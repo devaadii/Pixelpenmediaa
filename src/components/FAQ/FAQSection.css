@@ -1,0 +1,172 @@
+.faq-container {
+  background-color: #000;
+  color: #fff;
+
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+  
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.faq-header .heading{
+  font-size: 40px;
+}
+.faq-header .subheading{
+  font-size: 18px;
+}
+
+
+.faq-list {
+  width: 100%;
+  max-width: 60vw;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.faq-item {
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 20px;
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+
+.faq-item:hover {
+  border-color: #4dabf7;
+}
+
+
+
+.faq-question {
+  display: flex;
+  align-items: flex-start;   /* align Q, text, and icon to the top */
+  justify-content: space-between;
+  gap: 12px;
+}
+
+
+
+.faq-index {
+  flex-shrink: 0;            /* keep index fixed */
+  width: 40px;               /* 👈 fixed width so all text lines up */
+  text-align: right;
+  margin: 0;                 /* remove random margins */
+}
+
+.faq-content {
+  flex: 1;                   /* take all remaining space */
+}
+
+.faq-answer {
+  margin-top: 12px;
+
+  color: #ccc;
+  line-height: 1.5;
+  font-size: 15px;
+}
+.faq-icon {
+  font-size: 20px;
+  color: #4dabf7;
+  margin-right: 10px;
+}
+
+
+/* ========================= */
+/* 📱 Responsive Adjustments */
+/* ========================= */
+
+/* Tablets */
+
+
+/* Mobile */
+@media (max-width: 768px) {
+  .faq-container {
+    padding: 40px 15px;
+    min-height: 55vh;
+  }
+
+  .faq-list {
+    max-width: 95vw;
+  }
+
+.faq-item {
+  position: relative; /* enable absolute positioning inside */
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 20px 50px 20px 10px; /* extra right padding for the icon */
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: flex-start; /* keep Q + text aligned left */
+  align-items: center;
+  gap: 12px;
+  font-weight: 400;
+}
+
+.faq-icon {
+  position: absolute;
+  right: 15px;   /* 👈 stick to extreme right */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #4dabf7;
+}
+
+  .faq-index {
+    margin-right: 15px;
+    margin-left: 5px;
+    font-size: 16px;
+  }
+
+
+  .faq-answer {
+    margin-left: 0;
+    padding-left: 0;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+.faq-answer-wrapper {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(.68,-0.55,.27,1.55), opacity 1s ease;
+}
+
+.faq-answer-wrapper.open {
+  max-height: 500px; /* Set to max expected height */
+  opacity: 1;
+    transform: translateY(0px);
+}
+
+
+
+/* Extra small phones */
+@media (max-width: 480px) {
+  .faq-container {
+    padding: 30px 10px;
+  }
+
+  .faq-header h2 {
+    font-size: 24px;
+  }
+
+  .faq-question {
+    font-size: 14px;
+  }
+
+  .faq-answer {
+    font-size: 12px;
+
+  }
+}

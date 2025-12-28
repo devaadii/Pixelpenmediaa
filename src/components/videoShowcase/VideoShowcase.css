@@ -1,0 +1,120 @@
+.video-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Shared screen base style */
+.video-frame-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+
+/* Horizontal (16:9) screens — sides */
+.video-frame-wrapper.horizontal {
+  aspect-ratio: 16 / 9;
+  width: 420px;
+}
+
+/* Vertical (9:16) screen — center */
+.video-frame-wrapper.vertical {
+  aspect-ratio: 9 / 16;
+  width: 320px;
+
+}
+
+/* Center screen slightly larger and elevated */
+.center-screen {
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+/* Hover animation */
+.video-frame-wrapper:hover {
+  transform: scale(1.07);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .video-showcase {
+    gap: 1rem;
+  }
+  .video-frame-wrapper.horizontal {
+    width: 220px;
+  }
+  .video-frame-wrapper.vertical {
+    width: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  .video-showcase {
+    flex-direction: column;
+  }
+  .video-frame-wrapper {
+    width: 80vw;
+  }
+}
+
+/* Thumbnail button styling */
+.video-thumb {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+}
+
+.thumbnail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.video-thumb:hover .thumbnail-img {
+  transform: scale(1.05);
+}
+
+/* Play overlay */
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.video-thumb:hover .play-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.play-icon {
+  width: 56px;
+  height: 56px;
+  opacity: 0.85;
+  transition: transform 0.3s ease;
+}
+
+.video-thumb:hover .play-icon {
+  transform: scale(1.1);
+}
+
+/* Embedded video frame */
+.video-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

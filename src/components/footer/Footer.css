@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 60px 20px 30px;
+    font-family: "Inter",sans-serif;
+  }
+
+  
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .footer-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+  }
+  
+  .footer-col {
+    min-width: 160px;
+  }
+  
+  .footer-col h4 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-col ul li {
+    color: #ccc;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .footer-tweet {
+    background: #0c0c0c;
+    padding: 16px;
+    border-radius: 10px;
+    max-width: 280px;
+    color: #ccc;
+    font-size: 14px;
+ 
+  }
+  
+  .tweet-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .tweet-avatar {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tweet-user {
+    margin-left: 10px;
+    flex-grow: 1;
+  }
+  
+  .tweet-user span {
+    display: block;
+    color: gray;
+    font-size: 12px;
+  }
+  
+  .tweet-icon {
+    font-size: 18px;
+  }
+  
+  .footer-bottom {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .footer-brand {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .footer-socials {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .social-icon {
+    background: #1a1a1a;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #copyright{
+    font-family: "Inter",sans-serif;
+    font-size: 14px;
+    color: #ccc;
+  }
+
+  /* Existing styles above remain unchanged */
+
+@media (max-width: 768px) {
+  .footer-columns {
+    flex-direction: column;   /* stack vertically */
+    gap: 20px;                /* spacing between sections */
+  }
+
+  .footer-col {
+    width: 100%;              /* take full width */
+  }
+
+  .footer-tweet {
+    max-width: 100%;          /* expand on mobile */
+  }
+
+  .footer-bottom {
+    flex-direction: column;   /* stack brand, copyright, socials */
+    text-align: center;
+    gap: 15px;
+  }
+
+  .footer-socials {
+    justify-content: center;  /* center icons */
+    margin-top: 10px;
+  }
+}

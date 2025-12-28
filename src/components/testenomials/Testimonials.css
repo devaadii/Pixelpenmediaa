@@ -1,0 +1,209 @@
+.vtc-wrapper {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+ 
+background: radial-gradient(circle, rgba(0, 92, 255, 0.4) 0%, transparent 50%);
+}
+
+.vtc-columns {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+  padding: 0 2vw;
+  box-sizing: border-box;
+}
+
+.vtc-column {
+  width: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.vtc-scroll-track {
+  display: flex;
+  flex-direction: column;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Scroll direction classes */
+.vtc-scroll-up {
+  animation-name: vtc-scroll-up;
+}
+
+.vtc-scroll-down {
+  animation-name: vtc-scroll-down;
+}
+
+.vtc-image-wrapper {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    cursor: grab;
+}
+
+.vtc-image-wrapper img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 10px;
+
+}
+
+/* Fades */
+.vtc-fade-top,
+.vtc-fade-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.vtc-fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent);
+}
+
+.vtc-fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+}
+
+/* Animations */
+@keyframes vtc-scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes vtc-scroll-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.vtc-scroll-track:hover {
+  animation-play-state: paused;
+}
+
+
+/* Horizontal Animations */
+@keyframes vtc-scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes vtc-scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+/* Hide/show depending on device */
+.desktop-only {
+  display: flex;
+}
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .htc-scroll-track.paused {
+  animation-play-state: paused !important;
+}
+  .vtc-wrapper{
+   background: radial-gradient(circle, rgba(0, 92, 255, 0.2) 0%, transparent 50%);
+    height: auto;
+ 
+  }
+  .vtc-fade-top {
+  
+
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), transparent);
+}
+
+.vtc-fade-bottom {
+
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), transparent);
+}
+  .desktop-only {
+    display: none;
+  }
+  .mobile-only {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+  
+    position: relative;
+ 
+  }
+
+.htc-scroll-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.htc-scroll-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 40s linear infinite;
+}
+
+ 
+.htc-image-wrapper {
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   flex-shrink: 0;
+
+}
+
+
+.htc-image-wrapper img {
+   display: block;
+   margin: 0 20px;
+  width: 300px;
+  height: 282.54;
+  border-radius: 10px;
+  object-fit: contain;
+    pointer-events: none;   /* prevents touch events going to the image */
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
+
+
+}
+
+/* Horizontal infinite scroll animation */
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%); /* move half the track (1 full set of images) */
+  }
+}
+

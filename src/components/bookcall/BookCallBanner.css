@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.book-banner {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 40px;
+  color: white;
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  font-family: "Inter",sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.book-banner-content {
+  position: relative;
+  z-index: 2;
+}
+
+.book-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.headline {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 25px;
+}
+
+.book-button {
+  background: white;
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  padding: 12px 80px;
+  border-radius: 8px;
+  font-family: "Inter",sans-serif;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.book-button:hover {
+  background: #f0f0f0;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: #555;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.dot.active {
+  background: white;
+}
+.book-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(200px at top left, rgba(0, 92, 255, 0.5), rgba(0, 92, 255, 0.1));
+  z-index: 0;
+  pointer-events: none;
+opacity: 0.4;
+
+}
+
+.book-banner-content {
+  position: relative;
+  z-index: 1;
+}
+@keyframes slideInRightToLeft {
+  0% {
+    transform: translateX(60px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-rtl {
+  animation: slideInRightToLeft 0.8s ease-out;
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .book-banner {
+    width: 95%;
+    padding: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .brand {
+    font-size: 20px;
+  }
+
+  .headline {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .book-button {
+    padding: 10px 50px;
+    font-size: 14px;
+  }
+
+  .carousel-dots {
+    margin-top: 15px;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .book-banner {
+    padding: 15px;
+  }
+
+  .brand {
+    font-size: 18px;
+  }
+
+  .headline {
+    font-size: 18px;
+  }
+
+  .book-button {
+    padding: 10px 30px;
+    font-size: 13px;
+  }
+}

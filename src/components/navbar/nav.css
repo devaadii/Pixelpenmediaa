@@ -1,0 +1,259 @@
+/* Reset styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+
+@font-face {
+  font-family: 'Neue';
+  src: url('../fonts/NeueMetana-Bold.otf') format('truetype');
+}
+@font-face {
+  font-family: 'Gilroy';
+  src: url('../fonts/Gilroy-Medium.ttf') format('truetype');
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mobile-book{
+  display: none;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  z-index: 100;
+  padding: 4vh 3vw;
+  font-family: "Inter", sans-serif;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Neue', sans-serif;
+  width: 9vw;
+
+}
+
+.menu-icon {
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  display: none; /* Hidden by default */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  border-radius: 20em;
+ 
+  background: linear-gradient(180deg, rgba(5, 6, 8, 0.12) 0%, rgba(0, 92, 255, 0.12) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  padding: 2vh 2.5vw;
+  backdrop-filter: blur(300px);
+  overflow: hidden; /* Ensures padding doesn't break the border-radius */
+ 
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #fff;
+}
+
+.book-call {
+  padding: 2vh 1vw;
+  border-radius: 10px; 
+  font-family: "Gilroy", sans-serif;
+  font-weight: 600;
+  width: 9vw;
+}
+
+/* Mobile Responsive */
+/* 🔹 Small screens */
+@media (max-width: 768px) {
+  /* Hide Book a Call */
+  .navbar{
+    padding: 20px 20px;
+    position: static;
+    z-index: 50000;
+  }
+  .book-call {
+    display: none;
+  }
+
+  /* Put hamburger left */
+  .navbar-container {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px; /* space between hamburger & logo */
+ 
+  }
+
+  .menu-icon {
+    display: block;
+    order: -1; /* ensures it's before logo */
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  /* Mobile nav menu (same as before) */
+
+
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .nav-links li a {
+    font-size: 18px;
+    color: #fff;
+  }
+}
+
+.nav-links a.active {
+  color: #FFF;
+  font-weight: 600;
+}
+
+/* 🔹 Mobile Responsive */
+/* 🔹 Small screens */
+/* 🔹 Small screens */
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  /* Hide Desktop Book a Call */
+.logo {
+  width: 16vw;
+}
+
+  .book-call {
+    display: none;
+  }
+
+  .desktop-book {
+    display: none;
+  }
+
+  /* Navbar container fix: logo left, hamburger right */
+  .navbar-container {
+    flex-direction: row;
+    justify-content: space-between; /* logo left, menu right */
+    align-items: center;
+    padding: 0;
+    margin: 0%;
+ 
+  }
+
+  /* Hamburger visible only on mobile, stays right */
+  .menu-icon {
+    display: block;
+    order: 2;   /* ensures it's at the right */
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+ 
+  }
+
+  .logo {
+    font-size: 22px;
+    order: 1;   /* always left */
+  }
+
+  /* Mobile nav menu */
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    height: calc(100vh - 70px);
+    width: 75%;
+    max-width: 300px;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 80000;
+    padding: 40px 20px;
+    gap: 20px;
+    background: rgb(0, 0, 0);
+    transform: translateX(-100%); /* Slide in from left */
+    transition: transform 0.3s ease-in-out;
+      border-radius: 0 16px 16px 0; /* top-right & bottom-right */
+   z-index: 10000000000000000000000000000;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
+  .nav-links li a {
+    font-size: 18px;
+    color: #fff;
+  }
+
+  .mobile-book {
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .mobile-book a {
+    display: inline-block;
+    padding: 12px 18px;
+    background: #005CFF;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+  }
+
+  .mobile-book a:hover {
+    background: #0040b5;
+  }
+}
+
+
+
+
+/* 🔹 Extra Small Devices (phones under 480px) */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 20px;
+  }
+
+  .menu-icon {
+    font-size: 26px;
+  }
+
+  .nav-links li a {
+    font-size: 16px;
+  }
+
+  .book-call {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+}

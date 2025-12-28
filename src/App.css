@@ -1,0 +1,92 @@
+body {
+  background: rgba(1, 1, 1, 1) url('./assets/9481dd68e28604e053133d0c6be29639.jpeg') center/cover no-repeat;
+   box-sizing: border-box; /* ✅ ensures they don’t exceed */
+  max-width: 100%;        /* ✅ prevent overflow */
+  overflow-x: hidden;
+  position: relative;
+  margin: 0%;
+  background-blend-mode: multiply; 
+  padding: 0%;
+  cursor: url('./assets/Vector.png'), auto;
+  width: 100%;
+  overflow-x: hidden; 
+}
+
+/* Grid Overlay */
+body::before {
+   box-sizing: border-box; /* ✅ ensures they don’t exceed */
+  max-width: 100%;        /* ✅ prevent overflow */
+  overflow-x: hidden;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('./assets/d2c5e68411f995451cc7a4c0cffee31a.png') center/100% no-repeat;
+  opacity: 0.08; /* Adjust transparency */
+  pointer-events: none; /* Ensures clicks pass through */
+  z-index: 1;
+}
+
+/* Blue Ellipse Gradient */
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 35vh; 
+  background: radial-gradient(ellipse at top center, rgba(0, 92, 255, 1), transparent 70%);
+  pointer-events: none;
+  z-index: 2;
+}
+html {
+  scroll-behavior: smooth;
+
+}
+
+@media (max-width: 768px) {
+  
+  .page-content {
+    max-width: 100%;       /* Take full width */
+    margin-left: auto;
+    margin-right: auto;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Horizontally center children */
+  }
+
+  /* Optionally make each section narrower and center aligned */
+  .page-content > section {
+    width: 100%;
+    max-width: 480px;      /* Control max width on mobile */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  body::after {
+      content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 35vh; 
+  background: radial-gradient(ellipse at top center, rgba(0, 92, 255, 1), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  }
+}
+@media (max-width: 768px) {
+    body::after {
+      content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 35vh; 
+  background: radial-gradient(circle at 50% -60%, rgba(0, 92, 255, 1), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  }
+}
