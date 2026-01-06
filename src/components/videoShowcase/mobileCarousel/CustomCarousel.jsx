@@ -9,7 +9,7 @@ const slides = [
   {
     orientation: "vertical",
     thumbnail:
-      "",
+    "https://res.cloudinary.com/dehknfmqf/video/upload/so_0/russian_river_web_klhmap.jpg",
     videoSrc:
       "https://res.cloudinary.com/dehknfmqf/video/upload/f_auto,q_auto/russian_river_web_klhmap.mp4",
   },
