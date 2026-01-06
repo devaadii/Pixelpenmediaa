@@ -5,17 +5,17 @@ import './BookCallBanner.css';
 const slides = [
   {
     brand: "Pixelpen.",
-    headline: "Book a Call Now to Discuss further.",
+    headline: "Weak visuals kill strong brands.",
   
   },
   {
     brand: "Pixelpen.",
-    headline: "Let’s Make Your Vision Real.",
+    headline: "Attention isn’t given. It’s earned.",
     image: "/banner2.jpg",
   },
   {
     brand: "Pixelpen.",
-    headline: "Bring Your Story to Life with Us.",
+    headline: "You need visuals that work harder.",
     image: "/banner3.jpg",
   },
 ];

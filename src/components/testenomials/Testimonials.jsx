@@ -24,7 +24,7 @@ const Testimonial = () => {
     <>
       <div style={{ color: "white", textAlign: "center" }}>
         <h2 className="heading">Testimonials</h2>
-        <p className="subheading">From Pixels to Power Moves</p>
+        <p className="subheading">Doubt us. Regret later.</p>
       </div>
 
       <div className="vtc-wrapper">

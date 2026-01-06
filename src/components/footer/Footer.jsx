@@ -2,7 +2,8 @@ import React from 'react';
 import './Footer.css';
 import logo from "../../assets/pixelpen logo bw-cropped.svg"
 
-import { FaTwitter, FaFacebookF, FaInstagram,FaLinkedin } from 'react-icons/fa';
+import { FaTwitter, FaFacebookF, FaInstagram,FaLinkedin, } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -91,7 +92,7 @@ const Footer = () => {
             </div>
             <div className="social-icon">
             <a href='https://x.com/PixelpenMedia?t=t0avYlK-5KmlgLNItkvghQ&s=09'  style={{ textDecoration: 'none', color: 'inherit' }}>
-              <FaTwitter /></a>
+           <FaXTwitter /></a>
             </div>
           </div>
         </div>

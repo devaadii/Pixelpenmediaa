@@ -16,7 +16,7 @@ const message = encodeURIComponent("Hi Pixelpen, I'm interested in your video ed
           <span id='atten'> Scroll Stoppers.</span>
         </h2>
         <p className="hero-subtitle">
-          Looking for <i>jaw-dropping edits, thumbnails, and scripts</i> that grab attention and make your audience stop scrolling?
+          We’re built for those who <i>refuse</i> mediocrity. <br></br><i>Fast</i> with <i>finesse</i> is our flex
         </p>
         <div className="hero-buttons" >
           <a href='#portfolio'>
