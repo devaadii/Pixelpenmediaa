@@ -68,7 +68,7 @@ const Footer = () => {
                 <span>@PixelpenMedia</span>
               </div>
               <div className="tweet-icon">
-                <FaTwitter />
+               <FaXTwitter />
               </div>
             </div>
             <p className="tweet-text">

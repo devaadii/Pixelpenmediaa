@@ -59,7 +59,7 @@
   gap: 20px;
   border-radius: 20em;
  
-  background: linear-gradient(180deg, rgba(5, 6, 8, 0.12) 0%, rgba(0, 92, 255, 0.12) 100%);
+  background: linear-gradient(180deg, rgba(215, 81, 3, 0.01) 0%,rgba(215, 81, 3, 0.12) 100%);
   border: 1px solid rgba(255, 255, 255, 0.24);
   padding: 2vh 2.5vw;
   backdrop-filter: blur(300px);
@@ -80,10 +80,17 @@
 
 .book-call {
   padding: 2vh 1vw;
+  background-color: rgba(215, 81, 3, 1);
+  color: white;
   border-radius: 10px; 
   font-family: "Gilroy", sans-serif;
   font-weight: 600;
   width: 9vw;
+  transition: transform 0.25s ease, box-shadow 0.25s ease; /* 👈 smooth */
+}
+
+.book-call:hover {
+  transform: scale(1.05); /* 👈 small pop */
 }
 
 /* Mobile Responsive */

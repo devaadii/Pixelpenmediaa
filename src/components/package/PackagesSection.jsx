@@ -36,7 +36,7 @@ const PackagesSection = () => {
         </div>
 
         {/* Package 2 */}
-        <div className="package-card elite">
+        <div className="package-card1 elite">
           <h3 className="package-title">PixelPen Elite</h3>
           <ul className="package-features">
             <li>

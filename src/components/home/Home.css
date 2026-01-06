@@ -112,13 +112,13 @@
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%) translateY(20%);
-  max-width: 500px;
+  transform: translateX(-50%) translateY(5%);
+  max-width: 600px;
   width: 100%;
-   z-index: 10; /* make sure it's above carousel */
+   z-index: 1000; /* make sure it's above carousel */
   pointer-events: none; 
-  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
 }
 #atten{
   font-family: "Awesome",serif ;
@@ -151,7 +151,7 @@
 
 
 .hero-image{
-  width: 80vw;
+  width: 100vw;
   bottom: 4vh;
   left: 50%;               /* Move left edge to 50% */
   transform: translateX(-45%) translateY(20%);  

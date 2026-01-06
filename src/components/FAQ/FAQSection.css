@@ -39,7 +39,7 @@
 }
 
 .faq-item:hover {
-  border-color: #4dabf7;
+  border-color: #ffbf84;
 }
 
 
@@ -73,7 +73,7 @@
 }
 .faq-icon {
   font-size: 20px;
-  color: #4dabf7;
+  color: #ffbf84;
   margin-right: 10px;
 }
 
@@ -119,7 +119,7 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 20px;
-  color: #4dabf7;
+  color: #ffbf84;
 }
 
   .faq-index {

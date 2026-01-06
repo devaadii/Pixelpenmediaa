@@ -55,7 +55,7 @@
   margin: 0 30px;
   font-size: 18px;
   font-weight: 500;
-  color: #005CFF;
+  color: #D75003;
   border: 1px solid rgba(0, 92, 255, 0.3);
   white-space: nowrap;
   border-radius: 100px;
@@ -64,7 +64,7 @@
 
 /* Dot */
 .carousel-text__dot {
-  color: #005CFF;
+  color: #D75003;
   margin-right: 6px;
 }
 

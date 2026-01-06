@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import img1 from "../../../assets/thumb.jpg";
 import img from "../../../assets/Vector 5.png";
 import img2 from "../../../assets/Vector 6.png";
-import iphoneFrame from "../../../assets/iphone.png"
+import iphoneFrame from "../../../assets/fucking png.png"
+import LiphoneFrame from "../../../assets/fucking1 png.png"
 
 /* ================= SLIDES (CLOUDINARY) ================= */
 const slides = [
@@ -100,14 +101,21 @@ export default function CustomCarousel() {
       {!isMobile && (
         <div className="custom-desktop-layout">
           {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`desktop-screen ${
-                slide.orientation === "vertical"
-                  ? "desktop-vertical"
-                  : "desktop-horizontal"
-              }`}
-            >
+          <div
+  key={index}
+  className={`iphone-shell ${
+    slide.orientation === "vertical"
+      ? "desktop-vertical"
+      : "desktop-horizontal"
+  }`}
+>
+<img
+  src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
+  className="iphone-frame-img"
+  alt=""
+/>
+
+  <div className="desktop-screen-inner">
               {isPlaying && index === currentIndex ? (
                 <div className="video-wrapper">
                   <video
@@ -138,7 +146,8 @@ export default function CustomCarousel() {
                   <div className="custom-carousel-play-button">▶</div>
                 </div>
               )}
-            </div>
+            </div>  </div>
+
           ))}
         </div>
       )}
@@ -160,18 +169,21 @@ export default function CustomCarousel() {
             }
 
             return (
-              <div
-                key={idx}
-                className={`mobile-video-item ${
-                  slide.orientation === "vertical"
-                    ? "mobile-vertical"
-                    : "mobile-horizontal"
-                } ${isPlaying && idx === currentIndex ? "playing" : ""}`}
-                style={{
-                  transform: `rotate(${rotation})`,
-                  transition: "transform 0.3s ease",
-                }}
-              >
+            <div
+  key={idx}
+  className={`iphone-shell mobile-video-item ${
+    slide.orientation === "vertical"
+      ? "mobile-vertical"
+      : "mobile-horizontal"
+  } ${isPlaying && idx === currentIndex ? "playing" : ""}`}
+  style={{
+    transform: `rotate(${rotation})`,
+    transition: "transform 0.3s ease",
+  }}
+>
+  <img src={iphoneFrame} className="iphone-frame-img" alt="" />
+
+  <div className="mobile-screen-inner">
                 {isPlaying && idx === currentIndex ? (
                   <div className="video-wrapper-no-transform">
                     <video
@@ -204,7 +216,7 @@ export default function CustomCarousel() {
                     <div className="custom-carousel-play-button">▶</div>
                   </div>
                 )}
-              </div>
+              </div></div>
             );
           })}
         </div>
@@ -213,6 +225,45 @@ export default function CustomCarousel() {
       {/* ================= CSS (EXACT SAME AS YOURS) ================= */}
       {/* 🔒 DO NOT CHANGE ANYTHING BELOW */}
 <style jsx>{`
+/* ========== IPHONE FRAME SYSTEM ========== */
+
+.iphone-shell {
+  position: relative;
+  display: inline-block;
+}
+
+/* iPhone PNG overlay */
+.iphone-frame-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 20;
+  pointer-events: none;
+
+  transform: scale(0.90);  /* 👈 adjust this number */
+
+}
+
+/* Actual screen area inside phone */
+.desktop-screen-inner,
+.mobile-screen-inner {
+  position: absolute;
+  inset: 6%;
+  border-radius: 24px;
+  overflow: hidden;
+  z-index: 5;
+  background: black;
+}
+
+/* Remove old borders */
+.desktop-screen,
+.mobile-video-item {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
 /* ========== DESKTOP ========== */
 .custom-carousel-thumb-wrapper {
 width: 100%;

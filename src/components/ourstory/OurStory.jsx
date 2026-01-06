@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ourstory.css";
-import image from "../../assets/Group 83.svg"
+import image from "../../assets/Group 83 (1).png"
 
 const barData = [
   { id: 1, height: 270, left: 320 },
