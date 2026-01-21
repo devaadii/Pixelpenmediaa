@@ -181,7 +181,11 @@ export default function CustomCarousel() {
     transition: "transform 0.3s ease",
   }}
 >
-  <img src={iphoneFrame} className="iphone-frame-img" alt="" />
+ <img
+  src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
+  className="iphone-frame-img"
+  alt=""
+/>
 
   <div className="mobile-screen-inner">
                 {isPlaying && idx === currentIndex ? (
