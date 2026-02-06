@@ -53,14 +53,14 @@
   flex-direction: column;
 align-items: center;
 
-  line-height: 1;
+  line-height: 0.8;
 }
 
 .hero-title {
   margin-top: 5px;
   font-size: clamp(2rem, 4vw, 4rem);
   font-weight: 200;
-  line-height: 1;
+  line-height: 0.8;
   z-index: 3;
   letter-spacing: -1px;
   margin-bottom: 10px;
@@ -162,8 +162,10 @@ align-items: center;
 
   word-break: break-word;        /* allows wrapping */
 }
-@media (min-width: 1400px) {
-
+@media (min-width: 769px) {
+  .home {
+    background-position: center -150px; /* desktop only */
+  }
 }
 @media (max-width: 768px) {
   .home{
