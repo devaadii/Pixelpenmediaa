@@ -4,7 +4,7 @@ import Carousel from './carousel/Carousel';
 import image from "../../assets/Group 82.png"
 import UnicornStudioEmbed from './UnicornStudioEmbed';
 import taare from "../../assets/taare.png"
-import backgroundvector from "../../assets/background.svg" 
+import backgroundvector from "../../assets/backgroundhai.png" 
 
 
 

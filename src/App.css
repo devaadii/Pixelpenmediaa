@@ -14,7 +14,7 @@ Retrieved 2026-02-06, License - CC BY-SA 3.0
       #000 35%
     ),
     /* your SVG */
-    url("../src/assets/background.svg");
+    url("../src/assets/backgroundhai.png");
 
   background-repeat: no-repeat, no-repeat;
 
@@ -22,7 +22,7 @@ Retrieved 2026-02-06, License - CC BY-SA 3.0
   background-size: 100% 100%, 100% auto;
 
   /* gradient stays fixed, svg keeps its position */
-  background-position: top left, center -180px;
+  background-position: top left, center -60px;
 body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
