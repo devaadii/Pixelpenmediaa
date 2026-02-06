@@ -195,8 +195,6 @@ gap: 1.5rem;
    /* give space for zoom */
   background-size: 140%;
     background-position: center top;
-
-
   }
 
 .hero-content {
@@ -204,6 +202,14 @@ gap: 1.5rem;
 }
 .hero-title {
   margin-bottom: 0%;
+  margin-top: 5px;
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 200;
+  line-height: 1.5;
+  z-index: 3;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+  color: #ffffff;
 }
 .hero-subtitle {
   margin: 0 5vw;
@@ -215,7 +221,6 @@ gap: 1.5rem;
   z-index: 0;
 
 }
-
 
 .hero-image{
   width: 100vw;
@@ -244,7 +249,9 @@ z-index: 400000000;
   color: white;
   font-size: 50px;
   max-width: 80VW;
-  
+    display: block;          /* break to new line cleanly */
+    line-height: 0.9;  
+    padding-bottom: 20px;
 }
   
 }
