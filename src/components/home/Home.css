@@ -162,9 +162,9 @@ align-items: center;
 
   word-break: break-word;        /* allows wrapping */
 }
-@media (min-width: 769px) {
+@media (min-width: 1400px) {
   .home {
-    background-position: center -150px; /* desktop only */
+    min-height: 150vh;
   }
 }
 @media (max-width: 768px) {
