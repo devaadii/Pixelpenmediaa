@@ -8,6 +8,7 @@
 
 
 .home {
+  padding: 20px 0;
   margin-left: auto;
   margin-right: auto;
   min-height: 130vh;
@@ -19,23 +20,27 @@
   text-align: center;
   font-family: 'Inter', sans-serif;
   position: relative;
+  overflow:visible;
+}
 
 .macbook-bg {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -60%);
+  top: 50%;
 
-  width: 100vw;     /* always fills horizontally */
-  height: auto;     /* never cuts vertically */
+  transform: translate(-50%, -60%); /* move up */
 
-  min-height: 100%; /* prevents top/bottom gaps on tall screens */
-  object-fit: contain;
+  width: 100vw;        /* always fills horizontally */
+  height: auto;        /* keeps aspect ratio */
+
+  min-height: 110%;    /* adds space top & bottom on big screens */
+
+  object-fit: contain; /* NEVER crop */
 
   z-index: 0;
   pointer-events: none;
 }
-}
+
 .home::before {
   content: "";
   position: absolute;
