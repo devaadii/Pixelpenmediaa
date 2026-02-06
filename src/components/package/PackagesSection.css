@@ -202,7 +202,7 @@ b{
     display: flex;
     flex-direction: column;
     gap: 20px;
-  background: radial-gradient(circle at top left, #D75003, #000000), rgba(0, 0, 0,0.6 )
+  background: radial-gradient(circle at top left, #ff7700, #000000), rgba(0, 0, 0,0.6 )
     ;
     background-blend-mode: normal;
     text-align: left;

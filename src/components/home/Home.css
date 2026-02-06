@@ -53,7 +53,7 @@ Retrieved 2026-02-06, License - CC BY-SA 3.0
   position: absolute;
   inset: 0;
 
-  background-image: url('../../assets/taare.png');
+  /* background-image: url('../../assets/taare.png'); */
   background-repeat: no-repeat;
   background-size: 1500px;      /* control star size */
   background-position: center top;

@@ -84,6 +84,7 @@
   color: white;
   border-radius: 500px; 
   font-family: "Gilroy", sans-serif;
+ font-size: 14px; 
   font-weight: 600;
   width: 9vw;
 background: linear-gradient(90deg, #F68218, #FF6200);
@@ -94,10 +95,10 @@ background: linear-gradient(90deg, #F68218, #FF6200);
   border-radius: 500px;
   font-family: "Gilroy", sans-serif;
   font-weight: 600;
-  width: 9vw;
+  width: 9vw;font-size: 14px;
   background: rgba(0,0,0,0.35);   /* KEY FIX */
   backdrop-filter: blur(10px);    /* optional for consistency */
-  border: 1px solid #F68218;
+  border: 1.5px solid #F68218;
 }
 .book-call,
 .book-call1 {

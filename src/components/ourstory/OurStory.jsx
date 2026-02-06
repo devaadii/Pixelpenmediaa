@@ -19,7 +19,7 @@ const OurStory = () => {
 
   return (
     <div className="ourStory">
-      <h2 className="heading" >Our Story</h2>
+      <h2 className="heading1" >Our Story</h2>
       <div style={{display:"flex",justifyContent:"center" }}>
       <img style={{background:"transaparent"}} src={image} /></div>
   </div>

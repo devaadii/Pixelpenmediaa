@@ -21,7 +21,7 @@ const scrollSpeeds = [40, 40, 40];
 
 const Testimonial = () => {
   return (
-    <>
+    <div className='test'>
       <div style={{ color: "white", textAlign: "center" }}>
         <h2 className="heading">Testimonials</h2>
         <p className="subheading">Doubt us. Regret later.</p>
@@ -78,7 +78,7 @@ const Testimonial = () => {
 </div>
 
      
-    </>
+    </div>
   );
 };
 
