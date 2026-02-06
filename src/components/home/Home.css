@@ -163,13 +163,7 @@ align-items: center;
   word-break: break-word;        /* allows wrapping */
 }
 @media (min-width: 1400px) {
-  .home {
-    min-height: 150vh;
-      background-repeat: no-repeat;
-  background-size: contain;
-  background-position: 40% top;
-  background-size: 100%;
-  }
+
 }
 @media (max-width: 768px) {
   .home{
