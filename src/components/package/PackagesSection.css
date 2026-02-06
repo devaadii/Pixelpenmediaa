@@ -45,7 +45,7 @@
     border-radius: 20px;
     padding: 20px 25px;
     width: 300px;
-  background: radial-gradient(circle at top left, #D75003, #000000), rgba(0, 0, 0,0.6 )
+  background: radial-gradient(circle at top left, #ff7700, #000000), rgba(0, 0, 0,0.6 )
     ;
     
     background-blend-mode: normal;

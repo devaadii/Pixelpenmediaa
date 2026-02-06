@@ -5,6 +5,18 @@
   font-weight: normal;
   font-style: normal;
 }
+/*
+Source - https://stackoverflow.com/a/36412339
+Posted by Ilias Karim, modified by community. See post 'Timeline' for change history
+Retrieved 2026-02-06, License - CC BY-SA 3.0
+*/
+
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
 
 
 .home {
@@ -19,28 +31,23 @@
   box-sizing: border-box;
   text-align: center;
   font-family: 'Inter', sans-serif;
+
+}
+
+.home {
+
+  min-height: 130vh;
+  width: 100vw;
+
+}
+
+/* ✅ The real trick */
+
+
+.hero-content {
   position: relative;
-  overflow:visible;
+  z-index: 2;
 }
-
-.macbook-bg {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  transform: translate(-50%, -60%); /* move up */
-
-  width: 100vw;        /* always fills horizontally */
-  height: auto;        /* keeps aspect ratio */
-
-  min-height: 110%;    /* adds space top & bottom on big screens */
-
-  object-fit: contain; /* NEVER crop */
-
-  z-index: 0;
-  pointer-events: none;
-}
-
 .home::before {
   content: "";
   position: absolute;
@@ -66,22 +73,20 @@
   display: flex;
   flex-direction: column;
 align-items: center;
-
-  line-height: 0.8;
+gap: 1.5rem;
 }
 
 .hero-title {
   margin-top: 5px;
   font-size: clamp(2rem, 4vw, 4rem);
   font-weight: 200;
-  line-height: 0.8;
+  line-height: 1;
   z-index: 3;
   letter-spacing: -1px;
   margin-bottom: 10px;
   color: #ffffff;
+
 }
-
-
 
 .hero-title i {
   font-family: "Awesome",serif ;
@@ -183,7 +188,7 @@ align-items: center;
 
 @media (max-width: 768px) {
   .home{
-   min-height: 65vh;
+   min-height: 60vh;
    padding-top: 0;
   padding-bottom: 0%;
     margin-top: 0px;

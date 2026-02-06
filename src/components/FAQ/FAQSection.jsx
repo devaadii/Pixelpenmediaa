@@ -51,9 +51,13 @@ export default function FAQSection() {
 
   <div className="faq-content">
     <span className="faq">{faq.question}</span>
-    {openId === faq.id && (
-      <div className="faq-answer">{faq.answer}</div>
-    )}
+<div
+  className={`faq-answer-wrapper ${
+    openId === faq.id ? "open" : ""
+  }`}
+>
+  <div className="faq-answer">{faq.answer}</div>
+</div>
   </div>
 
   <span className="faq-icon">{openId === faq.id ? "−" : "+"}</span>

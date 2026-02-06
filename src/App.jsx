@@ -13,12 +13,12 @@ import VideoShowcase from './components/videoShowcase/VideoShowcase'
 import CustomCarousel from './components/videoShowcase/mobileCarousel/CustomCarousel'
 import FAQSection from './components/FAQ/FAQSection'
 import "keen-slider/keen-slider.min.css";
-
-
+import image from "../src/assets/background.svg"
 
 function App() {
   return (
     <div className="layout"  >
+
       <Nav />
   
       <main className="page-content">

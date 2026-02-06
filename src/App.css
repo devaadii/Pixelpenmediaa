@@ -1,5 +1,32 @@
 body{
   background-color: black;
+  /*
+Source - https://stackoverflow.com/a/32660790
+Posted by inorganik, modified by community. See post 'Timeline' for change history
+Retrieved 2026-02-06, License - CC BY-SA 3.0
+*/
+  background-color: black;
+
+  background-image:
+    /* continuation gradient */
+    linear-gradient(to bottom,
+      rgba(0,0,0,0) 0%,
+      #000 35%
+    ),
+    /* your SVG */
+    url("../src/assets/background.svg");
+
+  background-repeat: no-repeat, no-repeat;
+
+  /* first gradient covers whole page */
+  background-size: 100% 100%, 100% auto;
+
+  /* gradient stays fixed, svg keeps its position */
+  background-position: top left, center -180px;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 }
 html {
   scroll-behavior: smooth;
@@ -10,8 +37,47 @@ html {
   margin-top: -250px;   /* pulls it upward */
   z-index: 5;           /* sits above Home */
 }
+.page-wrap {
+  position: relative;
+}
+
+/* 🔥 REAL BACKGROUND LAYER */
+.layout {
+  position: relative;
+}
+
+.global-bg {
+  position: absolute;
+  left: 50%;
+  top: 0;
+
+  transform: translate(-50%, -10%);
+
+  width: 100vw;
+  height: auto;
+
+  z-index: 0;
+  pointer-events: none;
+}
+.page-content,
+.page-content section {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+}
 
 @media (max-width: 768px) {
+  body {
+    background-image:
+      linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 55%),
+      url("../src/assets/background.svg");
+
+    /* still scale by width (sharp) */
+    background-size: 100% 100%, 160% auto;
+
+    /* push it down instead of scaling tall */
+    background-position: top left, center 70px;
+  }
   .overlap-up {
   position: block;
   margin-top: 0;   /* pulls it upward */

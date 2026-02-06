@@ -1,12 +1,12 @@
 import React from 'react';
 import './Testimonials.css';
 
-import one from '../../assets/one.svg';
-import two from '../../assets/two.svg';
-import three from '../../assets/three.svg';
-import four from '../../assets/four.svg';
-import five from '../../assets/five.svg';
-import six from '../../assets/six.svg';
+import one from '../../assets/1.svg';
+import two from '../../assets/2.svg';
+import three from '../../assets/3.svg';
+import four from '../../assets/4.svg';
+import five from '../../assets/5.svg';
+import six from '../../assets/6.svg';
 
 const columns = [
   [one, two, three],

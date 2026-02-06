@@ -10,7 +10,7 @@ const PackagesSection = () => {
       <div className="packages-grid">
 
         <div className="package-card">
-          <div className="ribbon">Popular</div>
+          {/* <div className="ribbon">Popular</div> */}
           <h3 className="package-title">PixelPen Pro</h3>
           <ul className="package-features">
             <li>
