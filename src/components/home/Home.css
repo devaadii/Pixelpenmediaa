@@ -167,7 +167,7 @@ align-items: center;
     min-height: 150vh;
       background-repeat: no-repeat;
   background-size: contain;
-  background-position: center top;
+  background-position: 40% top;
   background-size: 100%;
   }
 }
