@@ -23,8 +23,9 @@
   /* ONLY macbook here */
   background-image: url('../../assets/macbook1.png');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: center top;
+  background-size: 100%;
 }
 .home::before {
   content: "";
