@@ -58,7 +58,7 @@
   display: flex;
   gap: 20px;
   border-radius: 20em;
- 
+   z-index: 80000;
   background: linear-gradient(180deg, rgba(215, 81, 3, 0.01) 0%,rgba(215, 81, 3, 0.12) 100%);
   border: 1px solid rgba(255, 255, 255, 0.24);
   padding: 2vh 2.5vw;
@@ -91,18 +91,34 @@ background: linear-gradient(90deg, #F68218, #FF6200);
 .book-call1 {
   padding: 2vh 1vw;
   color: white;
-  border-radius: 500px; 
+  border-radius: 500px;
   font-family: "Gilroy", sans-serif;
   font-weight: 600;
   width: 9vw;
-background: transparent;
+  background: rgba(0,0,0,0.35);   /* KEY FIX */
+  backdrop-filter: blur(10px);    /* optional for consistency */
+  border: 1px solid #F68218;
+}
+.book-call,
+.book-call1 {
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
+.book-call:hover,
+.book-call1:hover {
+  transform: translateY(-2px) scale(1.05);
 
-.book-call:hover {
-  transform: scale(1.05); /* 👈 small pop */
 }
-
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;   /* invisible */
+  z-index: 70000;            /* below menu, above page */
+}
 /* Mobile Responsive */
 /* 🔹 Small screens */
 @media (max-width: 768px) {
@@ -239,7 +255,7 @@ transition: transform 0.35s ease-in-out;
   .mobile-book a {
     display: inline-block;
     padding: 12px 18px;
-    background: #005CFF;
+    background: #F68218;
     color: #fff;
     border-radius: 8px;
     font-weight: 600;

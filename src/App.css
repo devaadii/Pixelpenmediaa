@@ -5,9 +5,18 @@ html {
   scroll-behavior: smooth;
 
 }
+.overlap-up {
+  position: relative;
+  margin-top: -250px;   /* pulls it upward */
+  z-index: 5;           /* sits above Home */
+}
 
 @media (max-width: 768px) {
-  
+  .overlap-up {
+  position: block;
+  margin-top: 0;   /* pulls it upward */
+  z-index: 5;           /* sits above Home */
+}
   .page-content {
     max-width: 100%;       /* Take full width */
     margin-left: auto;

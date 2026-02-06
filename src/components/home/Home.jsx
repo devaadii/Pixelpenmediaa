@@ -3,7 +3,7 @@ import './Home.css';
 import Carousel from './carousel/Carousel';
 import image from "../../assets/Group 82.png"
 import UnicornStudioEmbed from './UnicornStudioEmbed';
-import background from "../../assets/background.png";
+import taare from "../../assets/taare.png"
 
 
 function Home() {

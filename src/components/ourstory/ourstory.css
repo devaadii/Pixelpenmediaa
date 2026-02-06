@@ -10,7 +10,9 @@
   font-family: "Awesome",serif ;
   color: white;
   text-align: center;
+  background: transparent;
 }
+
 @media (max-width: 768px) {
 .ourStory{
   display: none;

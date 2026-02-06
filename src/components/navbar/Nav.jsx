@@ -40,7 +40,16 @@ function Nav() {
         </div>
 
         {/* Nav Menu */}
-        <ul className={menuOpen ? "nav-links open" : "nav-links"}>
+      {/* Overlay */}
+{menuOpen && (
+  <div
+    className="nav-overlay"
+    onClick={() => setMenuOpen(false)}
+  />
+)}
+
+{/* Nav Menu */}
+<ul className={menuOpen ? "nav-links open" : "nav-links"}>
           <li><a href="#home" className={activeLink === "home" ? "active" : ""} onClick={handleLinkClick}>Home</a></li>
           <li><a href="#portfolio" className={activeLink === "portfolio" ? "active" : ""} onClick={handleLinkClick}>Portfolio</a></li>
           <li><a href="#case-study" className={activeLink === "case-study" ? "active" : ""} onClick={handleLinkClick}>Services</a></li>

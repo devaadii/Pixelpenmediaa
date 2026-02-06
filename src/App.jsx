@@ -15,17 +15,20 @@ import FAQSection from './components/FAQ/FAQSection'
 import "keen-slider/keen-slider.min.css";
 
 
+
 function App() {
   return (
     <div className="layout"  >
       <Nav />
   
       <main className="page-content">
-            <section id="home">
+            <section  id="home">
           <Home />
    
         </section>
-        <OurStory />
+     <section id="our-story" className="overlap-up">
+  <OurStory />
+</section>
         <section id="portfolio">
  
 <CustomCarousel />
