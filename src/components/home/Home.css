@@ -20,12 +20,21 @@
   font-family: 'Inter', sans-serif;
   position: relative;
 
-  /* ONLY macbook here */
-  background-image: url('../../assets/macbook1.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center top;
-  background-size: 100%;
+.macbook-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+
+  width: 100vw;     /* always fills horizontally */
+  height: auto;     /* never cuts vertically */
+
+  min-height: 100%; /* prevents top/bottom gaps on tall screens */
+  object-fit: contain;
+
+  z-index: 0;
+  pointer-events: none;
+}
 }
 .home::before {
   content: "";
@@ -162,11 +171,11 @@ align-items: center;
 
   word-break: break-word;        /* allows wrapping */
 }
-@media (min-width: 769px) {
-  .home {
-    background-position: center -150px; /* desktop only */
-  }
-}
+/* Big laptops / large monitors */
+
+
+
+
 @media (max-width: 768px) {
   .home{
    min-height: 65vh;

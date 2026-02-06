@@ -4,6 +4,7 @@ import Carousel from './carousel/Carousel';
 import image from "../../assets/Group 82.png"
 import UnicornStudioEmbed from './UnicornStudioEmbed';
 import taare from "../../assets/taare.png"
+import macbook from '../../assets/macbook1.png';
 
 
 function Home() {
@@ -11,6 +12,8 @@ function Home() {
 const message = encodeURIComponent("Hi Pixelpen, I'm interested in your video editing services. Could you please share more details?");
   return (
 <div className="home">
+  <img src={macbook} className="macbook-bg" alt="" />
+
      <div className="hero-content">
         <h2 className="hero-title">
           We Edit<br />
