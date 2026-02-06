@@ -8,9 +8,10 @@
 
 
 .home {
+
       margin-left: auto;
   margin-right: auto;
-  min-height: 100vh;
+  min-height: 130vh;
   width: 100vw;
   display: flex;
   align-items: center;          
@@ -18,10 +19,23 @@
   padding: 2rem 0;
   box-sizing: border-box;
   text-align: center;
-  color: rgba(255, 255, 255, 0.6);
+
   font-family: 'Inter', sans-serif;
+  margin-top: 0;
+   position: relative;
+  background: url('../../assets/background.png') center/cover no-repeat;
+  background-position: center -150px
+}
+.home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+}
+
+.hero-content {
   position: relative;
-  margin-top: 20px;
+  z-index: 2;
 }
 
 .hero-content {
@@ -29,6 +43,7 @@
   max-width: 70ch;
   display: flex;
   flex-direction: column;
+align-items: center;
   gap: 1.5rem;
 }
 
@@ -39,6 +54,7 @@
   z-index: 3;
   letter-spacing: -1px;
   margin-bottom: 10px;
+  color: #ffffff;
 }
 
 
@@ -120,10 +136,21 @@
   -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
 }
-#atten{
-  font-family: "Awesome",serif ;
-  color: white;
-  font-size: 80px;
+#atten {
+  font-family: "Awesome", serif;
+
+  font-size: clamp(2.2rem, 10vw, 5rem);
+  line-height: 1.2;              /* prevents vertical clipping */
+  display: inline-block;         /* important for gradient text */
+
+  background: linear-gradient(45deg, #F47F17, #FF5900);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+  color: transparent;
+
+  word-break: break-word;        /* allows wrapping */
 }
 @media (max-width: 768px) {
   .home{
@@ -131,6 +158,9 @@
    padding-top: 0;
   padding-bottom: 0%;
     margin-top: 0px;
+    
+    background-position: center 20%;  /* responsive for mobile */
+    background-size: cover;
   }
 .hero-content {
   margin-top: 0%;
@@ -176,6 +206,7 @@ z-index: 400000000;
   font-family: "Awesome",serif ;
   color: white;
   font-size: 50px;
+  
 }
   
 }

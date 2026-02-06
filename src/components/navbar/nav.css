@@ -82,12 +82,22 @@
   padding: 2vh 1vw;
   background-color: rgba(215, 81, 3, 1);
   color: white;
-  border-radius: 10px; 
+  border-radius: 500px; 
   font-family: "Gilroy", sans-serif;
   font-weight: 600;
   width: 9vw;
-  transition: transform 0.25s ease, box-shadow 0.25s ease; /* 👈 smooth */
+background: linear-gradient(90deg, #F68218, #FF6200);
 }
+.book-call1 {
+  padding: 2vh 1vw;
+  color: white;
+  border-radius: 500px; 
+  font-family: "Gilroy", sans-serif;
+  font-weight: 600;
+  width: 9vw;
+background: transparent;
+}
+
 
 .book-call:hover {
   transform: scale(1.05); /* 👈 small pop */

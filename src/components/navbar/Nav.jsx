@@ -55,7 +55,7 @@ function Nav() {
 
         {/* Desktop Book Call */}
         <a href="https://calendly.com/pixelpenmedia-in/30min" className="desktop-book">
-          <button className='book-call'>Book a Call</button>
+          <button className='book-call1'>Book a Call</button>
         </a>
       </div>
     </nav>
