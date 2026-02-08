@@ -6,7 +6,8 @@
   width: 100%;
   overflow: hidden;
  
-/* background: radial-gradient(circle, #D75003 0%, transparent 50%); */
+background: radial-gradient(circle, rgba(255, 119, 0, 0.20) 
+0%, transparent 50%);
 }
 
 .vtc-columns {

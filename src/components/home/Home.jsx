@@ -18,9 +18,11 @@ const message = encodeURIComponent("Hi Pixelpen, I'm interested in your video ed
      <div className="hero-content">
         <h2 className="hero-title">
           We Edit<br />
-          <span id='atten'>Instant Scroll Stoppers.</span>
+          <span id='atten' data-text="Instant Scroll Stoppers.">Instant Scroll Stoppers.</span>
         </h2>
-        <button className='book-call'>Portfolio</button>
+ <a href="#portfolio" style={{textDecoration:"none"}}>
+  <button className="book-call">Portfolio</button>
+</a>
       </div>
 </div>
   );

@@ -167,19 +167,59 @@ gap: 1.5rem;
 }
 #atten {
   font-family: "Awesome", serif;
-
   font-size: clamp(2.2rem, 10vw, 5rem);
-  line-height: 1.2;              /* prevents vertical clipping */
-  display: inline-block;         /* important for gradient text */
+  line-height: 1.2;
+  display: inline-block;
+  padding-bottom: 10px;
 
+  position: relative;
+
+  /* Base gradient */
   background: linear-gradient(45deg, #F47F17, #FF5900);
+  background-clip: text;
   -webkit-background-clip: text;
+  color: transparent;
   -webkit-text-fill-color: transparent;
 
-  background-clip: text;
-  color: transparent;
+  overflow: hidden;
+}
 
-  word-break: break-word;        /* allows wrapping */
+/* ✨ Shine that is ALSO clipped to text */
+#atten::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(255,255,255,0.0) 35%,
+    rgba(255,255,255,0.9) 50%,
+    rgba(255,255,255,0.0) 65%,
+    transparent 100%
+  );
+
+  background-size: 200% 100%;
+  animation: shineText 4s ease-in-out infinite;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  pointer-events: none;
+}
+
+@keyframes shineText {
+  0% {
+    background-position: -200% 0;
+  }
+  60% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 /* Big laptops / large monitors */
 

@@ -186,7 +186,8 @@ background: linear-gradient(90deg, #F68218, #FF6200);
 }
 
   .book-call {
-    display: none;
+    display: block;
+    width: auto;
   }
 
   .desktop-book {
