@@ -91,15 +91,24 @@ background: linear-gradient(90deg, #F68218, #FF6200);
 }
 .book-call1 {
   padding: 2vh 1vw;
+  width: 9vw;
+  font-size: 14px;
   color: white;
   border-radius: 500px;
   font-family: "Gilroy", sans-serif;
   font-weight: 600;
-  width: 9vw;font-size: 14px;
-  background: rgba(0,0,0,0.35);   /* KEY FIX */
-  backdrop-filter: blur(10px);    /* optional for consistency */
-  border: 1.5px solid #F68218;
+
+  border: 2px solid transparent;
+
+  background:
+   linear-gradient(#000, #000) padding-box,
+    linear-gradient(45deg, #F47F17, #FF5900) border-box;
+
+  backdrop-filter: blur(10px);
 }
+
+/* Gradient border layer */
+
 .book-call,
 .book-call1 {
   transition: 
@@ -129,9 +138,7 @@ background: linear-gradient(90deg, #F68218, #FF6200);
     position: static;
     z-index: 50000;
   }
-  .book-call {
-    display: none;
-  }
+
 
   /* Put hamburger left */
   .navbar-container {
