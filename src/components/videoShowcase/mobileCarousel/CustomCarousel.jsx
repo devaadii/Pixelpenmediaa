@@ -264,12 +264,14 @@ export default function CustomCarousel() {
 /* Remove old borders */
 .desktop-screen,
 .mobile-video-item {
+
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
 }
 /* ========== DESKTOP ========== */
 .custom-carousel-thumb-wrapper {
+
 width: 100%;
 height: 100%;
 position: relative; /* important for absolute children */

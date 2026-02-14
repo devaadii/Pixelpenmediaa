@@ -27,6 +27,10 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+section {
+  scroll-margin-top: 100px; /* 👈 adjust */
+}
+
 }
 html {
   scroll-behavior: smooth;

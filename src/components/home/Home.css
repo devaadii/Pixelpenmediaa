@@ -200,7 +200,7 @@ gap: 1.5rem;
   );
 
   background-size: 200% 100%;
-  animation: shineText 4s ease-in-out infinite;
+  animation: shineText 8s ease-in-out infinite;
 
   background-clip: text;
   -webkit-background-clip: text;
@@ -212,13 +212,13 @@ gap: 1.5rem;
 
 @keyframes shineText {
   0% {
-    background-position: -200% 0;
+    background-position: 200% 0;
   }
   60% {
-    background-position: 200% 0;
+    background-position: 0% 0;
   }
   100% {
-    background-position: 200% 0;
+    background-position: -200% 0;
   }
 }
 /* Big laptops / large monitors */
