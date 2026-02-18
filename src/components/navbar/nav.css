@@ -242,7 +242,7 @@ background: linear-gradient(90deg, #F68218, #FF6200);
     background: rgb(0, 0, 0);
 transform: translateY(-120%);
 transition: transform 0.35s ease-in-out;
-      border-radius: 0 16px 16px 0; /* top-right & bottom-right */
+      border-radius: 0 0px 16px 16px; /* top-right & bottom-right */
    z-index: 10000000000000000000000000000;
   }
 

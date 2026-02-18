@@ -416,6 +416,9 @@ display: flex;
 flex-direction: column;
 align-items: center;
 }
+.header h2{
+width:60vw;
+}
 .header p{
 margin:0;
 }
