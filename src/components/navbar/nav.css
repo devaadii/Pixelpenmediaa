@@ -138,7 +138,9 @@ background: linear-gradient(90deg, #F68218, #FF6200);
     position: static;
     z-index: 50000;
   }
-
+.book-call{
+  font-weight: 400;
+}
 
   /* Put hamburger left */
   .navbar-container {

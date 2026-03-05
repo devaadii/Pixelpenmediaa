@@ -412,12 +412,14 @@ box-sizing: border-box;
 text-align: center;
 color: white;
 margin-bottom: 1rem;
+margin-top:10px;
 display: flex;
 flex-direction: column;
 align-items: center;
 }
 .header h2{
-width:60vw;
+max-width:95vw;
+font-size:35px;
 }
 .header p{
 margin:0;

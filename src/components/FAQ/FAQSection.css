@@ -89,8 +89,9 @@
 /* Mobile */
 @media (max-width: 768px) {
   .faq-container {
-    padding: 40px 15px;
+
     min-height: 55vh;
+padding: 30px 15px;
   }
 
   .faq-list {
@@ -161,9 +162,7 @@
 
 /* Extra small phones */
 @media (max-width: 480px) {
-  .faq-container {
-    padding: 30px 10px;
-  }
+
 
   .faq-header h2 {
     font-size: 24px;
