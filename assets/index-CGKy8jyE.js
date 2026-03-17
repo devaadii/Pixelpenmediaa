@@ -195,7 +195,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 gap: 1.5rem;
-padding: 3rem 1rem;
+padding: 0rem 1rem;
 }
 
 /* 👇 HIDE MOBILE STACK ON DESKTOP */
@@ -223,8 +223,9 @@ font-family: "inter", sans-serif;
 }
 .img {
 position: absolute;
-right: 500px;
-transform: translateY(-25px);
+right: -61px;
+width: 81px;
+transform: translateY(31px);
 }
 .img-mobile {
 display: none;
