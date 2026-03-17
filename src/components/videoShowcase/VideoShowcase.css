@@ -47,9 +47,11 @@
   .video-showcase {
     gap: 1rem;
   }
+
   .video-frame-wrapper.horizontal {
     width: 220px;
   }
+
   .video-frame-wrapper.vertical {
     width: 200px;
   }
@@ -59,6 +61,7 @@
   .video-showcase {
     flex-direction: column;
   }
+
   .video-frame-wrapper {
     width: 80vw;
   }
@@ -93,7 +96,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none; /* let clicks pass through to button */
+  pointer-events: none;
+  /* let clicks pass through to button */
   background: rgba(0, 0, 0, 0.2);
   transition: background 0.3s ease;
 }
@@ -116,6 +120,7 @@
   color: #fff;
   transition: transform 0.3s ease;
 }
+
 /* Ensure the svg path has somewhat rounded corners if possible, but standard SVGs depend on stroke-linejoin */
 .modern-play-btn svg path {
   stroke-linejoin: round;
@@ -130,7 +135,8 @@
 
 .video-thumb:hover .modern-play-btn svg {
   transform: scale(1.05);
-  color: #F47F17; /* turn orange on hover */
+  color: #F47F17;
+  /* turn orange on hover */
 }
 
 /* Embedded video frame */
@@ -142,7 +148,7 @@
 
 .video-carousel-heading {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: -11px;
   margin-top: 60px;
 }
 
@@ -167,8 +173,8 @@
 .video-carousel-heading .img-desktop {
   position: absolute;
   top: 5px;
-  right: -70px;
-  width: 50px;
+  right: -61px;
+  width: 81px;
 }
 
 .video-carousel-heading .img-mobile {
@@ -179,9 +185,11 @@
   .video-carousel-heading .heading {
     font-size: 32px;
   }
+
   .video-carousel-heading .img-desktop {
     display: none;
   }
+
   .video-carousel-heading .img-mobile {
     display: block;
     margin: 10px auto;

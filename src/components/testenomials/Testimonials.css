@@ -60,7 +60,12 @@
   max-height: 400px;
   object-fit: contain;
   border-radius: 10px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
 
+.vtc-image-wrapper img:hover {
+  transform: scale(1.03);
+  z-index: 10;
 }
 
 /* Fades */
@@ -205,10 +210,14 @@
     height: 282.54;
     border-radius: 10px;
     object-fit: contain;
-    pointer-events: none;
-    /* prevents touch events going to the image */
+    pointer-events: auto; /* Allow hover on mobile if clicked */
     user-select: none;
     -webkit-user-drag: none;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .htc-image-wrapper img:hover {
+    transform: scale(1.02);
   }
 
 

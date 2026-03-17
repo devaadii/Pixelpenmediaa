@@ -68,12 +68,6 @@
 
 .package-card:hover {
   transform: translateY(-10px) scale(1.01);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.2),
-    0 30px 60px rgba(0, 0, 0, 0.6),
-    0 0 20px rgba(244, 127, 23, 0.1);
 }
 
 .package-card1 {
@@ -107,12 +101,6 @@
 
 .package-card1:hover {
   transform: translateY(-10px) scale(1.01);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.2),
-    0 30px 60px rgba(0, 0, 0, 0.6),
-    0 0 20px rgba(244, 127, 23, 0.1);
 }
 
 .package-title {

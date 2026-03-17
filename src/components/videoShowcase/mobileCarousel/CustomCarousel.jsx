@@ -30,7 +30,7 @@ const slides = [
     thumbnail: img1,
     videoSrc:
       "https://res.cloudinary.com/dehknfmqf/video/upload/f_auto,q_auto/russian_river_web_klhmap.mp4",
-  },  {
+  }, {
     orientation: "vertical",
     thumbnail: img1,
     videoSrc:
@@ -78,7 +78,7 @@ export default function CustomCarousel() {
       setIsPlaying(true);
     }, 0);
   };
-  
+
 
   return (
     <div className="custom-carousel-container">
@@ -96,48 +96,47 @@ export default function CustomCarousel() {
       {!isMobile && (
         <div className="custom-desktop-layout">
           {slides.map((slide, index) => (
-          <div
-  key={index}
-  className={`iphone-shell ${
-    slide.orientation === "vertical"
-      ? "desktop-vertical"
-      : "desktop-horizontal"
-  }`}
->
-<img
-  src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
-  className="iphone-frame-img"
-  alt=""
-/>
+            <div
+              key={index}
+              className={`iphone-shell ${slide.orientation === "vertical"
+                  ? "desktop-vertical"
+                  : "desktop-horizontal"
+                }`}
+            >
+              <img
+                src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
+                className="iphone-frame-img"
+                alt=""
+              />
 
-  <div className="desktop-screen-inner">
-              {isPlaying && index === currentIndex ? (
-                <div className="video-wrapper">
-                  <video
-                    ref={(el) => (videoRefs.current[index] = el)}
-                    src={slide.videoSrc}
-                    className="player-host"
-                    autoPlay
-                    muted
-                      controls  
-                    playsInline
-                
-                    onEnded={stopVideo}
-                  />
-                  <button className="custom-carousel-close" onClick={stopVideo}>
-                    ✕
-                  </button>
-                </div>
-              ) : (
-                <div
-                  className="custom-carousel-thumb-wrapper"
-                  onClick={() => handleThumbnailClick(index)}
-                >
-                  <img
-                    src={slide.thumbnail}
-                    className="custom-carousel-video-thumb"
-                    alt=""
-                  />
+              <div className="desktop-screen-inner">
+                {isPlaying && index === currentIndex ? (
+                  <div className="video-wrapper">
+                    <video
+                      ref={(el) => (videoRefs.current[index] = el)}
+                      src={slide.videoSrc}
+                      className="player-host"
+                      autoPlay
+                      muted
+                      controls
+                      playsInline
+
+                      onEnded={stopVideo}
+                    />
+                    <button className="custom-carousel-close" onClick={stopVideo}>
+                      ✕
+                    </button>
+                  </div>
+                ) : (
+                  <div
+                    className="custom-carousel-thumb-wrapper"
+                    onClick={() => handleThumbnailClick(index)}
+                  >
+                    <img
+                      src={slide.thumbnail}
+                      className="custom-carousel-video-thumb"
+                      alt=""
+                    />
                     <div className="modern-play-btn">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -147,9 +146,9 @@ export default function CustomCarousel() {
                         <path d="M8 5v14l11-7z" />
                       </svg>
                     </div>
-                </div>
-              )}
-            </div>  </div>
+                  </div>
+                )}
+              </div>  </div>
 
           ))}
         </div>
@@ -172,66 +171,65 @@ export default function CustomCarousel() {
             }
 
             return (
-            <div
-  key={idx}
-  className={`iphone-shell mobile-video-item ${
-    slide.orientation === "vertical"
-      ? "mobile-vertical"
-      : "mobile-horizontal"
-  } ${isPlaying && idx === currentIndex ? "playing" : ""}`}
-  style={{
-    transform: `rotate(${rotation})`,
-    transition: "transform 0.3s ease",
-  }}
->
- <img
-  src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
-  className="iphone-frame-img"
-  alt=""
-/>
+              <div
+                key={idx}
+                className={`iphone-shell mobile-video-item ${slide.orientation === "vertical"
+                    ? "mobile-vertical"
+                    : "mobile-horizontal"
+                  } ${isPlaying && idx === currentIndex ? "playing" : ""}`}
+                style={{
+                  transform: `rotate(${rotation})`,
+                  transition: "transform 0.3s ease",
+                }}
+              >
+                <img
+                  src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
+                  className="iphone-frame-img"
+                  alt=""
+                />
 
-  <div className="mobile-screen-inner">
-                {isPlaying && idx === currentIndex ? (
-                  <div className="video-wrapper-no-transform">
-                    <video
-                      ref={(el) => (videoRefs.current[idx] = el)}
-                      src={slide.videoSrc}
-                      className="player-host"
-                      autoPlay
-                      muted
-                      playsInline
-                      controls  
-                      onEnded={stopVideo}
-                    />
-                    <button
-                      className="custom-carousel-close"
-                      onClick={stopVideo}
-                    >
-                      ✕
-                    </button>
-                  </div>
-                ) : (
-                  <div
-                    className="custom-carousel-thumb-wrapper mobile-thumb"
-                    onClick={() => handleThumbnailClick(idx)}
-                  >
-                    <img
-                      src={slide.thumbnail}
-                      className="custom-carousel-video-thumb"
-                      alt=""
-                    />
-                      <div className="modern-play-btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
+                <div className="mobile-screen-inner">
+                  {isPlaying && idx === currentIndex ? (
+                    <div className="video-wrapper-no-transform">
+                      <video
+                        ref={(el) => (videoRefs.current[idx] = el)}
+                        src={slide.videoSrc}
+                        className="player-host"
+                        autoPlay
+                        muted
+                        playsInline
+                        controls
+                        onEnded={stopVideo}
+                      />
+                      <button
+                        className="custom-carousel-close"
+                        onClick={stopVideo}
                       >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
+                        ✕
+                      </button>
                     </div>
-                  </div>
-                )}
-              </div></div>
+                  ) : (
+                    <div
+                      className="custom-carousel-thumb-wrapper mobile-thumb"
+                      onClick={() => handleThumbnailClick(idx)}
+                    >
+                      <img
+                        src={slide.thumbnail}
+                        className="custom-carousel-video-thumb"
+                        alt=""
+                      />
+                      <div className="modern-play-btn">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                </div></div>
             );
           })}
         </div>
@@ -239,7 +237,7 @@ export default function CustomCarousel() {
 
       {/* ================= CSS (EXACT SAME AS YOURS) ================= */}
       {/* 🔒 DO NOT CHANGE ANYTHING BELOW */}
-<style jsx>{`
+      <style jsx>{`
 /* ========== IPHONE FRAME SYSTEM ========== */
 
 .iphone-shell {
@@ -291,7 +289,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 gap: 1.5rem;
-padding: 3rem 1rem;
+padding: 0rem 1rem;
 }
 
 /* 👇 HIDE MOBILE STACK ON DESKTOP */
@@ -319,8 +317,9 @@ font-family: "inter", sans-serif;
 }
 .img {
 position: absolute;
-right: 500px;
-transform: translateY(-25px);
+right: -61px;
+width: 81px;
+transform: translateY(31px);
 }
 .img-mobile {
 display: none;

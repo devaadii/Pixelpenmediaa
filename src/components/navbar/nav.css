@@ -115,12 +115,12 @@
 .nav-links li {
   position: relative;
   z-index: 1;
-  padding: 8px 18px;
   border-radius: 9999px;
-  cursor: pointer;
 }
 
 .nav-links li a {
+  display: block;
+  padding: 8px 18px;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.55);
   font-size: 15px;
