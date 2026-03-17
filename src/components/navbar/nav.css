@@ -1,0 +1,401 @@
+/* Reset styles */
+
+
+
+@font-face {
+  font-family: 'Neue';
+  src: url('../fonts/NeueMetana-Bold.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('../fonts/Gilroy-Medium.ttf') format('truetype');
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mobile-book {
+  display: none;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  z-index: 100000000000000;
+  padding: 4vh 3vw;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.logo {
+  font-family: 'Neue', sans-serif;
+  width: 6vw;
+}
+
+.menu-icon {
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  display: none;
+  /* Hidden by default */
+}
+
+/* ─── Nav Links Container — Liquid Glass ─── */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  border-radius: 9999px;
+  z-index: 80000;
+
+  /* Center horizontally in navbar */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* Liquid glass background */
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(215, 81, 3, 0.06) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 6px 8px;
+  backdrop-filter: blur(40px) saturate(1.6);
+  -webkit-backdrop-filter: blur(40px) saturate(1.6);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  overflow: visible;
+}
+
+/* ─── Sliding Hover Indicator (pill) ─── */
+.nav-hover-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(100% - 10px);
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 0;
+
+  /* Liquid glass pill — 60% opacity */
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(240, 112, 0, 0.07) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 0 15px rgba(240, 112, 0, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0.6;
+
+  /* Smooth ease transition for sliding */
+  transition:
+    left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    opacity 0.25s ease;
+}
+
+/* ─── Nav Link Items ─── */
+.nav-links li {
+  position: relative;
+  z-index: 1;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-links li a:hover {
+  color: #fff;
+}
+
+.nav-links a.active {
+  color: #FFF;
+  font-weight: 600;
+}
+
+/* ─── Portfolio Button — Futuristic Always-On Animation ─── */
+.book-call {
+  position: relative;
+  margin-top: 10px;
+  padding: 1.8vh 0.1vw;
+  color: white;
+  border: none;
+  border-radius: 500px;
+  font-family: "Gilroy", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  width: 9vw;
+  cursor: pointer;
+  background: linear-gradient(90deg, #F68218, #FF6200);
+  overflow: hidden;
+  z-index: 1;
+
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    filter 0.4s ease;
+}
+
+/* Shimmer sweep — always running */
+.book-call::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.25) 50%,
+      transparent 100%);
+  transform: skewX(-20deg);
+  animation: portfolioShimmer 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Shimmer sweep keyframes */
+@keyframes portfolioShimmer {
+  0% {
+    left: -100%;
+  }
+
+  50% {
+    left: 150%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}
+
+.book-call:hover {
+  transform: translateY(-2px) scale(1.11);
+  filter: brightness(1.15);
+}
+
+/* ─── Book a Call Button — Liquid Glass Futuristic ─── */
+.book-call1 {
+  position: relative;
+  padding: 14px 28px;
+  color: white;
+  border-radius: 9999px;
+  font-family: "Gilroy", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid rgba(246, 130, 24, 0.5);
+
+  /* Liquid glass background */
+  background: linear-gradient(135deg,
+      rgba(246, 130, 24, 0.12) 0%,
+      rgba(255, 98, 0, 0.08) 50%,
+      rgba(255, 255, 255, 0.04) 100%);
+  backdrop-filter: blur(30px) saturate(1.4);
+  -webkit-backdrop-filter: blur(30px) saturate(1.4);
+  box-shadow:
+    0 0 20px rgba(246, 130, 24, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  /* Smooth transitions — slowed down */
+  transition:
+    transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-color 0.6s ease,
+    background 0.6s ease;
+}
+
+.book-call1 .btn-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Sweeping glow pseudo-element */
+.book-call1 .btn-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(246, 130, 24, 0.25) 40%,
+      rgba(255, 200, 100, 0.3) 50%,
+      rgba(246, 130, 24, 0.25) 60%,
+      transparent 100%);
+  z-index: 1;
+  transition: left 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+  pointer-events: none;
+}
+
+.book-call1:hover {
+  transform: translateY(-2px) scale(1.04);
+  border-color: rgba(246, 130, 24, 0.8);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  /* Removed outer glow, kept inset light rim */
+  background: linear-gradient(135deg,
+      rgba(246, 130, 24, 0.2) 0%,
+      rgba(255, 98, 0, 0.15) 50%,
+      rgba(255, 255, 255, 0.06) 100%);
+}
+
+.book-call1:hover .btn-glow {
+  left: 100%;
+}
+
+.desktop-book {
+  text-decoration: none;
+}
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  /* invisible */
+  z-index: 70000;
+  /* below menu, above page */
+}
+
+/* ─── Mobile Responsive ─── */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 20px 20px;
+    position: static;
+    z-index: 50000;
+  }
+
+  .book-call {
+    display: none;
+  }
+
+  .desktop-book {
+    display: none;
+  }
+
+  .navbar-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0%;
+  }
+
+  .menu-icon {
+    display: block;
+    order: 2;
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+  }
+
+  .logo {
+    width: 16vw;
+    font-size: 22px;
+    order: 1;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    z-index: 10000000000000000000000000000;
+    padding: 40px 20px;
+    gap: 20px;
+    background: rgb(0, 0, 0);
+    transform: translateY(-120%);
+    transition: transform 0.35s ease-in-out;
+    border-radius: 0 16px 16px 0;
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+  }
+
+  .nav-links li {
+    margin: 0;
+    padding: 10px 0;
+  }
+
+  .nav-links li a {
+    font-size: 18px;
+    color: #fff;
+  }
+
+  /* Hide sliding indicator on mobile */
+  .nav-hover-indicator {
+    display: none;
+  }
+
+  .mobile-book {
+    display: block;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .mobile-book a {
+    display: inline-block;
+    padding: 12px 18px;
+    background: #F68218;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+  }
+
+  .mobile-book a:hover {
+    background: #FF6200;
+  }
+}
+
+/* ─── Extra Small Devices ─── */
+@media (max-width: 480px) {
+  .logo {
+    font-size: 20px;
+  }
+
+  .menu-icon {
+    font-size: 26px;
+  }
+
+  .nav-links li a {
+    font-size: 16px;
+  }
+
+  .book-call {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+}

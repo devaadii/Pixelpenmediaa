@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'Awesome';
+  src: url('/src/fonts/Awesome\ Serif\ Italic\ VAR-VF.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ourStory{
+  font-family: "Awesome",serif ;
+  color: white;
+  text-align: center;
+  background: transparent;
+  margin-top: 50px;
+}
+  .heading1 {
+    margin-bottom: 10px;
+    font-family: "Awesome",serif;
+    font-size: 48px;
+    font-weight: 400;
+    color: #fff;
+  }
+@media (max-width: 768px) {
+.ourStory{
+  display: none;
+}
+}
