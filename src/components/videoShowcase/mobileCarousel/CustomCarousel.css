@@ -1,0 +1,336 @@
+/* ========== IPHONE FRAME SYSTEM ========== */
+
+.iphone-shell {
+  position: relative;
+  display: inline-block;
+}
+
+/* iPhone PNG overlay */
+.iphone-frame-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 20;
+  pointer-events: none;
+  transform: scale(0.90);
+}
+
+/* Actual screen area inside phone */
+.desktop-screen-inner,
+.mobile-screen-inner {
+  position: absolute;
+  inset: 6%;
+  border-radius: 24px;
+  overflow: hidden;
+  z-index: 5;
+  background: black;
+}
+
+/* Remove old borders */
+.desktop-screen,
+.mobile-video-item {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ========== DESKTOP ========== */
+.custom-carousel-thumb-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: block;
+}
+
+.custom-desktop-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0rem 1rem;
+}
+
+.mobile-video-list {
+  display: none;
+}
+
+.header {
+  text-align: center;
+  color: white;
+  margin-top: 40px;
+  position: relative;
+}
+
+.header h2 {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 10px auto;
+  font-family: "Awesome", serif;
+  font-size: 40px;
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+
+.header p {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 80px auto;
+  font-size: 18px;
+  opacity: 0.6;
+  font-family: "inter", sans-serif;
+}
+
+.img {
+  position: absolute;
+  right: -61px;
+  width: 81px;
+  transform: translateY(31px);
+}
+
+.img-mobile {
+  display: none;
+}
+
+.desktop-screen {
+  border: 10px solid #111;
+  border-radius: 32px;
+  overflow: hidden;
+  background: black;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.desktop-screen:hover {
+  transform: scale(1.05);
+}
+
+.desktop-horizontal {
+  aspect-ratio: 16 / 9;
+  width: 400px;
+}
+
+.desktop-vertical {
+  aspect-ratio: 9 / 16;
+  width: 220px;
+}
+
+.custom-carousel-video-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  display: block;
+}
+
+.modern-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease;
+}
+
+.modern-play-btn svg {
+  width: 45px;
+  height: 45px;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.modern-play-btn svg path {
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-width: 2;
+  stroke: currentColor;
+}
+
+.custom-carousel-thumb-wrapper:hover .modern-play-btn,
+.mobile-thumb:hover .modern-play-btn {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.custom-carousel-thumb-wrapper:hover .modern-play-btn svg,
+.mobile-thumb:hover .modern-play-btn svg {
+  transform: scale(1.05);
+  color: #F47F17;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.player-host {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.custom-carousel-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.custom-carousel-arrow {
+  display: none;
+}
+
+/* ========== MOBILE ========== */
+@media (max-width: 768px) {
+  .custom-desktop-layout {
+    display: none;
+  }
+
+  .mobile-video-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    width: 100%;
+    padding: 0 1rem 3rem;
+    box-sizing: border-box;
+  }
+
+  .header {
+    text-align: center;
+    color: white;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header p {
+    margin: 0;
+  }
+
+  .img-desktop {
+    display: none;
+  }
+
+  .img-mobile {
+    display: block;
+    width: 70px;
+    margin: 8px auto 0;
+    position: static;
+    transform: translateX(35%) translateY(-5%);
+  }
+
+  .mobile-video-item {
+    width: 100%;
+    max-width: 420px;
+    border: 12px solid #111;
+    border-radius: 22px;
+    overflow: hidden;
+    background: black;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    position: relative;
+  }
+
+  .mobile-video-item.playing {
+    transform: none !important;
+  }
+
+  .mobile-thumb {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: hidden;
+    border-radius: 24px;
+    min-height: 180px;
+  }
+
+  .mobile-vertical.mobile-video-item,
+  .mobile-video-item.mobile-vertical {
+    aspect-ratio: 9 / 16;
+    max-width: 225px;
+    margin: 0 auto;
+  }
+
+  .mobile-horizontal.mobile-video-item,
+  .mobile-video-item.mobile-horizontal {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .video-wrapper-no-transform {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .mobile-video-item .player-host {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+  }
+
+  .custom-carousel-video-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: inherit;
+  }
+
+  .mobile-video-item .custom-carousel-close {
+    z-index: 20;
+  }
+
+  .img {
+    display: none;
+  }
+
+  .custom-carousel-video-thumb {
+    border-radius: 24px;
+  }
+
+  .custom-carousel {
+    display: none !important;
+  }
+
+  .img-mobile {
+    display: block;
+    width: 70px;
+    margin: 8px auto 0;
+    position: static;
+  }
+
+  .video-wrapper-no-transform {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+}

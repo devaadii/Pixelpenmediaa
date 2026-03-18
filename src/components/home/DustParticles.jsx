@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 
-const PARTICLE_COUNT = 260;
-const REPEL_RADIUS = 200;
-const REPEL_STRENGTH = 3;
-const SHOOTING_STAR_INTERVAL = 220; // ~4-5 per second at 60fps
+const PARTICLE_COUNT = 120; // Reduced from 260 for performance
+const REPEL_RADIUS = 180;
+const REPEL_STRENGTH = 2.5;
+const SHOOTING_STAR_INTERVAL = 350; // Less frequent to save GPU
 
 function DustParticles() {
   const canvasRef = useRef(null);
@@ -125,16 +125,21 @@ function DustParticles() {
         const drawY = p.y + p.offsetY;
         const r = p.baseRadius;
 
-        ctx.beginPath();
-        ctx.arc(drawX, drawY, r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${opacity.toFixed(3)})`;
-        ctx.fill();
-
-        if (p.z > 0.7) {
+        if (r < 0.5) {
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity.toFixed(3)})`;
+          ctx.fillRect(drawX - r, drawY - r, r * 2, r * 2);
+        } else {
           ctx.beginPath();
-          ctx.arc(drawX, drawY, r * 2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 240, 220, ${(opacity * 0.4).toFixed(3)})`;
+          ctx.arc(drawX, drawY, r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${opacity.toFixed(3)})`;
           ctx.fill();
+
+          if (p.z > 0.7) {
+            ctx.beginPath();
+            ctx.arc(drawX, drawY, r * 2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 240, 220, ${(opacity * 0.4).toFixed(3)})`;
+            ctx.fill();
+          }
         }
       }
 

@@ -1,5 +1,3 @@
-
-
 .book-banner {
   position: relative;
   background-size: cover;
@@ -13,34 +11,66 @@
   margin: auto;
   margin-top: 60px;
   margin-bottom: 60px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
 
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Liquid Glass Look inherited from FAQ */
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(215, 81, 3, 0.06) 100%);
+  backdrop-filter: blur(40px) saturate(1.6);
+  -webkit-backdrop-filter: blur(40px) saturate(1.6);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .book-banner-content {
   position: relative;
   z-index: 2;
+  text-align: left;
 }
 
+/* Futuristic Shine Sweep from FAQ */
 .book-banner::before {
   content: "";
   position: absolute;
-  inset: 0;
-
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
+  transform: skewX(-25deg);
+  transition: 2.7s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1;
+  pointer-events: none;
 }
 
+.book-banner:hover::before {
+  left: 150%;
+}
+
+
+
 .brand {
+  display: block;
+  width: fit-content;
+  margin: 0 0 10px 0;
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .headline {
+  display: block;
+  width: fit-content;
+  margin: 0 0 25px 0;
   font-size: 28px;
   font-weight: 600;
   line-height: 1.4;
-  margin-bottom: 25px;
 }
 
 .book-button {
@@ -78,27 +108,15 @@
 .dot.active {
   background: white;
 }
-.book-banner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-background:
-  linear-gradient(135deg, #ff7700, rgba(0,0,0,0.95));
-  z-index: 0;
-  pointer-events: none;
-opacity: 0.4;
 
-}
 
-.book-banner-content {
-  position: relative;
-  z-index: 1;
-}
+
 @keyframes slideInRightToLeft {
   0% {
     transform: translateX(60px);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -108,6 +126,7 @@ opacity: 0.4;
 .animate-slide-rtl {
   animation: slideInRightToLeft 0.8s ease-out;
 }
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .book-banner {

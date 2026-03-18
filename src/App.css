@@ -32,18 +32,23 @@ html {
 
 /* 🎨 CUSTOM BRAND SCROLLBAR */
 ::-webkit-scrollbar {
-  width: 10px; /* Reduced width */
+  width: 10px;
+  /* Reduced width */
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent; /* Hidden track */
+  background: transparent;
+  /* Hidden track */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #F07000; /* Brand Color */
+  background: #F07000;
+  /* Brand Color */
   border-radius: 10px;
-  border: 3px solid black; /* Creates 'padding' look around the thumb */
-  min-height: 150px; /* Increased height feel */
+  border: 3px solid black;
+  /* Creates 'padding' look around the thumb */
+  min-height: 150px;
+  /* Increased height feel */
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -59,7 +64,8 @@ html {
 }
 
 #portfolio {
-  scroll-margin-top: 80px; /* Precise adjustment for fixed navbar height */
+  scroll-margin-top: 80px;
+  /* Precise adjustment for fixed navbar height */
 }
 
 #services {
@@ -79,6 +85,42 @@ html {
 /* 🔥 REAL BACKGROUND LAYER */
 .layout {
   position: relative;
+}
+
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.2; 
+  filter: contrast(250%) brightness(150%) grayscale(100%);
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAA997SDAAAABlBMVEUAAAD///+l2Z/dAAAAAnRSTlP/AOW3MEoAAAA9SURBVHjaY2BkAAMmJggwMjKigInJBAYmRhQwcUGAiZkRBWxscGFiYUMBGxtcmFjYUMDGFhcmVjYUsLHBiQUAnMoAL6p6694AAAAASUVORK5CYII=");
+  background-repeat: repeat;
+  mix-blend-mode: screen; 
+  animation: noise-flicker 0.15s steps(4) infinite;
+}
+
+@keyframes noise-flicker {
+  0% {
+    background-position: 10px 10px;
+  }
+
+  50% {
+    background-position: -5px -15px;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.page-wrap {
+  position: relative;
+  z-index: 1;
+  /* Above noise */
 }
 
 .global-bg {

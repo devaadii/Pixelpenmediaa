@@ -6,17 +6,17 @@ const slides = [
   {
     brand: "Pixelpen.",
     headline: "Weak visuals kill strong brands.",
-  
+    image: null,
   },
   {
     brand: "Pixelpen.",
     headline: "Attention isn’t given. It’s earned.",
-    image: "/banner2.jpg",
+    image: null,
   },
   {
     brand: "Pixelpen.",
     headline: "You need visuals that work harder.",
-    image: "/banner3.jpg",
+    image: null,
   },
 ];
 
@@ -31,10 +31,7 @@ const BookCallBanner = () => {
   }, []);
 
   return (
-    <div
-      className="book-banner"
-      style={{ backgroundImage: `url(${slides[current].image})` }}
-    >
+    <div className="book-banner">
       <div className="book-banner-content">
         <h1 className="brand">{slides[current].brand}</h1>
        <h2 className="headline animate-slide-rtl" key={current}>

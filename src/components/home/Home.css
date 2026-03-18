@@ -69,13 +69,14 @@ Retrieved 2026-02-06, License - CC BY-SA 3.0
 }
 
 .hero-title {
-  margin-top: 5px;
+  display: block;
+  width: fit-content;
+  margin: 5px auto -1.5rem auto;
   font-size: clamp(2rem, 4vw, 4rem);
   font-weight: 200;
   line-height: 0.9;
   z-index: 3;
   letter-spacing: -1px;
-  margin-bottom: -1.5rem;
   color: #ffffff;
   will-change: transform;
 }
@@ -125,7 +126,7 @@ Retrieved 2026-02-06, License - CC BY-SA 3.0
   font-size: 1rem;
   cursor: pointer;
   font-weight: 300;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
 .primary-btn {
@@ -178,7 +179,8 @@ Retrieved 2026-02-06, License - CC BY-SA 3.0
   line-height: 1.35;
   padding-bottom: 0.15em;
   display: block;
-  width: 100%;
+  width: fit-content;
+  margin: 0 auto;
   text-align: center;
   will-change: transform, opacity, filter, background-position;
 

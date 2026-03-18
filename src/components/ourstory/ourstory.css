@@ -13,7 +13,9 @@
   margin-top: 50px;
 }
   .heading1 {
-    margin-bottom: 10px;
+    display: block;
+    width: fit-content;
+    margin: 0 auto 10px auto;
     font-family: "Awesome",serif;
     font-size: 48px;
     font-weight: 400;

@@ -14,14 +14,29 @@ import CustomCarousel from './components/videoShowcase/mobileCarousel/CustomCaro
 import FAQSection from './components/FAQ/FAQSection'
 import "keen-slider/keen-slider.min.css";
 import image from "../src/assets/background.svg"
+import CustomCursor from './components/common/CustomCursor';
+import CustomScrollbar from './components/common/CustomScrollbar';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    // Clear browser scroll restoration
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    // Force scroll to top on mount
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="layout"  >
-
+      <div className="noise-overlay" />
+      <CustomCursor />
+      <CustomScrollbar />
       <Nav />
   
       <main className="page-content">
+        <div className="page-wrap">
             <section  id="home">
           <Home />
    
@@ -48,6 +63,7 @@ function App() {
         <section id="about">
           <Footer />
         </section>
+        </div>
       </main>
     </div>
   );

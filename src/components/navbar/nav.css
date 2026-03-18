@@ -4,12 +4,12 @@
 
 @font-face {
   font-family: 'Neue';
-  src: url('../fonts/NeueMetana-Bold.otf') format('truetype');
+  src: url('../../fonts/NeueMetana-Bold.otf') format('truetype');
 }
 
 @font-face {
   font-family: 'Gilroy';
-  src: url('../fonts/Gilroy-Medium.ttf') format('truetype');
+  src: url('../../fonts/Gilroy-Medium.ttf') format('truetype');
 }
 
 

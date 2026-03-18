@@ -131,7 +131,14 @@ function Home() {
 
         {/* Absolute positioned Spline embed so it doesn't push down page content */}
         <div className="spline-wrapper">
-          <iframe src='https://my.spline.design/studiolanding-mqW7qmGFzWcoWXg4lXxYTm8p/' frameBorder='0' width='100%' height='100%'></iframe>
+          <iframe 
+            src='https://my.spline.design/studiolanding-mqW7qmGFzWcoWXg4lXxYTm8p/' 
+            frameBorder='0' 
+            width='100%' 
+            height='100%'
+            loading="lazy"
+            title="Spline 3D Scene"
+          ></iframe>
         </div>
       </div>
     </div>
