@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import img1 from "../../../assets/thumb.jpg";
 import img from "../../../assets/Vector 5.png";
 import img2 from "../../../assets/Vector 6.png";
 import iphoneFrame from "../../../assets/fucking png.png"
 import LiphoneFrame from "../../../assets/fucking1 png.png"
 import "./CustomCarousel.css";
+import useScrollReveal from "../../../hooks/useScrollReveal";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ================= SLIDES (CLOUDINARY) ================= */
 const slides = [
@@ -61,6 +66,98 @@ export default function CustomCarousel() {
   const [currentIndex, setCurrentIndex] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRefs = useRef({});
+  const headingRef = useRef(null);
+  const layoutRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (!isMobile) {
+        // --- DESKTOP ANIMATION ---
+        const heading = headingRef.current;
+        const layout = layoutRef.current;
+        if (!heading || !layout) return;
+
+        const verticalPhones = layout.querySelectorAll('.desktop-vertical');
+        const horizontalPhone = layout.querySelector('.desktop-horizontal');
+
+        // Create a master timeline for a perfectly synchronized reveal
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: heading,
+            start: "top 85%",
+            once: true
+          }
+        });
+
+        // 1. Heading Reveal
+        // Match "Our Story" heading effect: from y:40, blur:4, duration 1s
+        const headerContainer = heading.querySelector('.header');
+        tl.fromTo(headerContainer.children, 
+          { opacity: 0, y: 40, filter: 'blur(4px)' },
+          { 
+            opacity: 1, y: 0, filter: 'blur(0px)',
+            duration: 1,
+            stagger: 0.2, // Stagger title, arrow, and subheading
+            ease: "power3.out"
+          }
+        );
+
+        // 2. Centerpiece Rise
+        // Starts slightly before the heading finishes
+        tl.fromTo(horizontalPhone,
+          { opacity: 0, y: 150, scale: 0.95 },
+          { 
+            opacity: 1, y: 0, scale: 1, 
+            duration: 1.5,
+            ease: "power3.out"
+          },
+          "-=0.8"
+        );
+
+        // 3. Phones Fan-Out
+        // Starts exactly 0.9 seconds into the centerpiece rising animation
+        const offsets = [-578, -334, 334, 578]; 
+
+        tl.fromTo(verticalPhones, 
+          { 
+            opacity: 0, // Keep hidden until animation starts
+            scale: 0.8,
+            rotation: (i) => i < 2 ? 90 : -90,
+            x: (i) => -offsets[i], 
+          },
+          {
+            opacity: 1, // Fade in as they fan out
+            scale: 1,
+            rotation: 0,
+            x: 0,
+            duration: 2.4, 
+            // Outermost (0, 3) first, then Inner pair (1, 2)
+            delay: (i) => (i === 0 || i === 3) ? 0 : 0.4,
+            ease: "power4.out"
+          },
+          "<0.6" // Exactly 0.6s after the previous animation (Centerpiece) started
+        );
+
+      } else {
+        // --- MOBILE ANIMATION (Simple Fade Up) ---
+        const items = document.querySelectorAll('.mobile-video-item');
+        gsap.fromTo(items,
+          { opacity: 0, y: 40, filter: 'blur(4px)' },
+          {
+            opacity: 1, y: 0, filter: 'blur(0)',
+            duration: 1, stagger: 0.15,
+            scrollTrigger: {
+              trigger: '.mobile-video-list',
+              start: "top 90%",
+              once: true
+            }
+          }
+        );
+      }
+    });
+
+    return () => ctx.revert();
+  }, [isMobile]);
 
   /* ================= STOP VIDEO ================= */
   const stopVideo = () => {
@@ -84,7 +181,7 @@ export default function CustomCarousel() {
   return (
     <div className="custom-carousel-container">
       {/* ---------- Header (UNCHANGED) ---------- */}
-      <div className="video-carousel-heading">
+      <div className="video-carousel-heading" ref={headingRef}>
         <div className="header">
           <h2>Our Edits, Your Story</h2>
           <img className="img img-desktop" src={img} alt="" />
@@ -95,7 +192,7 @@ export default function CustomCarousel() {
 
       {/* ========== DESKTOP (UNCHANGED STRUCTURE) ========== */}
       {!isMobile && (
-        <div className="custom-desktop-layout">
+        <div className="custom-desktop-layout" ref={layoutRef}>
           {slides.map((slide, index) => (
             <div
               key={index}

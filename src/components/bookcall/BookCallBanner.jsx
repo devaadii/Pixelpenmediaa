@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './BookCallBanner.css';
+import useScrollReveal from '../../hooks/useScrollReveal';
 
 
 const slides = [
@@ -22,6 +23,8 @@ const slides = [
 
 const BookCallBanner = () => {
   const [current, setCurrent] = useState(0);
+  const sectionRef = useRef(null);
+  useScrollReveal(sectionRef);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,7 +34,7 @@ const BookCallBanner = () => {
   }, []);
 
   return (
-    <div className="book-banner">
+    <div className="book-banner" ref={sectionRef}>
       <div className="book-banner-content">
         <h1 className="brand">{slides[current].brand}</h1>
        <h2 className="headline animate-slide-rtl" key={current}>
@@ -39,7 +42,7 @@ const BookCallBanner = () => {
     <div key={idx}>{line}</div>
   ))}
 </h2>
-<a href="https://calendly.com/pixelpenmedia-in/30min"><button className="book-button">Book a Call</button></a>
+<a href="https://calendly.com/pixelpenmedia-in/30min" target="_blank" rel="noopener noreferrer"><button className="book-button">Book a Call</button></a>
 
       </div>
 

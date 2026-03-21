@@ -1,5 +1,8 @@
 .test {
   background: transparent !important;
+  /* Softens the section edges to blend with global background */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
 }
 
 .vtc-wrapper {
@@ -8,27 +11,9 @@
   width: 100%;
   overflow: hidden;
   background: transparent;
-}
-
-/* Fading Overlays - High performance alternative to mask-image */
-.vtc-fade-top,
-.vtc-fade-bottom {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 15%;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.vtc-fade-top {
-  top: 0;
-  background: linear-gradient(to bottom, #000 0%, transparent 100%);
-}
-
-.vtc-fade-bottom {
-  bottom: 0;
-  background: linear-gradient(to top, #000 0%, transparent 100%);
+  /* Smoothes the scrolling tracks locally */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
 }
 
 .vtc-columns {
@@ -181,20 +166,7 @@
   }
 
   .vtc-wrapper {
-    background: radial-gradient(circle, rgba(255, 119, 0, 0.20) 0%, transparent 50%);
     height: auto;
-
-  }
-
-  .vtc-fade-top {
-
-
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), transparent);
-  }
-
-  .vtc-fade-bottom {
-
-    background: linear-gradient(to top, rgba(0, 0, 0, 0), transparent);
   }
 
   .desktop-only {

@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./PackagesSection.css";
+import useScrollReveal from "../../hooks/useScrollReveal";
 
 const PackagesSection = () => {
+  const sectionRef = useRef(null);
+  const gridRef = useRef(null);
+
+  useScrollReveal(sectionRef);
+  useScrollReveal(gridRef, { delay: 0.3 }); // Stagger the cards right after the heading
+
   return (
-    <div className="packages-wrapper">
+    <div className="packages-wrapper" ref={sectionRef}>
       {/* Side Blurs */}
       <img src="/Pixelpenmediaa/testimonial-side-blur.svg" className="package-side-blur left" alt="" />
       <img src="/Pixelpenmediaa/testimonial-side-blur.svg" className="package-side-blur right" alt="" />
       <h2 className="heading" style={{ position: "relative", right: "5px" }}>Two Packages</h2>
       <p className="subheading">Endless Possibilities</p>
 
-      <div className="packages-grid">
+      <div className="packages-grid" ref={gridRef}>
 
         <div className="package-card">
           <div className="badge-popular">Popular</div>
@@ -47,7 +54,7 @@ const PackagesSection = () => {
             </li>
 
           </ul>
-          <a href="https://calendly.com/pixelpenmedia-in/30min">
+          <a href="https://calendly.com/pixelpenmedia-in/30min" target="_blank" rel="noopener noreferrer">
             <button className="book-btn">Book a Call</button></a>
         </div>
 
@@ -91,7 +98,7 @@ const PackagesSection = () => {
 
 
           </ul>
-          <a href="https://calendly.com/pixelpenmedia-in/30min">
+          <a href="https://calendly.com/pixelpenmedia-in/30min" target="_blank" rel="noopener noreferrer">
             <button className="book-btn">Book a Call</button></a>
         </div>
       </div>

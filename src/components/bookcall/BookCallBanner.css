@@ -83,11 +83,14 @@
   border-radius: 8px;
 
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .book-button:hover {
   background: #f0f0f0;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-shadow: 0 0 0.5px currentColor;
 }
 
 .carousel-dots {

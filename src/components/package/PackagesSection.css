@@ -23,6 +23,8 @@
   opacity: 0.55;
   pointer-events: none;
   z-index: -1;
+  -webkit-mask-image: radial-gradient(ellipse at center, black 50%, transparent 80%);
+  mask-image: radial-gradient(ellipse at center, black 50%, transparent 80%);
 }
 
 .package-side-blur.left {
@@ -87,11 +89,11 @@
   z-index: 2;
   isolation: isolate;
   height: 60vh;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease;
 }
 
 .package-card:hover {
-  transform: scale(1.04);
+  transform: scale(1.017);
 }
 
 .package-card1 {
@@ -121,11 +123,11 @@
   z-index: 2;
   isolation: isolate;
   height: 60vh;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease;
 }
 
 .package-card1:hover {
-  transform: scale(1.04);
+  transform: scale(1.017);
 }
 
 .package-title {
@@ -164,13 +166,16 @@
   border: 1px solid white;
   border-radius: 11px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
   width: 90%;
 }
 
 .book-btn:hover {
   background-color: #f0f0f0;
   color: black;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-shadow: 0 0 0.5px currentColor;
 }
 
 b {

@@ -85,60 +85,66 @@ function DustParticles() {
       });
     }
 
+    const SHOOTING_STAR_SPAWN_CHECK = 60; // Check every 60 frames
     let time = 0;
 
     const draw = () => {
       time++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // ── Dust particles ──
+      const opacity = 0.5;
+      const repelRadius = REPEL_RADIUS;
+      const repelRadiusSq = repelRadius * repelRadius;
+
+      // Batch small particles (fillRect) for performance
+      ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+      
       for (const p of particles) {
-        p.x += p.vx * (0.5 + p.z * 0.5);
-        p.y += p.vy * (0.5 + p.z * 0.5);
+        const speedMult = 0.5 + p.z * 0.5;
+        p.x += p.vx * speedMult;
+        p.y += p.vy * speedMult;
 
         if (p.x < -20) p.x = canvas.width + 20;
-        if (p.x > canvas.width + 20) p.x = -20;
+        else if (p.x > canvas.width + 20) p.x = -20;
         if (p.y < -20) p.y = canvas.height + 20;
-        if (p.y > canvas.height + 20) p.y = -20;
+        else if (p.y > canvas.height + 20) p.y = -20;
 
         const dx = (p.x + p.offsetX) - mouse.x;
         const dy = (p.y + p.offsetY) - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const repelRadius = REPEL_RADIUS * (0.6 + p.z * 0.4);
+        const distSq = dx * dx + dy * dy;
+        const pRepelRadiusSq = repelRadiusSq * (0.6 + p.z * 0.4);
 
         let targetOffsetX = 0;
         let targetOffsetY = 0;
 
-        if (dist < repelRadius && dist > 0.1) {
-          const force = (1 - dist / repelRadius) * REPEL_STRENGTH * (0.5 + p.z * 0.5);
-          targetOffsetX = (dx / dist) * force * repelRadius * 0.3;
-          targetOffsetY = (dy / dist) * force * repelRadius * 0.3;
+        if (distSq < pRepelRadiusSq && distSq > 1) {
+          const dist = Math.sqrt(distSq);
+          const force = (1 - dist / Math.sqrt(pRepelRadiusSq)) * REPEL_STRENGTH * (0.5 + p.z * 0.5);
+          const mag = force * Math.sqrt(pRepelRadiusSq) * 0.3;
+          targetOffsetX = (dx / dist) * mag;
+          targetOffsetY = (dy / dist) * mag;
         }
 
         p.offsetX += (targetOffsetX - p.offsetX) * 0.06;
         p.offsetY += (targetOffsetY - p.offsetY) * 0.06;
-
-        const flicker = Math.sin(time * p.flickerSpeed + p.flickerPhase);
-        const opacity = 0.5; // 50% opacity as requested
 
         const drawX = p.x + p.offsetX;
         const drawY = p.y + p.offsetY;
         const r = p.baseRadius;
 
         if (r < 0.5) {
-          ctx.fillStyle = `rgba(255, 255, 255, ${opacity.toFixed(3)})`;
           ctx.fillRect(drawX - r, drawY - r, r * 2, r * 2);
         } else {
           ctx.beginPath();
           ctx.arc(drawX, drawY, r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 255, 255, ${opacity.toFixed(3)})`;
           ctx.fill();
 
           if (p.z > 0.7) {
             ctx.beginPath();
             ctx.arc(drawX, drawY, r * 2, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 240, 220, ${(opacity * 0.4).toFixed(3)})`;
+            ctx.fillStyle = `rgba(255, 240, 220, 0.2)`;
             ctx.fill();
+            ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`; // Reset for next iteration
           }
         }
       }

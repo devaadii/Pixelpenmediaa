@@ -3,6 +3,7 @@
 .iphone-shell {
   position: relative;
   display: inline-block;
+  transform-origin: center center;
 }
 
 /* iPhone PNG overlay */
@@ -86,7 +87,7 @@
   position: absolute;
   right: -61px;
   width: 81px;
-  transform: translateY(31px);
+  top: 31px !important;
 }
 
 .img-mobile {
@@ -110,11 +111,15 @@
 .desktop-horizontal {
   aspect-ratio: 16 / 9;
   width: 400px;
+  z-index: 10;
+  position: relative;
 }
 
 .desktop-vertical {
   aspect-ratio: 9 / 16;
   width: 220px;
+  z-index: 5;
+  position: relative;
 }
 
 .custom-carousel-video-thumb {
@@ -233,7 +238,7 @@
     width: 70px;
     margin: 8px auto 0;
     position: static;
-    transform: translateX(35%) translateY(-5%);
+    transform: translateX(35%) translateY(-100px) !important;
   }
 
   .mobile-video-item {

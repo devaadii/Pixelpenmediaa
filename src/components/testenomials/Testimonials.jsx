@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import './Testimonials.css';
+import useScrollReveal from '../../hooks/useScrollReveal';
 
 import one from '../../assets/1.svg';
 import two from '../../assets/2.svg';
@@ -22,6 +23,8 @@ const scrollDurations = [12, 10, 14]; // Duration for 50% scroll
 const Testimonial = () => {
   const mainRef = useRef(null);
   const animations = useRef([]);
+  const headingRef = useRef(null);
+  useScrollReveal(headingRef);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -59,14 +62,12 @@ const Testimonial = () => {
 
   return (
     <div className='test' ref={mainRef}>
-      <div style={{ color: "white", textAlign: "center" }}>
+      <div style={{ color: "white", textAlign: "center" }} ref={headingRef}>
         <h2 className="heading">Testimonials</h2>
         <p className="subheading">Doubt us. Regret later.</p>
       </div>
 
       <div className="vtc-wrapper">
-        <div className="vtc-fade-top" />
-        <div className="vtc-fade-bottom" />
         <div className="vtc-glow" />
         
         <div className="vtc-columns desktop-only">

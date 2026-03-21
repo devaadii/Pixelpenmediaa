@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./FAQSection.css";
+import useScrollReveal from "../../hooks/useScrollReveal";
 
 const faqs = [
   {
@@ -31,6 +32,12 @@ const faqs = [
 
 export default function FAQSection() {
   const [openId, setOpenId] = useState(null);
+  
+  const headerRef = useRef(null);
+  const listRef = useRef(null);
+  
+  useScrollReveal(headerRef);
+  useScrollReveal(listRef, { delay: 0.2 }); // slight delay so it starts right after the heading
 
   const toggle = (id) => {
     setOpenId(openId === id ? null : id);
@@ -38,12 +45,12 @@ export default function FAQSection() {
 
   return (
     <div className="faq-container">
-      <div className="faq-header">
+      <div className="faq-header" ref={headerRef}>
       <h2 className="heading">Faq's</h2>
         <p className="subheading" style={{marginBottom:"0"}}>We figured you’d ask.</p>
       </div>
 
-      <div className="faq-list">
+      <div className="faq-list" ref={listRef}>
         {faqs.map((faq, index) => (
            <div key={faq.id} className="faq-item" onClick={() => toggle(faq.id)}>
              <div className="faq-question">

@@ -21,16 +21,39 @@ import { useEffect } from 'react';
 
 function App() {
   useEffect(() => {
-    // Clear browser scroll restoration
+    // Force browser to start at top on reload
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-    // Force scroll to top on mount
+
+    // Immediate scroll
     window.scrollTo(0, 0);
+
+    // Defensive delayed scroll (ensures it hits after the initial render loop finishes)
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+      // Optional: Clear hash if you want to remove "#section" from URL on reload
+      if (window.location.hash) {
+        window.history.replaceState(null, null, ' ');
+      }
+    }, 10);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="layout"  >
+      {/* Native SVG Noise Filter — No external assets needed */}
+      <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+        <filter id="noiseFilter">
+          <feTurbulence 
+            type="fractalNoise" 
+            baseFrequency="1.0" 
+            numOctaves="1" 
+            stitchTiles="stitch" 
+          />
+        </filter>
+      </svg>
       <div className="noise-overlay" />
       <CustomCursor />
       <CustomScrollbar />
@@ -62,7 +85,7 @@ function App() {
           <BookCallBanner />
         </section>
 
-        <section id="about">
+        <section id="footer">
           <Footer />
         </section>
         </div>

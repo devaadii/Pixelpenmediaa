@@ -48,16 +48,38 @@ function Home() {
       // "Instant Scroll Stoppers." — whole element reveal
       tl.fromTo(
         '#atten',
-        { y: 100, opacity: 0, scale: 0.9 },
-        { y: 0, opacity: 1, scale: 1, duration: 1.2 },
+        { y: 100, opacity: 0, scale: 0.9, filter: 'blur(15px)' },
+        { y: 0, opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.2 },
         '-=0.8'
+      );
+
+      // Spline 3D Scene — smooth wide reveal
+      tl.fromTo(
+        '.spline-wrapper',
+        { opacity: 0, scale: 1.1, filter: 'blur(10px)', xPercent: -50 },
+        { 
+          opacity: 1, 
+          scale: 1, 
+          filter: 'blur(0px)', 
+          xPercent: -50, 
+          duration: 2.25, 
+          ease: 'power3.out',
+          clearProps: "all"
+        },
+        '-=1.2'
       );
 
       // Portfolio button — pop in
       tl.fromTo(
         '.book-call',
         { y: 30, opacity: 0, scale: 0.9 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.8 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          scale: 1, 
+          duration: 0.8,
+          onComplete: (self) => gsap.set(self.targets(), { clearProps: "all" })
+        },
         '-=0.6'
       );
 
@@ -117,6 +139,28 @@ function Home() {
     };
   }, []);
 
+    const handlePortfolioEnter = (e) => {
+      gsap.to(e.currentTarget, {
+        scale: 1.1,
+        y: -4,
+        duration: 0.7,
+        ease: 'power2.out',
+        overwrite: 'auto',
+        boxShadow: 'inset 0 0 25px rgba(255, 255, 255, 0.5)'
+      });
+    };
+
+    const handlePortfolioLeave = (e) => {
+      gsap.to(e.currentTarget, {
+        scale: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+        overwrite: 'auto',
+        boxShadow: 'inset 0 0 15px rgba(255, 255, 255, 0.4)'
+      });
+    };
+
   return (
     <div className="home" ref={heroRef}>
       <DustParticles />
@@ -127,10 +171,18 @@ function Home() {
         </h2>
         <span id='atten'>Instant Scroll Stoppers.</span>
 
-        <button className='book-call'>Portfolio</button>
+        <a href="#portfolio">
+          <button 
+              className='book-call'
+              onMouseEnter={handlePortfolioEnter}
+              onMouseLeave={handlePortfolioLeave}
+            >
+              Portfolio
+            </button>
+        </a>
 
         {/* Absolute positioned Spline embed so it doesn't push down page content */}
-        <div className="spline-wrapper">
+        <div className="spline-wrapper" style={{ opacity: 0 }}>
           <iframe 
             src='https://my.spline.design/studiolanding-mqW7qmGFzWcoWXg4lXxYTm8p/' 
             frameBorder='0' 

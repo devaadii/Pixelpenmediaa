@@ -52,9 +52,14 @@ const CustomScrollbar = () => {
                 force3D: true
             });
 
+            // Calculate velocity for scrolling feedback
+            const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+            velocity = Math.abs(currentScrollY - lastScrollY);
+            lastScrollY = currentScrollY;
+
             // Show tracking feedback on scroll
-            if (currentVelocity > 0.3) {
-                gsap.to(track, { autoAlpha: 1, duration: 0.2 });
+            if (velocity > 0.3) {
+                gsap.set(track, { autoAlpha: 1 });
                 clearTimeout(scrollTimeout);
                 scrollTimeout = setTimeout(() => {
                     gsap.to(track, { autoAlpha: 0, duration: 0.6 });

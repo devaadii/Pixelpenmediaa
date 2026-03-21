@@ -94,13 +94,12 @@ html {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 9999;
-  opacity: 0.2; 
-  filter: contrast(250%) brightness(150%) grayscale(100%);
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAA997SDAAAABlBMVEUAAAD///+l2Z/dAAAAAnRSTlP/AOW3MEoAAAA9SURBVHjaY2BkAAMmJggwMjKigInJBAYmRhQwcUGAiZkRBWxscGFiYUMBGxtcmFjYUMDGFhcmVjYUsLHBiQUAnMoAL6p6694AAAAASUVORK5CYII=");
-  background-repeat: repeat;
+  z-index: 1; /* Above basic background, but below content */
+  opacity: 0.01; 
+  background: white; /* Give the filter a canvas to work on */
+  filter: url(#noiseFilter) contrast(200%) brightness(150%);
   mix-blend-mode: screen; 
-  animation: noise-flicker 0.15s steps(4) infinite;
+  animation: noise-flicker 0.3s steps(4) infinite;
 }
 
 @keyframes noise-flicker {

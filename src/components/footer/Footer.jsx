@@ -1,13 +1,12 @@
 import React from 'react';
 import './Footer.css';
-import logo from "../../assets/pixelpen logo bw-cropped.svg"
-
+import logo from "../../assets/pixelpen logo bw-cropped.svg";
 import { FaTwitter, FaFacebookF, FaInstagram, FaLinkedin, } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="footer" style={{ padding: '0', backgroundColor: '#000' }}>
+    <footer className="footer" style={{ backgroundColor: '#000' }}>
       <div className="footer-container" style={{ paddingTop: '60px' }}>
         <div className="footer-columns">
           <div className="footer-col">
@@ -45,11 +44,11 @@ const Footer = () => {
           <div className="footer-col">
             <h4>Legal</h4>
             <ul>
-              <a style={{ textDecoration: "none" }} href='https://docs.google.com/document/d/1YpoOrvIp8g4RjUpOg7vJ25KNSycRcZ-Fg-Xa2Q31pjM/edit?tab=t.0#heading=h.81j7ctahqlmo'>
+              <a style={{ textDecoration: "none" }} href='https://docs.google.com/document/d/1YpoOrvIp8g4RjUpOg7vJ25KNSycRcZ-Fg-Xa2Q31pjM/edit?tab=t.0#heading=h.81j7ctahqlmo' target="_blank" rel="noopener noreferrer">
                 <li>Terms & Conditions*</li></a>
-              <a style={{ textDecoration: "none" }} href='https://docs.google.com/document/d/1McgvKduaXe0BBJmv752i3JC0icPvxT_ftIvLMlCgw0s/edit?tab=t.0#heading=h.lxq7gd2poa2f'>
+              <a style={{ textDecoration: "none" }} href='https://docs.google.com/document/d/1McgvKduaXe0BBJmv752i3JC0icPvxT_ftIvLMlCgw0s/edit?tab=t.0#heading=h.lxq7gd2poa2f' target="_blank" rel="noopener noreferrer">
                 <li>Privacy Policy</li></a>
-              <a style={{ textDecoration: "none" }} href='https://docs.google.com/document/d/1k4G8E08qQh5mNZkSiTlVg0XQj0KSOhQ-zZrs69dhvto/edit?tab=t.0#heading=h.mvm4x2ret5bz'>
+              <a style={{ textDecoration: "none" }} href='https://docs.google.com/document/d/1k4G8E08qQh5mNZkSiTlVg0XQj0KSOhQ-zZrs69dhvto/edit?tab=t.0#heading=h.mvm4x2ret5bz' target="_blank" rel="noopener noreferrer">
                 <li>Refund & Cancelation Policy</li></a>
             </ul>
           </div>
@@ -83,7 +82,7 @@ const Footer = () => {
           </div>
           <div className="footer-socials">
             <div className="social-icon">
-              <a href='https://www.instagram.com/pixelpen.in?igsh=MTM2MW9paGp5MnltbA==' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <a href='https://www.instagram.com/pixelpen.in?igsh=MTM2MW9paGp5MnltbA==' style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" rel="noopener noreferrer">
                 <FaInstagram /></a>
             </div>
             <div className="social-icon">
@@ -91,7 +90,7 @@ const Footer = () => {
               <FaLinkedin />
             </div>
             <div className="social-icon">
-              <a href='https://x.com/PixelpenMedia?t=t0avYlK-5KmlgLNItkvghQ&s=09' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <a href='https://x.com/PixelpenMedia?t=t0avYlK-5KmlgLNItkvghQ&s=09' style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" rel="noopener noreferrer">
                 <FaXTwitter /></a>
             </div>
           </div>
