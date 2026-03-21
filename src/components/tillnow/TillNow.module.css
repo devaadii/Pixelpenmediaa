@@ -1,0 +1,361 @@
+/* ================================================================= */
+/*  TillNow — CSS Module                                             */
+/* ================================================================= */
+
+.section {
+  --orange: #E8820C;
+  --orange-dim: rgba(232, 130, 12, 0.58);
+  --orange-glow: rgba(200, 100, 10, 0.3);
+  --axis: rgba(180, 180, 180, 0.5);
+  --dash: rgba(180, 180, 180, 0.38);
+  --white: #ffffff;
+  --gray-soft: rgba(220, 220, 220, 0.82);
+
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 108px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: transparent;
+  font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+/* ---------- content container ---------- */
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* ---------- heading ---------- */
+.heading {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 26px;
+  color: var(--gray-soft);
+  position: absolute;
+  top: 40px;
+  left: 674px;
+  margin: 0;
+  opacity: 1;
+}
+
+/* ---------- chart area ---------- */
+.chartArea {
+  position: relative;
+  width: 100%;
+  padding-left: 36px;
+  padding-bottom: 36px;
+}
+
+/* ---------- y axis ---------- */
+.yAxis {
+  position: absolute;
+  left: 75px;
+  bottom: -42px;
+  width: 4px;
+  height: calc(100% + 74px);
+  background: linear-gradient(to top, black, white);
+  transform-origin: bottom;
+}
+
+.yArrow {
+  position: absolute;
+  top: -8px;
+  left: -6px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+/* ---------- x axis ---------- */
+.xAxis {
+  position: absolute;
+  bottom: 32px;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(to right, black, white);
+  transform-origin: left;
+}
+
+.xArrow {
+  position: absolute;
+  right: -8px;
+  top: -6px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid white;
+}
+
+/* ---------- bars row ---------- */
+.barsRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 61px;
+  height: 520px;
+  position: relative;
+  padding-left: 89px;
+  padding-bottom: 0;
+}
+
+/* ---------- bar column ---------- */
+.barCol {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+/* ---------- bar wrapper ---------- */
+.barWrapper {
+  position: relative;
+  width: 61px;
+  min-width: 61px;
+  flex-shrink: 0;
+  height: var(--final-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* ---------- bar ---------- */
+.bar {
+  width: 100%;
+  height: 100%;
+  border-radius: 15.7056px 15.7056px 0 0;
+  transform-origin: bottom center;
+  background: linear-gradient(to bottom,
+      #F4900C 0%,
+      #C06008 38%,
+      #7A3500 72%,
+      #1a0800 100%);
+  box-shadow: none;
+}
+
+/* ---------- badge ---------- */
+.badge {
+  position: absolute;
+  top: 0;
+  width: 61px;
+  height: 61px;
+  border-radius: 15.7056px;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: white;
+  display: grid;
+  place-content: center;
+  padding-bottom: 10px;
+  text-align: center;
+  opacity: 1;
+  transform: translateY(-15px);
+  background: #F68218;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 160, 60, 0.28);
+  filter: drop-shadow(0px 4.83249px 19.33px rgba(0, 0, 0, 0.25));
+  font-family: 'AwesomeSerifItalic-LightReg', 'Playfair Display', serif;
+  pointer-events: auto;
+}
+
+/* ---------- dot ---------- */
+.dot {
+  position: absolute;
+  top: -6px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 1;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 22px rgba(255, 255, 255, 0.5);
+}
+
+/* ---------- dash line ---------- */
+.dashLine {
+  position: absolute;
+  left: calc(100% - 31px);
+  top: -17px;
+  height: 1px;
+  width: var(--dash-width, 260px);
+  background-image: repeating-linear-gradient(to right,
+      #ffffff 0,
+      #ffffff 6px,
+      transparent 6px,
+      transparent 11px);
+  transform: none;
+  opacity: 1;
+}
+
+.dashArrow {
+  position: absolute;
+  right: -6px;
+  top: -4.5px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8.5px solid #ffffff;
+}
+
+.dashCircle {
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+/* ---------- stat label ---------- */
+.statLabel {
+  position: absolute;
+  left: calc(100% - 31px + var(--dash-width, 260px) + 15px);
+  top: -34px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25em;
+  opacity: 1;
+  transform: translateX(16px);
+  white-space: nowrap;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.labelMain {
+  font-weight: 700;
+  font-size: 29px;
+  color: var(--orange);
+  line-height: 1.1;
+}
+
+.labelSub {
+  font-weight: 700;
+  font-size: 29px;
+  color: var(--orange);
+}
+
+/* ---------- custom dashed line ---------- */
+.customLine {
+  position: absolute;
+  top: -15px; /* Top edge of the badge */
+  left: 30.5px; /* Horizontal center of the badge/bar */
+  width: var(--line-width, 521px);
+  height: 0.9px;
+  background-image: repeating-linear-gradient(to right, 
+      white 0px, 
+      white 5px, 
+      transparent 5px, 
+      transparent 10px);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.customCircle {
+  position: absolute;
+  left: -2.5px; /* Center circle on line start */
+  top: -2.05px; /* Center vertical */
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.customArrow {
+  position: absolute;
+  right: -5px; /* Pointing right */
+  top: -4.55px; /* Center vertical */
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 8.5px solid white;
+}
+
+.lineLabel {
+  position: absolute;
+  left: calc(100% + 15px);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--orange);
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+.sectionTitle {
+  position: absolute;
+  left: calc(100% + 15px);
+  bottom: calc(100% + 20px);
+  color: white;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 30px;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+/* ================================================================= */
+/*  Mobile                                                            */
+/* ================================================================= */
+@media (max-width: 768px) {
+  .container {
+    padding: 3rem 1.25rem;
+  }
+
+  .barsRow {
+    gap: 0.75rem;
+    height: 300px;
+  }
+
+  .barWrapper {
+    width: 61px;
+    min-width: 61px;
+    flex-shrink: 0;
+  }
+
+  .dashLine {
+    display: none;
+  }
+
+  .statLabel {
+    position: static;
+    transform: none;
+    margin-top: 0.5rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .barCol {
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .labelMain {
+    font-size: 0.75rem;
+  }
+
+  .labelSub {
+    font-size: 0.55rem;
+  }
+}

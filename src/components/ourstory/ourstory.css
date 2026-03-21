@@ -22,7 +22,8 @@
     color: #fff;
   }
 @media (max-width: 768px) {
-.ourStory{
-  display: none;
-}
+  .ourStory {
+    /* Made visible on mobile since TillNow is now inside it */
+    display: block; 
+  }
 }

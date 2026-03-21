@@ -12,6 +12,7 @@ import PackagesSection from './components/package/PackagesSection'
 import VideoShowcase from './components/videoShowcase/VideoShowcase'
 import CustomCarousel from './components/videoShowcase/mobileCarousel/CustomCarousel'
 import FAQSection from './components/FAQ/FAQSection'
+import TillNow from './components/tillnow/TillNow'
 import "keen-slider/keen-slider.min.css";
 import image from "../src/assets/background.svg"
 import CustomCursor from './components/common/CustomCursor';
@@ -60,6 +61,7 @@ function App() {
         <section id="book-call">
           <BookCallBanner />
         </section>
+
         <section id="about">
           <Footer />
         </section>
