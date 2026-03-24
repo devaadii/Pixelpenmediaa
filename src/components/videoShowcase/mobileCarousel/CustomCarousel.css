@@ -79,7 +79,7 @@
   width: fit-content;
   margin: 0 auto 80px auto;
   font-size: 18px;
-  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.55);
   font-family: "inter", sans-serif;
 }
 
@@ -156,15 +156,17 @@
   stroke: currentColor;
 }
 
-.custom-carousel-thumb-wrapper:hover .modern-play-btn,
-.mobile-thumb:hover .modern-play-btn {
-  transform: translate(-50%, -50%) scale(1.1);
-}
+@media (hover: hover) {
+  .custom-carousel-thumb-wrapper:hover .modern-play-btn,
+  .mobile-thumb:hover .modern-play-btn {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 
-.custom-carousel-thumb-wrapper:hover .modern-play-btn svg,
-.mobile-thumb:hover .modern-play-btn svg {
-  transform: scale(1.05);
-  color: #F47F17;
+  .custom-carousel-thumb-wrapper:hover .modern-play-btn svg,
+  .mobile-thumb:hover .modern-play-btn svg {
+    transform: scale(1.05);
+    color: #F47F17;
+  }
 }
 
 .video-wrapper {
@@ -173,27 +175,62 @@
   height: 100%;
 }
 
+.modern-pause-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 15;
+  width: 70px;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.video-wrapper:hover .modern-pause-btn,
+.video-wrapper-no-transform:hover .modern-pause-btn {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .modern-pause-btn {
+    opacity: 0.6; /* Slightly visible since mobile lacks hover */
+  }
+}
+
+.modern-pause-btn:hover,
+.modern-pause-btn:active {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modern-pause-btn svg {
+  width: 35px;
+  height: 35px;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.modern-pause-btn:hover svg,
+.modern-pause-btn:active svg {
+  color: #F47F17;
+}
+
 .player-host {
   width: 100%;
   height: 100%;
   border-radius: 24px;
   overflow: hidden;
   position: relative;
-}
-
-.custom-carousel-close {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  font-size: 18px;
-  border: none;
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  cursor: pointer;
-  z-index: 10;
 }
 
 .custom-carousel-arrow {
@@ -206,23 +243,83 @@
     display: none;
   }
 
-  .mobile-video-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
+  .mobile-splide-container {
     width: 100%;
-    padding: 0 1rem 3rem;
-    box-sizing: border-box;
+    overflow: hidden;
+    padding: 0 0 1rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .mobile-splide-container .splide__track {
+    overflow: visible !important;
+  }
+
+  .mobile-splide-container .splide__list {
+    display: flex;
+    align-items: center;
+    perspective: 1200px;
+  }
+
+  .mobile-splide-container .splide__slide .iphone-shell {
+    transform-style: preserve-3d;
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 15;
+  }
+
+  /* The actual stretchy pill */
+  .active-pill {
+    position: absolute;
+    height: 8px;
+    width: 8px; /* Start as a dot, then stretch? Or just keep it a pill? */
+    border-radius: 10px;
+    background: #F47F17;
+    z-index: 5;
+    pointer-events: none;
+    box-shadow: 0 0 15px rgba(244, 127, 23, 0.6);
+    /* The cubic-bezier creates the 'liquid' effect */
+    transition: transform 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+
+  .carousel-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    transition: background 0.3s ease;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .carousel-dots .dot.active {
+    background: transparent;
   }
 
   .header {
     text-align: center;
     color: white;
+    margin-top: -30px; /* Push portfolio section up on mobile */
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+  }
+
+  .header h2 {
+    margin: 0 15px 10px 15px; /* 15px margin left and right */
+    font-size: 35px; /* Increased to 35px */
+    white-space: nowrap; /* Strictly keep on one line */
+    letter-spacing: 1px;
   }
 
   .header p {
@@ -235,15 +332,14 @@
 
   .img-mobile {
     display: block;
-    width: 70px;
-    margin: 8px auto 0;
+    width: 50px;
+    margin: 5px auto 0;
     position: static;
-    transform: translateX(35%) translateY(-100px) !important;
+    transform: none !important; /* Stop the arrow from jumping around or hiding */
   }
 
   .mobile-video-item {
-    width: 100%;
-    max-width: 420px;
+    display: block !important;
     border: 12px solid #111;
     border-radius: 22px;
     overflow: hidden;
@@ -269,16 +365,17 @@
   .mobile-vertical.mobile-video-item,
   .mobile-video-item.mobile-vertical {
     aspect-ratio: 9 / 16;
-    max-width: 225px;
-    margin: 0 auto;
+    width: 260px !important;
+    flex: 0 0 260px !important;
+    margin: 0;
   }
 
   .mobile-horizontal.mobile-video-item,
   .mobile-video-item.mobile-horizontal {
     aspect-ratio: 16 / 9;
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
+    width: 360px !important;
+    flex: 0 0 360px !important;
+    margin: 0;
   }
 
   .video-wrapper-no-transform {
@@ -324,12 +421,7 @@
     display: none !important;
   }
 
-  .img-mobile {
-    display: block;
-    width: 70px;
-    margin: 8px auto 0;
-    position: static;
-  }
+  /* Redundant .img-mobile class removed */
 
   .video-wrapper-no-transform {
     position: relative;

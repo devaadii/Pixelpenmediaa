@@ -16,12 +16,13 @@ gsap.registerPlugin(ScrollTrigger);
  * @param {string} options.start - ScrollTrigger start position (default: "top 85%").
  */
 export default function useScrollReveal(ref, options = {}) {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
   const {
-    y = 40,
+    y = isMobile ? 20 : 40,
     duration = 1,
     stagger = 0.15,
     delay = 0,
-    start = 'top 85%',
+    start = isMobile ? 'top 95%' : 'top 85%',
     blur = true,
   } = options;
 
@@ -49,7 +50,7 @@ export default function useScrollReveal(ref, options = {}) {
           stagger,
           delay,
           ease: 'power3.out',
-          clearProps: 'all',
+          clearProps: 'opacity,transform,filter',
           scrollTrigger: {
             trigger: el,
             start,

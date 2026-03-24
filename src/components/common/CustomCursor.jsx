@@ -9,7 +9,15 @@ const CustomCursor = () => {
     const hoverScale = useRef(0.25); // Initial state: 20px (80 * 0.25)
     const isHovered = useRef(false);
 
+    const [isMobile, setIsMobile] = React.useState(false);
+
     useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        
+        if (isMobile) return;
+
         const cursor = cursorRef.current;
         if (!cursor) return;
 
@@ -26,12 +34,12 @@ const CustomCursor = () => {
 
             const target = e.target;
             // Added input and textarea to the hoverable list
-            const isHoverable = !!target.closest('a, button, h1, h2, h3, h4, h5, h6, p, span, li, input, textarea, .hover-target, .nav-links');
+            const isHoverable = !!target.closest('a, button, h1, h2, h3, h4, h5, h6, p, span, li, input, textarea, .hover-target, .nav-links, img.logo');
 
             // Only trigger animation when the hover state actually changes
             if (isHoverable !== isHovered.current) {
                 isHovered.current = isHoverable;
-                
+
                 gsap.to(hoverScale, {
                     current: isHoverable ? 1.0 : 0.25,
                     duration: 0.4, // Slightly faster for responsiveness
@@ -42,8 +50,8 @@ const CustomCursor = () => {
         };
 
         const updateCursor = () => {
-            // Increased "time offset" (lag) by reducing dt from 0.15 to 0.08
-            const dt = 0.08;
+            // Reduced delay (lag) by increasing dt from 0.08 to 0.18
+            const dt = 0.18;
             pos.current.x += (mouse.current.x - pos.current.x) * dt;
             pos.current.y += (mouse.current.y - pos.current.y) * dt;
 
@@ -51,17 +59,17 @@ const CustomCursor = () => {
             const dx = mouse.current.x - pos.current.x;
             const dy = mouse.current.y - pos.current.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            
+
             // Map distance to a tasteful stretch factor (max 1.5x length)
             // Tuning distance * 0.015 for better response with the new lag
-            const stretch = Math.min(distance * 0.015, 0.5); 
+            const stretch = Math.min(distance * 0.015, 0.5);
             const angle = Math.atan2(dy, dx) * (180 / Math.PI);
 
             // Apply updates with -40px centering offset
             xSet(pos.current.x - 40);
             ySet(pos.current.y - 40);
             rotateSet(angle);
-            
+
             // Combine hover scale with stretch/squish
             scaleXSet(hoverScale.current * (1 + stretch));
             scaleYSet(hoverScale.current * (1 - stretch * 0.6)); // Squish slightly less than stretch for volume feel
@@ -76,6 +84,8 @@ const CustomCursor = () => {
         };
     }, []);
 
+    if (isMobile) return null;
+
     return (
         <div
             ref={cursorRef}
@@ -84,7 +94,7 @@ const CustomCursor = () => {
                 top: 0,
                 left: 0,
                 pointerEvents: 'none',
-                zIndex: 9999,
+                zIndex: 2147483647, // Max z-index to sit on top of the navbar
                 mixBlendMode: 'difference',
                 willChange: 'transform',
                 // Center the svg inside the div or ensure the div starts at 0,0

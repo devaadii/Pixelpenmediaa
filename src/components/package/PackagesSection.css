@@ -6,7 +6,7 @@
 }
 
 .packages-wrapper {
-  padding: 80px 20px;
+  padding: 80px 20px 20px; /* 60px extra top padding for desktop */
   text-align: center;
   background: transparent;
   color: white;
@@ -18,7 +18,8 @@
   position: absolute;
   top: calc(50% + 100px);
   transform: translateY(-50%);
-  width: 1817px; /* Scaled up by 10% from 1652px */
+  width: 1817px;
+  /* Scaled up by 10% from 1652px */
   height: auto;
   opacity: 0.55;
   pointer-events: none;
@@ -44,6 +45,8 @@
   font-size: 48px;
   font-weight: 400;
   color: #fff;
+  position: relative;
+  right: 5px;
 }
 
 .subheading {
@@ -51,7 +54,7 @@
   width: fit-content;
   margin: 0 auto 80px auto;
   font-size: 18px;
-  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .packages-grid {
@@ -68,27 +71,27 @@
   border-radius: 20px;
   padding: 20px 25px;
   width: 320px;
-  
-  /* Liquid Apple Glass with Radial Gradient */
-  background: radial-gradient(
-      circle at bottom right,
-      rgba(244, 127, 23, 0.3),
-      rgba(255, 255, 255, 0.03) 85%
-    ),
-    rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(40px) saturate(1.8);
-  -webkit-backdrop-filter: blur(40px) saturate(1.8);
-  
-  box-shadow: 
+
+  /* Re-enabled glassmorphism with will-change to prevent rendering bugs */
+  background: radial-gradient(circle at bottom right,
+      rgba(220, 95, 0, 0.25),
+      rgba(255, 255, 255, 0.05) 85%),
+    rgba(25, 25, 25, 0.4);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  will-change: transform;
+
+  box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 -1px 0 rgba(255, 255, 255, 0.05),
     inset 0 0 10px rgba(255, 255, 255, 0.3);
-    
+
   text-align: left;
   z-index: 2;
   isolation: isolate;
-  height: 60vh;
+  height: 58vh;
+  padding-bottom: 20px;
   transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease;
 }
 
@@ -102,27 +105,27 @@
   border-radius: 20px;
   padding: 20px 25px;
   width: 320px;
-  
-  /* Liquid Apple Glass with Radial Gradient */
-  background: radial-gradient(
-      circle at bottom right,
-      rgba(150, 150, 150, 0.2),
-      rgba(255, 255, 255, 0.03) 85%
-    ),
-    rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(40px) saturate(1.8);
-  -webkit-backdrop-filter: blur(40px) saturate(1.8);
-  
-  box-shadow: 
+
+  /* Re-enabled glassmorphism with will-change to prevent rendering bugs */
+  background: radial-gradient(circle at bottom right,
+      rgba(150, 150, 150, 0.15),
+      rgba(255, 255, 255, 0.05) 85%),
+    rgba(25, 25, 25, 0.4);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  will-change: transform;
+
+  box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 -1px 0 rgba(255, 255, 255, 0.05),
     inset 0 0 10px rgba(255, 255, 255, 0.3);
-    
+
   text-align: left;
   z-index: 2;
   isolation: isolate;
-  height: 60vh;
+  height: 58vh;
+  padding-bottom: 20px;
   transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s ease;
 }
 
@@ -239,12 +242,23 @@ b {
 /* Ribbon styles removed (unused) */
 
 @media (max-width: 768px) {
+  .packages-wrapper {
+    padding: 20px;
+  }
   .heading {
+    font-size: 35px;
     margin-bottom: 5px;
   }
 
   .subheading {
     margin-bottom: 40px;
+  }
+
+  .packages-grid {
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    align-items: center;
   }
 
   .package-card {
@@ -256,15 +270,31 @@ b {
     max-width: 90vw;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(20px) saturate(1.6);
-    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    gap: 0;
+    /* Inherit desktop colors & blur */
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: left;
     z-index: 2;
     isolation: isolate;
+    min-height: 420px;
     height: auto;
+    padding-bottom: 40px;
+  }
+
+  .package-card1.elite {
+    min-height: 440px;
+    height: auto;
+    padding-bottom: 40px;
+  }
+
+  /* Specific override for PixelPen Pro container on mobile */
+  .package-card .package-features {
+    margin-bottom: 0;
+  }
+
+  /* Remove 12px bottom margin from 'Fast Turnarounds' specifically in Pro container */
+  .package-card .package-features li:last-child {
+    margin-bottom: 0;
   }
 }
 

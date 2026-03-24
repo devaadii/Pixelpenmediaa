@@ -52,7 +52,7 @@ export default function FAQSection() {
 
       <div className="faq-list" ref={listRef}>
         {faqs.map((faq, index) => (
-           <div key={faq.id} className="faq-item" onClick={() => toggle(faq.id)}>
+           <div key={faq.id} className={`faq-item ${openId === faq.id ? "open" : ""}`} onClick={() => toggle(faq.id)}>
              <div className="faq-question">
                <span className="faq-index">Q{index + 1}</span>
                <span className="faq">{faq.question}</span>

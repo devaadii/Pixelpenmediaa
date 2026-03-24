@@ -5,7 +5,15 @@ const CustomScrollbar = () => {
     const thumbRef = useRef(null);
     const trackRef = useRef(null);
 
+    const [isMobile, setIsMobile] = useState(false);
+
     useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        if (isMobile) return;
+
         const thumb = thumbRef.current;
         const track = trackRef.current;
         if (!thumb || !track) return;
@@ -74,6 +82,8 @@ const CustomScrollbar = () => {
             clearTimeout(scrollTimeout);
         };
     }, []);
+
+    if (isMobile) return null;
 
     return (
         <div

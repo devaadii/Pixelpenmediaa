@@ -182,8 +182,27 @@
 }
 
 @media (max-width: 768px) {
+  .video-carousel-heading {
+    margin-top: -20px; /* Push the portfolio section up exclusively on mobile */
+  }
+
+  .video-carousel-heading .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
   .video-carousel-heading .heading {
     font-size: 32px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  .video-carousel-heading .subheading {
+    text-align: center;
+    margin-bottom: 0; /* Removed margin to tighten space */
+    line-height: 1.2;
   }
 
   .video-carousel-heading .img-desktop {
@@ -192,7 +211,9 @@
 
   .video-carousel-heading .img-mobile {
     display: block;
-    margin: 10px auto;
+    margin: 0 auto 0; /* Center horizontally with no top margin */
     width: 40px;
+    position: static; 
+    transform: translateY(-5px); /* Fine-tuned tuck completely against the text */
   }
 }

@@ -32,6 +32,10 @@
   text-align: left;
 }
 
+.book-banner-content a {
+  text-decoration: none;
+}
+
 /* Futuristic Shine Sweep from FAQ */
 .book-banner::before {
   content: "";
@@ -93,92 +97,111 @@
   text-shadow: 0 0 0.5px currentColor;
 }
 
-.carousel-dots {
+.book-banner .carousel-dots {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 20px;
-  gap: 8px;
+  gap: 12px;
+  margin-bottom: 0px;
+  position: relative;
+  z-index: 15;
+}
+
+/* The actual stretchy pill for liquid animation */
+.book-banner .active-pill {
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  border-radius: 10px;
+  background: #F47F17;
+  z-index: 5;
+  pointer-events: none;
+  box-shadow: 0 0 15px rgba(244, 127, 23, 0.6);
+  /* The cubic-bezier creates the 'liquid' effect */
+  transition: transform 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
-  background: #555;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   transition: background 0.3s;
+  z-index: 1;
 }
 
 .dot.active {
-  background: white;
+  background: transparent;
 }
 
-
-
-@keyframes slideInRightToLeft {
-  0% {
-    transform: translateX(60px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.animate-slide-rtl {
-  animation: slideInRightToLeft 0.8s ease-out;
-}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
   .book-banner {
-    width: 95%;
-    padding: 20px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    width: calc(100vw - 40px); /* Strict math for exactly 20px off each edge of the screen */
+    margin: 40px auto; /* Centers the banner within that calculated space */
+    padding: 30px 20px; /* Increased padding by 15px top and 15px bottom to add 30px total height */
+    box-sizing: border-box;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center; /* Ensures flex elements are centered vertically */
+    text-align: left;
+    transform: none !important;
+    left: 0 !important;
+    height: 209px;
+    min-height: 209px; /* Fixed strictly to 209px as requested */
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .book-banner-content {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
   }
 
   .brand {
-    font-size: 20px;
+    font-size: 1.2rem;
+    margin-bottom: 10px; /* Added 10px margin as requested */
+    text-align: left;
   }
 
   .headline {
-    font-size: 20px;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem; /* Saved 16px */
+    text-align: left;
+    line-height: 1.25;
+    width: 100%;
   }
 
   .book-button {
-    padding: 10px 50px;
-    font-size: 14px;
+    width: 180px !important; /* Reduced by another 40px as requested, now 180px total */
+    padding: 12px 0;
+    font-size: 15px;
+    display: block; /* Ensure it respects the width correctly as a block element */
+    margin-top: 10px; /* Added 10px top margin as requested */
+    margin-bottom: 20px; /* Added 20px margin as requested */
   }
 
-  .carousel-dots {
-    margin-top: 15px;
-    gap: 6px;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
+  .book-banner .carousel-dots {
+    width: 100%;
+    margin-top: 10px; /* Reduced from 20px to balance top and bottom space visually */
+    margin-bottom: 0px; /* Overrides the huge 3rem margin leaking from the CustomCarousel stylesheet */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px; /* Match Portfolio gap */
   }
 }
 
-@media (max-width: 400px) {
-  .book-banner {
-    padding: 15px;
-  }
-
-  .brand {
-    font-size: 18px;
-  }
-
+@media (max-width: 480px) {
   .headline {
-    font-size: 18px;
-  }
-
-  .book-button {
-    padding: 10px 30px;
-    font-size: 13px;
+    font-size: 1.3rem;
   }
 }

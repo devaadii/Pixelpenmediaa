@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import img1 from "../../../assets/thumb.jpg";
@@ -66,13 +68,53 @@ export default function CustomCarousel() {
   const [currentIndex, setCurrentIndex] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRefs = useRef({});
+  const videoTimes = useRef({}); // Stores paused timestamps
   const headingRef = useRef(null);
   const layoutRef = useRef(null);
+  const splideRef = useRef(null);
+  const [scrollIndex, setScrollIndex] = useState(0);
+
+  const handleMove = (splide) => {
+    const realIndex = splide.index % slides.length;
+    setScrollIndex(realIndex < 0 ? realIndex + slides.length : realIndex);
+    apply3DEffect(splide);
+  };
+
+  /* 3D coverflow effect for mobile carousel */
+  const apply3DEffect = (splide) => {
+    if (!splide || !splide.Components || !splide.Components.Slides) return;
+    const slideEls = splide.Components.Slides.get();
+    const activeIndex = splide.index;
+
+    slideEls.forEach((slideObj) => {
+      const inner = slideObj.slide.querySelector('.iphone-shell');
+      if (!inner) return;
+      const idx = slideObj.index;
+      let diff = idx - activeIndex;
+
+      // Clamp for looped clones
+      if (diff > slides.length / 2) diff -= slides.length;
+      if (diff < -slides.length / 2) diff += slides.length;
+
+      const absDiff = Math.abs(diff);
+      const rotateY = diff * -20;     // tilt away from center
+      const scale = 1 - absDiff * 0.1; // shrink non-active
+      const opacity = 1 - absDiff * 0.3;
+
+      gsap.to(inner, {
+        rotateY,
+        scale: Math.max(scale, 0.7),
+        opacity: Math.max(opacity, 0.4),
+        duration: 0.5,
+        ease: 'power2.out',
+        overwrite: true,
+      });
+    });
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (!isMobile) {
-        // --- DESKTOP ANIMATION ---
         const heading = headingRef.current;
         const layout = layoutRef.current;
         if (!heading || !layout) return;
@@ -80,7 +122,6 @@ export default function CustomCarousel() {
         const verticalPhones = layout.querySelectorAll('.desktop-vertical');
         const horizontalPhone = layout.querySelector('.desktop-horizontal');
 
-        // Create a master timeline for a perfectly synchronized reveal
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: heading,
@@ -89,81 +130,44 @@ export default function CustomCarousel() {
           }
         });
 
-        // 1. Heading Reveal
-        // Match "Our Story" heading effect: from y:40, blur:4, duration 1s
         const headerContainer = heading.querySelector('.header');
         tl.fromTo(headerContainer.children, 
           { opacity: 0, y: 40, filter: 'blur(4px)' },
-          { 
-            opacity: 1, y: 0, filter: 'blur(0px)',
-            duration: 1,
-            stagger: 0.2, // Stagger title, arrow, and subheading
-            ease: "power3.out"
-          }
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, stagger: 0.2, ease: "power3.out" }
         );
 
-        // 2. Centerpiece Rise
-        // Starts slightly before the heading finishes
         tl.fromTo(horizontalPhone,
           { opacity: 0, y: 150, scale: 0.95 },
-          { 
-            opacity: 1, y: 0, scale: 1, 
-            duration: 1.5,
-            ease: "power3.out"
-          },
+          { opacity: 1, y: 0, scale: 1, duration: 1.5, ease: "power3.out" },
           "-=0.8"
         );
 
-        // 3. Phones Fan-Out
-        // Starts exactly 0.9 seconds into the centerpiece rising animation
         const offsets = [-578, -334, 334, 578]; 
-
         tl.fromTo(verticalPhones, 
-          { 
-            opacity: 0, // Keep hidden until animation starts
-            scale: 0.8,
-            rotation: (i) => i < 2 ? 90 : -90,
-            x: (i) => -offsets[i], 
-          },
-          {
-            opacity: 1, // Fade in as they fan out
-            scale: 1,
-            rotation: 0,
-            x: 0,
-            duration: 2.4, 
-            // Outermost (0, 3) first, then Inner pair (1, 2)
-            delay: (i) => (i === 0 || i === 3) ? 0 : 0.4,
-            ease: "power4.out"
-          },
-          "<0.6" // Exactly 0.6s after the previous animation (Centerpiece) started
+          { opacity: 0, scale: 0.8, rotation: (i) => i < 2 ? 90 : -90, x: (i) => -offsets[i] },
+          { opacity: 1, scale: 1, rotation: 0, x: 0, duration: 2.4, delay: (i) => (i === 0 || i === 3) ? 0 : 0.4, ease: "power4.out" },
+          "<0.6"
         );
-
       } else {
-        // --- MOBILE ANIMATION (Simple Fade Up) ---
-        const items = document.querySelectorAll('.mobile-video-item');
-        gsap.fromTo(items,
-          { opacity: 0, y: 40, filter: 'blur(4px)' },
-          {
-            opacity: 1, y: 0, filter: 'blur(0)',
-            duration: 1, stagger: 0.15,
-            scrollTrigger: {
-              trigger: '.mobile-video-list',
-              start: "top 90%",
-              once: true
-            }
-          }
-        );
+        const heading = headingRef.current;
+        if (heading) {
+          const headerContainer = heading.querySelector('.header');
+          gsap.fromTo(headerContainer.children, 
+            { opacity: 0, y: 20, filter: 'blur(4px)' },
+            { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, stagger: 0.15, ease: 'power3.out', clearProps: 'opacity,transform,filter', scrollTrigger: { trigger: heading, start: 'top 95%', once: true } }
+          );
+        }
       }
     });
 
     return () => ctx.revert();
   }, [isMobile]);
 
-  /* ================= STOP VIDEO ================= */
   const stopVideo = () => {
     if (currentIndex !== null && videoRefs.current[currentIndex]) {
+      // Save current timestamp before stopping natively
+      videoTimes.current[currentIndex] = videoRefs.current[currentIndex].currentTime;
       videoRefs.current[currentIndex].pause();
-      videoRefs.current[currentIndex].currentTime = 0;
     }
     setIsPlaying(false);
     setCurrentIndex(null);
@@ -177,10 +181,8 @@ export default function CustomCarousel() {
     }, 0);
   };
 
-
   return (
     <div className="custom-carousel-container">
-      {/* ---------- Header (UNCHANGED) ---------- */}
       <div className="video-carousel-heading" ref={headingRef}>
         <div className="header">
           <h2>Our Edits, Your Story</h2>
@@ -190,23 +192,11 @@ export default function CustomCarousel() {
         </div>
       </div>
 
-      {/* ========== DESKTOP (UNCHANGED STRUCTURE) ========== */}
       {!isMobile && (
         <div className="custom-desktop-layout" ref={layoutRef}>
           {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`iphone-shell ${slide.orientation === "vertical"
-                  ? "desktop-vertical"
-                  : "desktop-horizontal"
-                }`}
-            >
-              <img
-                src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
-                className="iphone-frame-img"
-                alt=""
-              />
-
+            <div key={index} className={`iphone-shell ${slide.orientation === "vertical" ? "desktop-vertical" : "desktop-horizontal"}`}>
+              <img src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame} className="iphone-frame-img" alt="" />
               <div className="desktop-screen-inner">
                 {isPlaying && index === currentIndex ? (
                   <div className="video-wrapper">
@@ -215,15 +205,17 @@ export default function CustomCarousel() {
                       src={slide.videoSrc}
                       className="player-host"
                       autoPlay
-                      muted
-                      controls
                       playsInline
-
+                      onLoadedData={(e) => {
+                        if (videoTimes.current[index]) e.target.currentTime = videoTimes.current[index];
+                      }}
                       onEnded={stopVideo}
                     />
-                    <button className="custom-carousel-close" onClick={stopVideo}>
-                      ✕
-                    </button>
+                    <div className="modern-pause-btn" onClick={stopVideo}>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                      </svg>
+                    </div>
                   </div>
                 ) : (
                   <div
@@ -254,83 +246,112 @@ export default function CustomCarousel() {
 
       {/* ========== MOBILE (UNCHANGED STRUCTURE) ========== */}
       {isMobile && (
-        <div className="mobile-video-list">
-          {slides.map((slide, idx) => {
-            let rotation = "0deg";
+        <>
+          <Splide
+            ref={splideRef}
+            options={{
+              type: 'loop',
+              drag: true,
+              focus: 'center',
+              autoWidth: true,
+              gap: '200px',
+              arrows: false,
+              pagination: false,
+              trimSpace: false,
+              dragThreshold: 0,
+              flickPower: 800,
+              speed: 600,
+              snap: true,
+              clones: 20,
+              rewind: false,
+              updateOnMove: true,
+            }}
+            onMove={handleMove}
+            onMounted={(splide) => apply3DEffect(splide)}
+            className="mobile-splide-container"
+          >
+            {slides.map((slide, idx) => (
+              <SplideSlide key={idx}>
+                <div
+                  className={`iphone-shell mobile-video-item ${slide.orientation === "vertical"
+                      ? "mobile-vertical"
+                      : "mobile-horizontal"
+                    } ${isPlaying && idx === currentIndex ? "playing" : ""}`}
+                >
+                  <img
+                    src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
+                    className="iphone-frame-img"
+                    alt=""
+                  />
 
-            if (
-              slide.orientation === "vertical" &&
-              !(isPlaying && idx === currentIndex)
-            ) {
-              const verticalIndex = slides
-                .slice(0, idx + 1)
-                .filter((s) => s.orientation === "vertical").length;
-              rotation = verticalIndex % 2 === 0 ? "-3deg" : "3deg";
-            }
-
-            return (
-              <div
-                key={idx}
-                className={`iphone-shell mobile-video-item ${slide.orientation === "vertical"
-                    ? "mobile-vertical"
-                    : "mobile-horizontal"
-                  } ${isPlaying && idx === currentIndex ? "playing" : ""}`}
-                style={{
-                  transform: `rotate(${rotation})`,
-                  transition: "transform 0.3s ease",
-                }}
-              >
-                <img
-                  src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
-                  className="iphone-frame-img"
-                  alt=""
-                />
-
-                <div className="mobile-screen-inner">
-                  {isPlaying && idx === currentIndex ? (
-                    <div className="video-wrapper-no-transform">
-                      <video
-                        ref={(el) => (videoRefs.current[idx] = el)}
-                        src={slide.videoSrc}
-                        className="player-host"
-                        autoPlay
-                        muted
-                        playsInline
-                        controls
-                        onEnded={stopVideo}
-                      />
-                      <button
-                        className="custom-carousel-close"
-                        onClick={stopVideo}
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ) : (
-                    <div
-                      className="custom-carousel-thumb-wrapper mobile-thumb"
-                      onClick={() => handleThumbnailClick(idx)}
-                    >
-                      <img
-                        src={slide.thumbnail}
-                        className="custom-carousel-video-thumb"
-                        alt=""
-                      />
-                      <div className="modern-play-btn">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                        >
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
+                  <div className="mobile-screen-inner">
+                    {isPlaying && idx === currentIndex ? (
+                      <div className="video-wrapper-no-transform">
+                        <video
+                          ref={(el) => (videoRefs.current[idx] = el)}
+                          src={slide.videoSrc}
+                          className="player-host"
+                          autoPlay
+                          playsInline
+                          onLoadedData={(e) => {
+                            if (videoTimes.current[idx]) e.target.currentTime = videoTimes.current[idx];
+                          }}
+                          onEnded={stopVideo}
+                        />
+                        <div className="modern-pause-btn" onClick={stopVideo}>
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                          </svg>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div></div>
-            );
-          })}
-        </div>
+                    ) : (
+                      <div
+                        className="custom-carousel-thumb-wrapper mobile-thumb"
+                        onClick={() => handleThumbnailClick(idx)}
+                      >
+                        <img
+                          src={slide.thumbnail}
+                          className="custom-carousel-video-thumb"
+                          alt=""
+                        />
+                        <div className="modern-play-btn">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </SplideSlide>
+            ))}
+          </Splide>
+          
+          {/* Pagination Dots */}
+          <div className="carousel-dots">
+            {/* The liquid highlighted pill */}
+            <div 
+              className="active-pill"
+              style={{
+                transform: `translateX(calc(${scrollIndex * 20}px - ${(slides.length - 1) * 10}px))`
+              }}
+            />
+            {slides.map((_, i) => (
+              <span 
+                key={i} 
+                className={`dot ${scrollIndex === i ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  splideRef.current?.go(i);
+                }}
+              />
+            ))}
+          </div>
+        </>
       )}
 
 

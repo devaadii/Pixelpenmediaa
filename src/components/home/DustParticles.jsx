@@ -1,18 +1,35 @@
 import React, { useRef, useEffect } from 'react';
+import gsap from 'gsap';
 
-const PARTICLE_COUNT = 120; // Reduced from 260 for performance
+const PARTICLE_COUNT = 220; // Increased back for better coverage on tall mobile screens
 const REPEL_RADIUS = 180;
 const REPEL_STRENGTH = 2.5;
-const SHOOTING_STAR_INTERVAL = 350; // Less frequent to save GPU
+const SHOOTING_STAR_INTERVAL = 140; // More frequent shooting stars
 
 function DustParticles() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animId;
     let mouse = { x: -9999, y: -9999 };
+
+    // Smooth slow fade-in on site load
+    gsap.fromTo(canvas, 
+      { opacity: 0 }, 
+      { opacity: 1, duration: 3.5, ease: "power2.inOut" }
+    );
 
     const resize = () => {
       canvas.width = canvas.parentElement.offsetWidth;
@@ -35,53 +52,69 @@ function DustParticles() {
 
     // Create particles with even grid-based distribution + random jitter
     const particles = [];
-    const cols = Math.ceil(Math.sqrt(PARTICLE_COUNT * (canvas.width / canvas.height)));
-    const rows = Math.ceil(PARTICLE_COUNT / cols);
-    const cellW = canvas.width / cols;
-    const cellH = canvas.height / rows;
+    
+    const initParticles = () => {
+      const isMobile = window.innerWidth < 768;
+      const currentCount = isMobile ? 0 : PARTICLE_COUNT; // 0 particles on mobile, but keep logic for shooting stars
+      const w = canvas.width || window.innerWidth;
+      const h = canvas.height || window.innerHeight;
+      
+      const cols = Math.ceil(Math.sqrt(currentCount * (w / (h || 1))));
+      const rows = Math.ceil(currentCount / (cols || 1));
+      const cellW = w / (cols || 1);
+      const cellH = h / (rows || 1);
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const col = i % cols;
-      const row = Math.floor(i / cols);
-      const z = Math.random();
-      particles.push({
-        // Grid position with random jitter for natural look
-        x: (col + Math.random()) * cellW,
-        y: (row + Math.random()) * cellH,
-        z,
-        baseRadius: 0.25 + z * 0.7, // medium-small particles
-        vx: (Math.random() - 0.5) * 0.12,
-        vy: (Math.random() - 0.5) * 0.12,
-        flickerPhase: Math.random() * Math.PI * 2,
-        flickerSpeed: 0.005 + Math.random() * 0.015,
-        baseOpacity: 0.12 + z * 0.35,
-        offsetX: 0,
-        offsetY: 0,
-      });
-    }
+      particles.length = 0;
+      for (let i = 0; i < currentCount; i++) {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const z = Math.random();
+        particles.push({
+          x: (col + Math.random()) * cellW,
+          y: (row + Math.random()) * cellH,
+          z,
+          baseRadius: 0.25 + z * 0.8, 
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.15,
+          flickerPhase: Math.random() * Math.PI * 2,
+          flickerSpeed: 0.005 + Math.random() * 0.015,
+          baseOpacity: 0.2 + z * 0.4,
+          offsetX: 0,
+          offsetY: 0,
+        });
+      }
+    };
+    initParticles();
 
     // Shooting stars pool
     const shootingStars = [];
     let shootingTimer = 0;
 
     function spawnShootingStar() {
-      // Spawn more spread out horizontally to cross the middle text area
-      const startX = canvas.width * 0.1 + Math.random() * canvas.width * 0.6;
-      const startY = Math.random() * canvas.height * 0.25;
-      // Fixed 45 degree angle
+      const isMobile = window.innerWidth < 768;
+      // Spawn more spread out horizontally across the full width
+      const startX = Math.random() * canvas.width;
+      // Spawn more broadly across the vertical range on mobile to fill the tall viewport
+      const startY = isMobile 
+        ? Math.random() * canvas.height * 0.7 // Top 70% of screen
+        : Math.random() * canvas.height * 0.25; // Desktop mostly top-focused
+
       const angle = 45 * (Math.PI / 180);
-      const speed = 2.5 + Math.random() * 1.5;
+      const speed = isMobile 
+        ? 1.5 + Math.random() * 2.0 // Softer range for mobile
+        : 2.5 + Math.random() * 1.5;
+
       shootingStars.push({
         x: startX,
         y: startY,
         angle,
         speed,
-        length: 50 + Math.random() * 60,
+        length: isMobile ? 30 + Math.random() * 40 : 50 + Math.random() * 60,
         opacity: 0,
         phase: 'fadeIn',
         life: 0,
-        maxLife: 120 + Math.random() * 80,
-        size: 0.8 + Math.random() * 0.6,
+        maxLife: isMobile ? 80 + Math.random() * 60 : 120 + Math.random() * 80,
+        size: isMobile ? 0.6 + Math.random() * 0.5 : 0.8 + Math.random() * 0.6,
       });
     }
 
@@ -92,8 +125,9 @@ function DustParticles() {
       time++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const opacity = 0.5;
-      const repelRadius = REPEL_RADIUS;
+      const opacity = 0.7; // Increased for better visibility
+      const isMobile = window.innerWidth < 768;
+      const repelRadius = isMobile ? 100 : REPEL_RADIUS;
       const repelRadiusSq = repelRadius * repelRadius;
 
       // Batch small particles (fillRect) for performance
@@ -151,8 +185,9 @@ function DustParticles() {
 
       // ── Shooting stars ──
       shootingTimer++;
-      // Spawn with slight randomness (~4-5 per second)
-      if (shootingTimer >= SHOOTING_STAR_INTERVAL * (0.6 + Math.random() * 0.8)) {
+      // Much more frequent on mobile (every ~60-80 frames instead of 140)
+      const currentInterval = isMobile ? 60 : SHOOTING_STAR_INTERVAL;
+      if (shootingTimer >= currentInterval * (0.6 + Math.random() * 0.8)) {
         spawnShootingStar();
         shootingTimer = 0;
       }
@@ -218,6 +253,7 @@ function DustParticles() {
       canvas.removeEventListener('mouseleave', onMouseLeave);
     };
   }, []);
+
 
   return (
     <canvas

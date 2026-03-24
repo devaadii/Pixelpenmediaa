@@ -110,6 +110,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.social-icon:hover {
+  background: #D75003;
+}
+
+.social-icon a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
 }
 
 #copyright {
@@ -121,33 +136,54 @@
 /* Existing styles above remain unchanged */
 
 @media (max-width: 768px) {
+  .footer {
+    padding: 0 20px 40px 5px; /* Removed top padding as requested */
+    width: calc(100vw - 40px); /* Exactly matching banner width logic */
+    margin: 0 auto 0 auto; /* Removed bottom margin to eliminate void space */
+    border-radius: 20px; /* Card aesthetic to match other sections */
+    box-sizing: border-box;
+    display: block; /* Standard block layout is more robust for mobile visibility */
+  }
+
+  .footer-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
   .footer-columns {
-    flex-direction: column;
-    /* stack vertically */
-    gap: 20px;
-    /* spacing between sections */
+    display: block; /* Stack components vertically without flexbox overhead */
+    width: 100%;
   }
 
   .footer-col {
     width: 100%;
-    /* take full width */
+    min-width: unset;
+    text-align: left;
+    margin-bottom: 30px; /* Restored spacing between stacking columns */
+  }
+
+  .footer-col ul {
+    padding: 0;
+    text-align: left;
+  }
+
+  .footer-col ul li {
+    text-align: left;
   }
 
   .footer-tweet {
-    max-width: 100%;
-    /* expand on mobile */
+    display: none;
   }
 
   .footer-bottom {
     flex-direction: column;
-    /* stack brand, copyright, socials */
+    gap: 20px;
     text-align: center;
-    gap: 15px;
   }
 
   .footer-socials {
     justify-content: center;
-    /* center icons */
-    margin-top: 10px;
+    width: 100%;
   }
 }

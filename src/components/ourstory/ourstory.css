@@ -11,11 +11,12 @@
   text-align: center;
   background: transparent;
   margin-top: 50px;
+  padding: 0 20px; /* 20px margin from left and right */
 }
   .heading1 {
     display: block;
     width: fit-content;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 0 auto;
     font-family: "Awesome",serif;
     font-size: 48px;
     font-weight: 400;
@@ -23,7 +24,16 @@
   }
 @media (max-width: 768px) {
   .ourStory {
-    /* Made visible on mobile since TillNow is now inside it */
-    display: block; 
+    display: block !important; 
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-top: 0px; /* Pushes the section 50px up from the default 50px */
+  }
+
+  .heading1 {
+    position: relative;
+    z-index: 10;
+    font-size: 35px;
+    margin-bottom: 298px !important;
   }
 }

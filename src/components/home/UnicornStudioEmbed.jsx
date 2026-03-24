@@ -20,8 +20,9 @@ const UnicornStudioEmbed = () => {
 
   return (
     <div
+      className="unicorn-embed"
       data-us-project="T6qS9lXKmItEIfS2pSU7"
-      style={{ width: "390px", height: "844px" }} data-us-autoplay="true"
+      data-us-autoplay="true"
     />
   );
 };

@@ -41,7 +41,7 @@ function Nav() {
 
       // Only run on desktop to avoid interfering with mobile menu layout
       if (window.innerWidth <= 768) {
-        gsap.set(navLinks, { opacity: 1, width: "auto" });
+        gsap.set(navLinks, { clearProps: "all" });
         return;
       }
 
@@ -146,13 +146,12 @@ function Nav() {
       <div className="navbar-container">
         <img className='logo' src={img} ref={logoRef} alt="logo" />
 
-        <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
-          ☰
+        <div className={`menu-icon ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
         </div>
 
-        {menuOpen && (
-          <div className="nav-overlay" onClick={() => setMenuOpen(false)} />
-        )}
 
         <ul
           className={menuOpen ? "nav-links open" : "nav-links"}

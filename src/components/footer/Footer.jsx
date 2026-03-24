@@ -7,7 +7,7 @@ import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
   return (
     <footer className="footer" style={{ backgroundColor: '#000' }}>
-      <div className="footer-container" style={{ paddingTop: '60px' }}>
+      <div className="footer-container">
         <div className="footer-columns">
           <div className="footer-col">
             <h4>Get Started</h4>
@@ -78,7 +78,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <div id='copyright' style={{ color: "white" }}>
-            ©️ 2024 PixelPen Media. All rights reserved.
+            <span style={{ color: '#D75003', fontSize: '16px' }}>©</span> 2024 Pixelpen Media. All rights reserved.
           </div>
           <div className="footer-socials">
             <div className="social-icon">
@@ -86,8 +86,8 @@ const Footer = () => {
                 <FaInstagram /></a>
             </div>
             <div className="social-icon">
-
-              <FaLinkedin />
+              <a href='https://www.linkedin.com/company/pixelpen-media/posts/?feedView=all' style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" rel="noopener noreferrer">
+                <FaLinkedin /></a>
             </div>
             <div className="social-icon">
               <a href='https://x.com/PixelpenMedia?t=t0avYlK-5KmlgLNItkvghQ&s=09' style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" rel="noopener noreferrer">

@@ -11,6 +11,22 @@
   overflow: hidden; /* Crop elements that overflow the bounds */
 }
 
+@media (max-width: 768px) {
+  .spline-wrapper {
+    transform: translateX(-50%) translateY(-190px); /* Wrapper stays full size, position adjusted */
+    height: 90vh;
+  }
+
+  .spline-wrapper iframe {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: 250vw !important; /* 100vw / 0.4 = 250vw */
+    height: 250% !important; /* 100% / 0.4 = 250% */
+    transform: translate(-50%, -50%) scale(0.4) !important;
+  }
+}
+
 /* Crop the iframe strictly avoiding the bottom-right corner where Spline puts its logo natively */
 .spline-wrapper iframe {
   width: 100%;
@@ -20,3 +36,4 @@
   /* Cuts off a 60px by 160px rectangle at the bottom right corner exactly where the logo sits */
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), calc(100% - 160px) calc(100% - 60px), calc(100% - 160px) 100%, 0 100%);
 }
+

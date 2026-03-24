@@ -1,6 +1,7 @@
 body {
   background-color: black;
   cursor: url("./assets/Cursor.svg"), auto;
+
   /*
 Source - https://stackoverflow.com/a/32660790
 Posted by inorganik, modified by community. See post 'Timeline' for change history
@@ -57,8 +58,8 @@ html {
 
 .overlap-up {
   position: relative;
-  margin-top: -250px;
-  /* pulls it upward */
+  margin-top: -50px;
+  /* pushes it below Home offset by particle extension */
   z-index: 5;
   /* sits above Home */
 }
@@ -94,11 +95,13 @@ html {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 1; /* Above basic background, but below content */
-  opacity: 0.01; 
-  background: white; /* Give the filter a canvas to work on */
+  z-index: 1;
+  /* Above basic background, but below content */
+  opacity: 0.01;
+  background: white;
+  /* Give the filter a canvas to work on */
   filter: url(#noiseFilter) contrast(200%) brightness(150%);
-  mix-blend-mode: screen; 
+  mix-blend-mode: screen;
   animation: noise-flicker 0.3s steps(4) infinite;
 }
 
@@ -145,23 +148,26 @@ html {
 
 @media (max-width: 768px) {
   body {
+    padding-top: 130px; /* Mobile only — clear space for the fixed glass navbar */
     background-image:
-      linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 55%),
-      url("../src/assets/background.svg");
+      linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 55%);
 
     /* still scale by width (sharp) */
-    background-size: 100% 100%, 160% auto;
+    background-size: 100% 100%;
 
     /* push it down instead of scaling tall */
-    background-position: top left, center 70px;
+    background-position: top left;
+  }
+
+  /* Hide scrollbar on mobile */
+  ::-webkit-scrollbar {
+    display: none;
   }
 
   .overlap-up {
-    position: block;
-    margin-top: 0;
-    /* pulls it upward */
+    position: relative;
+    margin-top: 20px; /* Changed from -100px to avoid overlapping fixed/scaled content */
     z-index: 5;
-    /* sits above Home */
   }
 
   .page-content {
@@ -179,10 +185,11 @@ html {
   /* Optionally make each section narrower and center aligned */
   .page-content>section {
     width: 100%;
-    max-width: 480px;
-    /* Control max width on mobile */
+    /* Remove fixed max-width for sections on mobile to prevent bleed */
+    max-width: 100% !important; 
     margin-left: auto;
     margin-right: auto;
+    overflow-x: hidden;
   }
 
 }

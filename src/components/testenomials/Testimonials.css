@@ -1,8 +1,5 @@
 .test {
   background: transparent !important;
-  /* Softens the section edges to blend with global background */
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
 }
 
 .vtc-wrapper {
@@ -52,7 +49,7 @@
   width: fit-content;
   margin: 0 auto;
   font-size: 18px;
-  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* Scroll direction classes handled by GSAP */
@@ -108,11 +105,13 @@
 /* Background Glow */
 .vtc-glow {
   position: absolute;
-  top: 50%;
+  top: calc(50% + 40px);
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70vw;
-  height: 70vh;
+  width: 150vw;
+  height: 150vw;
+  max-width: 1200px;
+  max-height: 1200px;
   background: radial-gradient(circle, rgba(240, 112, 0, 0.25) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
@@ -161,12 +160,20 @@
 }
 
 @media (max-width: 768px) {
+  .heading {
+    font-size: 35px;
+  }
+
   .htc-scroll-track.paused {
     animation-play-state: paused !important;
   }
 
   .vtc-wrapper {
     height: auto;
+    padding: 0;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent) !important;
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent) !important;
+    overflow: visible;
   }
 
   .desktop-only {
@@ -175,68 +182,46 @@
 
   .mobile-only {
     display: block;
-    overflow: hidden;
-    width: 100%;
-
-    position: relative;
-
-  }
-
-  .htc-scroll-container {
-    overflow: hidden;
+    overflow: visible;
     width: 100%;
     position: relative;
   }
 
-  .htc-scroll-track {
-    display: flex;
-    width: max-content;
-    animation: scroll-left 40s linear infinite;
+  .mobile-testimonial-splide {
+    width: 100%;
+    padding: 20px 0;
+    cursor: grab;
   }
 
+  .mobile-testimonial-splide:active {
+    cursor: grabbing;
+  }
 
   .htc-image-wrapper {
-    min-width: 250px;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
-
+    margin: 0 10px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; /* Remove generic blue flash on tap */
   }
-
 
   .htc-image-wrapper img {
-    display: block;
-    margin: 0 20px;
-    width: 300px;
-    height: 282.54;
+    display: block !important;
+    width: 300px !important;
+    height: auto !important;
     border-radius: 10px;
     object-fit: contain;
-    pointer-events: auto;
-    /* Allow hover on mobile if clicked */
+    pointer-events: none; /* Let Splide handle dragging natively */
     user-select: none;
     -webkit-user-drag: none;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease;
+    -webkit-touch-callout: none; /* Disables image copy/save popups on iOS */
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .htc-image-wrapper img:hover {
-    transform: scale(1.02);
+  /* Smooth size increase specifically when held/touched */
+  .htc-image-wrapper:active img {
+    transform: scale(1.01);
   }
 
-
-
-
-}
-
-/* Horizontal infinite scroll animation */
-
-@keyframes scroll-left {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(-50%);
-    /* move half the track (1 full set of images) */
-  }
 }

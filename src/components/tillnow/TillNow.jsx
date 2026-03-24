@@ -26,10 +26,12 @@ export default function TillNow() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      const isMobile = window.innerWidth < 768;
       const tl = gsap.timeline({
-        scrollTrigger: {
+        scrollTrigger: isMobile ? null : {
           trigger: sectionRef.current,
-          start: 'top 80%',
+          start: 'top bottom',
+          end: 'bottom top',
           toggleActions: 'restart reset restart reset'
         },
         defaults: { ease: 'power3.out' }
@@ -84,7 +86,7 @@ export default function TillNow() {
         }, setStartTime + 0.45);
       });
 
-    }, sectionRef);
+    }, sectionRef.current);
 
     return () => ctx.revert();
   }, []);

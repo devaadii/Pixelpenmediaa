@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
+import '@splidejs/react-splide/css';
 import './Testimonials.css';
 import useScrollReveal from '../../hooks/useScrollReveal';
 
@@ -61,14 +64,15 @@ const Testimonial = () => {
   };
 
   return (
-    <div className='test' ref={mainRef}>
-      <div style={{ color: "white", textAlign: "center" }} ref={headingRef}>
+    <div className='test' ref={mainRef} style={{ position: 'relative' }}>
+      <div className="vtc-glow" />
+      
+      <div style={{ color: "white", textAlign: "center", position: "relative", zIndex: 1 }} ref={headingRef}>
         <h2 className="heading">Testimonials</h2>
         <p className="subheading">Doubt us. Regret later.</p>
       </div>
 
       <div className="vtc-wrapper">
-        <div className="vtc-glow" />
         
         <div className="vtc-columns desktop-only">
           {columns.map((columnImages, colIndex) => (
@@ -90,15 +94,36 @@ const Testimonial = () => {
         </div>
 
         <div className="mobile-only">
-          <div className="htc-scroll-container">
-            <div className="htc-scroll-track">
-              {[...allImages, ...allImages].map((img, idx) => (
-                <div className="htc-image-wrapper" key={idx}>
+          <Splide
+            options={{
+              type: 'loop',
+              drag: 'free',
+              focus: 'center',
+              autoWidth: true,
+              gap: '0px',
+              arrows: false,
+              pagination: false,
+              dragThreshold: 0,
+              snap: true,
+              clones: 12,
+              rewind: false,
+              autoScroll: {
+                speed: 1,
+                pauseOnHover: true,
+                pauseOnFocus: false,
+              },
+            }}
+            extensions={{ AutoScroll }}
+            className="mobile-testimonial-splide"
+          >
+            {[...allImages, ...allImages].map((img, idx) => (
+              <SplideSlide key={idx}>
+                <div className="htc-image-wrapper">
                   <img src={img} alt={`testimonial-horizontal-${idx}`} />
                 </div>
-              ))}
-            </div>
-          </div>
+              </SplideSlide>
+            ))}
+          </Splide>
         </div>
       </div>
     </div>

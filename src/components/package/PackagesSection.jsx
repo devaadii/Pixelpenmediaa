@@ -14,7 +14,7 @@ const PackagesSection = () => {
       {/* Side Blurs */}
       <img src="/Pixelpenmediaa/testimonial-side-blur.svg" className="package-side-blur left" alt="" />
       <img src="/Pixelpenmediaa/testimonial-side-blur.svg" className="package-side-blur right" alt="" />
-      <h2 className="heading" style={{ position: "relative", right: "5px" }}>Two Packages</h2>
+      <h2 className="heading">Two Packages</h2>
       <p className="subheading">Endless Possibilities</p>
 
       <div className="packages-grid" ref={gridRef}>
@@ -27,30 +27,30 @@ const PackagesSection = () => {
               <span style={{ display: "inline-flex", gap: "5px", alignItems: "flex-start" }}>
                 <span className="arrow">➜</span>
                 <span style={{ maxWidth: "300px" }}>
-                  <b>Scroll-stopping Reels</b>
+                  <b>Scroll-stopping Reels.</b>
                 </span>
               </span>
             </li>
             <li>
               <span style={{ display: "inline-flex", gap: "5px", alignItems: "flex-start" }}>
                 <span className="arrow">➜</span> <span style={{ maxWidth: "300px" }}>
-                  <b>Long-form Content</b> edited for<b>Watch Time.</b>
+                  <b>Long-form Content</b> edited for <b>Watch Time.</b>
                 </span>
               </span>
             </li>
             <li>
               <span style={{ display: "inline-flex", gap: "5px", alignItems: "flex-start" }}>
                 <span className="arrow">➜</span> <span style={{ maxWidth: "300px" }}>
-                  <b>Personalized branding</b> that feels uniquely you
+                  <b>Personalized branding</b> that feels uniquely you.
                 </span>
               </span>
             </li>
 
             <li>
-              <span className="arrow">➜</span> <b>Click-Worthy</b> Thumbnails
+              <span className="arrow">➜</span> <b>Click-Worthy</b> Thumbnails.
             </li>
             <li>
-              <span className="arrow">➜</span> Fast <b>Turnarounds</b>
+              <span className="arrow">➜</span> Delivered in <b>48 Hours.</b>
             </li>
 
           </ul>
@@ -66,14 +66,14 @@ const PackagesSection = () => {
               <span style={{ display: "inline-flex", gap: "5px", alignItems: "flex-start" }}>
                 <span className="arrow">➜</span>
                 <span style={{ maxWidth: "300px" }}>
-                  <b>Top Notch</b> Editing for Reels, Long-form Content & Podcasts
+                  <b>Top Notch</b> Editing for Reels, Long-form Content & Podcasts.
                 </span>
               </span>
             </li>
             <li>
               <span style={{ display: "inline-flex", gap: "5px", alignItems: "flex-start" }}>
                 <span className="arrow">➜</span> <span style={{ maxWidth: "300px" }}>
-                  <b>Personalized branding</b> that feels uniquely you
+                  <b>Personalized branding</b> that feels uniquely you.
                 </span>
               </span>
             </li>
@@ -85,15 +85,18 @@ const PackagesSection = () => {
               <span style={{ display: "inline-flex", gap: "5px", alignItems: "flex-start" }}>
                 <span className="arrow">➜</span>
                 <span style={{ maxWidth: "200px" }}>
-                  <b>Content Strategy</b> Tailored for Results
+                  <b>Content Strategy</b> Tailored for Results.
                 </span>
               </span>
             </li>
             <li>
-              <span className="arrow">➜</span> <b>Click-Worthy</b> Thumbnails
+              <span className="arrow">➜</span> <b>Click-Worthy</b> Thumbnails.
             </li>
             <li>
-              <span className="arrow">➜</span> Delivered in <b>48 Hours</b>
+              <span className="arrow">➜</span> Delivered in <b>29 Hours.</b>
+            </li>
+            <li>
+              <span className="arrow">➜</span> Dedicated <b>Top-notch Editors.</b>
             </li>
 
 
