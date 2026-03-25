@@ -90,7 +90,7 @@ function App() {
         </section>
         </div>
       </main>
-    </div>
+     </div>
   );
 }
 
