@@ -183,7 +183,9 @@ function Nav() {
           </li>
 
           <li className="mobile-book">
-            <a href="https://calendly.com/pixelpenmedia-in/30min" onClick={handleLinkClick}>📞 Book a Call</a>
+            <a href="https://calendly.com/pixelpenmedia-in/30min" onClick={handleLinkClick}>
+              <span>📞 Book a Call</span>
+            </a>
           </li>
         </ul>
 

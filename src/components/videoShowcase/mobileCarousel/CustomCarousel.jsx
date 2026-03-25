@@ -19,30 +19,30 @@ const slides = [
     orientation: "vertical",
     thumbnail: img1,
     videoSrc:
-      "https://res.cloudinary.com/dehknfmqf/video/upload/f_auto,q_auto/russian_river_web_klhmap.mp4",
+      "https://res.cloudinary.com/dehknfmqf/video/upload/v1774425997/namita_final_edit_GOATED_1_vr6rlg.mp4",
   },
   {
     orientation: "vertical",
     thumbnail: img1,
     videoSrc:
-      "https://res.cloudinary.com/dehknfmqf/video/upload/f_auto,q_auto/russian_river_web_klhmap.mp4",
+      "https://res.cloudinary.com/dehknfmqf/video/upload/v1767528720/animation_web_nzmjsg.mp4",
   },
   {
     orientation: "horizontal",
     thumbnail: img1,
     videoSrc:
-      "https://res.cloudinary.com/dehknfmqf/video/upload/f_auto,q_auto/russian_river_web_klhmap.mp4",
+      "https://res.cloudinary.com/dehknfmqf/video/upload/v1774424026/Its_you_vs_you_upl1ck.mp4",
   },
   {
     orientation: "vertical",
     thumbnail: img1,
     videoSrc:
-      "https://res.cloudinary.com/dehknfmqf/video/upload/f_auto,q_auto/russian_river_web_klhmap.mp4",
-  }, {
+      "https://res.cloudinary.com/dehknfmqf/video/upload/v1774424026/Its_you_vs_you_upl1ck.mp4",
+  },  {
     orientation: "vertical",
     thumbnail: img1,
     videoSrc:
-      "https://res.cloudinary.com/dehknfmqf/video/upload/f_auto,q_auto/russian_river_web_klhmap.mp4",
+      "https://res.cloudinary.com/dehknfmqf/video/upload/v1767528735/Astrakhan_Web_j52ksd.mp4",
   },
 ];
 
@@ -165,9 +165,10 @@ export default function CustomCarousel() {
 
   const stopVideo = () => {
     if (currentIndex !== null && videoRefs.current[currentIndex]) {
-      // Save current timestamp before stopping natively
-      videoTimes.current[currentIndex] = videoRefs.current[currentIndex].currentTime;
-      videoRefs.current[currentIndex].pause();
+      const video = videoRefs.current[currentIndex];
+      // Reset to 0 if video ended, otherwise save current timestamp
+      videoTimes.current[currentIndex] = video.ended ? 0 : video.currentTime;
+      video.pause();
     }
     setIsPlaying(false);
     setCurrentIndex(null);
@@ -259,7 +260,9 @@ export default function CustomCarousel() {
               pagination: false,
               trimSpace: false,
               dragThreshold: 0,
-              flickPower: 800,
+              flickPower: 100,
+              flickMaxPages: 1,
+              perMove: 1,
               speed: 600,
               snap: true,
               clones: 20,

@@ -1,19 +1,25 @@
 /* Spline Container Styling */
 .spline-wrapper {
   position: absolute;
-  top: 5%; /* Move it higher */
+  top: 5%;
+  /* Move it higher */
   left: 50%;
-  transform: translateX(-50%) scale(1.0); /* Zoom out by 5% more (Total 1.0) */
+  transform: translateX(-50%) scale(1.0);
+  /* Zoom out by 5% more (Total 1.0) */
   width: 100vw;
-  height: 80vh; /* Adjust height as needed */
+  height: 80vh;
+  /* Adjust height as needed */
   z-index: 0;
-  pointer-events: none; /* Let scroll events pass through to the page */
-  overflow: hidden; /* Crop elements that overflow the bounds */
+  pointer-events: none;
+  /* Let scroll events pass through to the page */
+  overflow: hidden;
+  /* Crop elements that overflow the bounds */
 }
 
 @media (max-width: 768px) {
   .spline-wrapper {
-    transform: translateX(-50%) translateY(-190px); /* Wrapper stays full size, position adjusted */
+    transform: translateX(-50%) translateY(-160px);
+    /* Wrapper stays full size, position adjusted */
     height: 90vh;
   }
 
@@ -21,8 +27,10 @@
     position: absolute !important;
     left: 50% !important;
     top: 50% !important;
-    width: 250vw !important; /* 100vw / 0.4 = 250vw */
-    height: 250% !important; /* 100% / 0.4 = 250% */
+    width: 250vw !important;
+    /* 100vw / 0.4 = 250vw */
+    height: 250% !important;
+    /* 100% / 0.4 = 250% */
     transform: translate(-50%, -50%) scale(0.4) !important;
   }
 }
@@ -30,10 +38,9 @@
 /* Crop the iframe strictly avoiding the bottom-right corner where Spline puts its logo natively */
 .spline-wrapper iframe {
   width: 100%;
-  height: 100%; 
+  height: 100%;
   background: transparent;
   border: none;
   /* Cuts off a 60px by 160px rectangle at the bottom right corner exactly where the logo sits */
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), calc(100% - 160px) calc(100% - 60px), calc(100% - 160px) 100%, 0 100%);
 }
-

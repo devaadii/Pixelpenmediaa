@@ -148,7 +148,7 @@ html {
 
 @media (max-width: 768px) {
   body {
-    padding-top: 130px; /* Mobile only — clear space for the fixed glass navbar */
+    padding-top: 100px; /* Mobile only — clear space for the fixed glass navbar */
     background-image:
       linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000 55%);
 
@@ -190,6 +190,10 @@ html {
     margin-left: auto;
     margin-right: auto;
     overflow-x: hidden;
+  }
+
+  #portfolio {
+    margin-top: 80px;
   }
 
 }
