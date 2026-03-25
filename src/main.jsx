@@ -6,7 +6,7 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter basename="/Pixelpenmediaa"> {/* 👈 add this */}
+    <BrowserRouter basename="/"> {/* 👈 add this */}
       <App />
     </BrowserRouter>
   </StrictMode>,
