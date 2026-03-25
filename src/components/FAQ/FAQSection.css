@@ -43,9 +43,9 @@
   padding: 20px;
   cursor: pointer;
   background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0.06) 0%,
       rgba(255, 255, 255, 0.02) 50%,
-      rgba(215, 81, 3, 0.06) 100%);
+      rgba(215, 81, 3, 0.09) 100%);
   box-shadow:
     0 4px 30px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
@@ -59,6 +59,10 @@
   grid-template-columns: auto 1fr auto;
   column-gap: 20px;
   row-gap: 0;
+
+  /* Performance optimization */
+  will-change: transform, border-color, background, box-shadow;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Futuristic Shine Sweep */
@@ -246,16 +250,14 @@
     margin: 0 20px; /* Keep the 20px margin */
     cursor: pointer;
     background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.06) 0%,
         rgba(255, 255, 255, 0.02) 50%,
-        rgba(215, 81, 3, 0.06) 100%);
-    backdrop-filter: blur(40px) saturate(1.6);
-    -webkit-backdrop-filter: blur(40px) saturate(1.6);
+        rgba(215, 81, 3, 0.09) 100%) !important;
     box-shadow:
       0 4px 30px rgba(0, 0, 0, 0.15),
       inset 0 1px 0 rgba(255, 255, 255, 0.1),
       inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.5s ease, background 0.5s ease;
+    transition: border-color 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
     overflow: hidden;
     
     /* Restore Grid Layout */
@@ -263,7 +265,20 @@
     grid-template-columns: auto 1fr auto;
     column-gap: 12px; /* Smaller gap for mobile */
     row-gap: 0;
+
+    /* Fix potential glitches on mobile: simplify effects */
+    backdrop-filter: none !important; /* BACKDROP FILTER IS THE MAIN CAUSE OF BRIGHTNESS GLITCHES ON MOBILE */
+    -webkit-backdrop-filter: none !important;
+    
+    /* Force hardware acceleration for smoother, glitch-free paints */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
+
+
+  /* Shine sweep restored by removing the display: none I added previously */
+
 
   .faq-question {
     display: contents; /* Allow children to join the grid */

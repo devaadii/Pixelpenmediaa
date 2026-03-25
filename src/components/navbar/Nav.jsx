@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 import "./nav.css";
 import img from "../../assets/logo.png"
+import ShinyButton from '../ui/ShinyButton';
 
 function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -184,7 +185,9 @@ function Nav() {
 
           <li className="mobile-book">
             <a href="https://calendly.com/pixelpenmedia-in/30min" onClick={handleLinkClick}>
-              <span>📞 Book a Call</span>
+              <ShinyButton className="mobile-shiny-btn">
+                📞 Book a Call
+              </ShinyButton>
             </a>
           </li>
         </ul>

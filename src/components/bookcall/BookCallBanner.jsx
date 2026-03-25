@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import './BookCallBanner.css';
 import useScrollReveal from '../../hooks/useScrollReveal';
@@ -34,6 +34,43 @@ const BookCallBanner = () => {
     }, 5000); // 5s per slide
     return () => clearInterval(interval);
   }, []);
+
+  const prevHeightRef = useRef(null);
+
+  useEffect(() => {
+    // Correct initial value on first mount
+    if (sectionRef.current) {
+      prevHeightRef.current = sectionRef.current.offsetHeight;
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    if (sectionRef.current) {
+      const el = sectionRef.current;
+      
+      // Calculate current natural height
+      gsap.set(el, { height: 'auto' });
+      const targetHeight = el.offsetHeight;
+      
+      if (prevHeightRef.current !== null && prevHeightRef.current !== targetHeight) {
+        // Immediately force the container back to its PREVIOUS height before paint
+        gsap.set(el, { height: prevHeightRef.current });
+        
+        // Animate from that previous height to the new height
+        gsap.to(el, {
+          height: targetHeight,
+          duration: 0.8, // Slightly slower for more liquid feel
+          ease: 'power3.inOut',
+          onComplete: () => {
+            gsap.set(el, { height: 'auto' });
+            prevHeightRef.current = targetHeight;
+          }
+        });
+      } else {
+        prevHeightRef.current = targetHeight;
+      }
+    }
+  }, [current]);
 
   useEffect(() => {
     if (headlineRef.current) {
