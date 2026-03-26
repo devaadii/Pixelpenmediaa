@@ -290,6 +290,20 @@ b {
   .package-card .package-features li:last-child {
     margin-bottom: 0;
   }
+
+  .package-side-blur {
+    width: 800px; /* Scale down for mobile */
+    top: 50%;
+    opacity: 0.4;
+  }
+
+  .package-side-blur.left {
+    left: -400px;
+  }
+
+  .package-side-blur.right {
+    right: -400px;
+  }
 }
 
 /* Ribbon animations removed */

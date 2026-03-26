@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Home.css';
 import Carousel from './carousel/Carousel';
 import image from "../../assets/Group 82.png"
@@ -27,10 +27,22 @@ function splitTextIntoChars(element) {
   return chars;
 }
 
+// Hook to detect mobile viewport
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+  return isMobile;
+};
+
 function Home() {
   const phone = "916376665647";
   const message = encodeURIComponent("Hi Pixelpen, I'm interested in your video editing services. Could you please share more details?");
   const heroRef = useRef(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const line1El = heroRef.current.querySelector('.hero-line-1');
@@ -172,17 +184,19 @@ function Home() {
           <ShinyButton>Portfolio</ShinyButton>
         </a>
 
-        {/* Absolute positioned Spline embed so it doesn't push down page content */}
-        <div className="spline-wrapper" style={{ opacity: 0 }}>
-          <iframe
-            src='https://my.spline.design/studiolanding-mqW7qmGFzWcoWXg4lXxYTm8p/'
-            frameBorder='0'
-            width='100%'
-            height='100%'
-            loading="lazy"
-            title="Spline 3D Scene"
-          ></iframe>
-        </div>
+        {/* Spline 3D on desktop, completely removed on mobile for performance */}
+        {!isMobile && (
+          <div className="spline-wrapper" style={{ opacity: 0 }}>
+            <iframe
+              src='https://my.spline.design/studiolanding-mqW7qmGFzWcoWXg4lXxYTm8p/'
+              frameBorder='0'
+              width='100%'
+              height='100%'
+              loading="lazy"
+              title="Spline 3D Scene"
+            ></iframe>
+          </div>
+        )}
       </div>
     </div>
   );

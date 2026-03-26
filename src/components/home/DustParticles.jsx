@@ -55,7 +55,7 @@ function DustParticles() {
     
     const initParticles = () => {
       const isMobile = window.innerWidth < 768;
-      const currentCount = isMobile ? 0 : PARTICLE_COUNT; // 0 particles on mobile, but keep logic for shooting stars
+      const currentCount = isMobile ? 300 : PARTICLE_COUNT; // Increased to 300 for mobile to fill screen
       const w = canvas.width || window.innerWidth;
       const h = canvas.height || window.innerHeight;
       

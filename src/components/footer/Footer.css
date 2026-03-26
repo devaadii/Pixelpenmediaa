@@ -137,12 +137,12 @@
 
 @media (max-width: 768px) {
   .footer {
-    padding: 0 20px 40px 5px; /* Removed top padding as requested */
+    padding: 0 20px 40px 20px; /* Symmetric padding for proper centering */
     width: calc(100vw - 40px); /* Exactly matching banner width logic */
-    margin: 0 auto 0 auto; /* Removed bottom margin to eliminate void space */
-    border-radius: 20px; /* Card aesthetic to match other sections */
+    margin: 0 auto; /* Centered in viewport */
+    border-radius: 20px;
     box-sizing: border-box;
-    display: block; /* Standard block layout is more robust for mobile visibility */
+    display: block;
   }
 
   .footer-container {
@@ -180,10 +180,15 @@
     flex-direction: column;
     gap: 20px;
     text-align: center;
+    align-items: center; /* Ensure flex children are centered horizontally in the column */
   }
 
   .footer-socials {
     justify-content: center;
     width: 100%;
+  }
+
+  .hide-on-mobile {
+    display: none !important;
   }
 }

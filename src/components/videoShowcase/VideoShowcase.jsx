@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import "./VideoShowcase.css";
-import thumb1 from "../../assets/thumb.jpg";
+// Removed thumb1 as it's causing glitches
 import img from "../../assets/Vector 5.png";
 import img2 from "../../assets/Vector 6.png";
 
 const videos = [
   {
     id: 1,
-    thumbnail: thumb1,
+    thumbnail: "/tn_1.png",
     embedUrl: "https://www.youtube.com/embed/ysz5S6PUM-U?autoplay=1",
     orientation: "vertical", 
   },
   {
     id: 2,
-    thumbnail: thumb1,
+    thumbnail: "/tn_2.png",
     embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
     orientation: "horizontal", 
   },
   {
     id: 3,
-    thumbnail: thumb1,
+    thumbnail: "/tn_4.png",
     embedUrl: "https://www.youtube.com/embed/ScMzIvxBSi4?autoplay=1",
     orientation: "vertical", 
   },

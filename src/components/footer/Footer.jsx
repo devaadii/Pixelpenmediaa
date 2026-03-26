@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className="footer" style={{ backgroundColor: '#000' }}>
       <div className="footer-container">
         <div className="footer-columns">
-          <div className="footer-col">
+          <div className="footer-col hide-on-mobile">
             <h4>Get Started</h4>
             <ul>
               <li>Plans & Pricing</li>
@@ -23,6 +23,7 @@ const Footer = () => {
               <li>About Us</li>
               <li style={{ color: "white", fontStyle: "bold" }}>Work with Us</li>
               <li
+                className="hide-on-mobile"
                 onClick={() => {
                   window.location.href = "mailto:info@pixelpen.in?subject=Video Editing Inquiry – Pixelpen Media&body=Hi Pixelpen Media team,";
                 }}
@@ -32,7 +33,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="footer-col">
+          <div className="footer-col hide-on-mobile">
             <h4>Resources</h4>
             <ul>
               <li>Blogs / Insights</li>

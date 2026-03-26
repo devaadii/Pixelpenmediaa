@@ -3,7 +3,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import img1 from "../../../assets/thumb.jpg";
+// Removed img1 as it's causing glitches
 import img from "../../../assets/Vector 5.png";
 import img2 from "../../../assets/Vector 6.png";
 import iphoneFrame from "../../../assets/fucking png.png"
@@ -17,30 +17,30 @@ gsap.registerPlugin(ScrollTrigger);
 const slides = [
   {
     orientation: "vertical",
-    thumbnail: img1,
+    thumbnail: "/tn_1.png",
     videoSrc:
       "https://res.cloudinary.com/dehknfmqf/video/upload/v1774425997/namita_final_edit_GOATED_1_vr6rlg.mp4",
   },
   {
     orientation: "vertical",
-    thumbnail: img1,
+    thumbnail: "/tn_2.png",
     videoSrc:
       "https://res.cloudinary.com/dehknfmqf/video/upload/v1767528720/animation_web_nzmjsg.mp4",
   },
   {
     orientation: "horizontal",
-    thumbnail: img1,
+    thumbnail: "/tn_1.png", // Replaced old thumb with tn_1
     videoSrc:
       "https://res.cloudinary.com/dehknfmqf/video/upload/v1774424026/Its_you_vs_you_upl1ck.mp4",
   },
   {
     orientation: "vertical",
-    thumbnail: img1,
+    thumbnail: "/tn_4.png",
     videoSrc:
       "https://res.cloudinary.com/dehknfmqf/video/upload/v1774424026/Its_you_vs_you_upl1ck.mp4",
   },  {
     orientation: "vertical",
-    thumbnail: img1,
+    thumbnail: "/tn_5.png",
     videoSrc:
       "https://res.cloudinary.com/dehknfmqf/video/upload/v1767528735/Astrakhan_Web_j52ksd.mp4",
   },
@@ -73,11 +73,30 @@ export default function CustomCarousel() {
   const layoutRef = useRef(null);
   const splideRef = useRef(null);
   const [scrollIndex, setScrollIndex] = useState(0);
+  const [showControls, setShowControls] = useState(false);
+  const controlsTimeoutRef = useRef(null);
+
+  const resetControlsTimeout = () => {
+    if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
+    controlsTimeoutRef.current = setTimeout(() => setShowControls(false), 1500); // Shortened to 1.5s
+  };
+
+  const handleVideoClick = (e) => {
+    // Prevent toggle if clicking specifically on the pause button (which has its own stopVideo handler)
+    if (e.target.closest('.modern-pause-btn')) return;
+    setShowControls((prev) => !prev);
+    resetControlsTimeout();
+  };
 
   const handleMove = (splide) => {
+    // Only apply visual effects during move - no state updates to prevent re-renders
+    apply3DEffect(splide);
+  };
+
+  const handleMoved = (splide) => {
+    // Update pagination dots state ONLY after movement finishes to avoid looping glitches
     const realIndex = splide.index % slides.length;
     setScrollIndex(realIndex < 0 ? realIndex + slides.length : realIndex);
-    apply3DEffect(splide);
   };
 
   /* 3D coverflow effect for mobile carousel */
@@ -166,12 +185,13 @@ export default function CustomCarousel() {
   const stopVideo = () => {
     if (currentIndex !== null && videoRefs.current[currentIndex]) {
       const video = videoRefs.current[currentIndex];
-      // Reset to 0 if video ended, otherwise save current timestamp
       videoTimes.current[currentIndex] = video.ended ? 0 : video.currentTime;
       video.pause();
     }
     setIsPlaying(false);
     setCurrentIndex(null);
+    setShowControls(false);
+    if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
   };
 
   const handleThumbnailClick = (index) => {
@@ -179,6 +199,8 @@ export default function CustomCarousel() {
     setTimeout(() => {
       setCurrentIndex(index);
       setIsPlaying(true);
+      setShowControls(true);
+      resetControlsTimeout();
     }, 0);
   };
 
@@ -200,7 +222,7 @@ export default function CustomCarousel() {
               <img src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame} className="iphone-frame-img" alt="" />
               <div className="desktop-screen-inner">
                 {isPlaying && index === currentIndex ? (
-                  <div className="video-wrapper">
+                  <div className="video-wrapper" onClick={handleVideoClick}>
                     <video
                       ref={(el) => (videoRefs.current[index] = el)}
                       src={slide.videoSrc}
@@ -212,7 +234,10 @@ export default function CustomCarousel() {
                       }}
                       onEnded={stopVideo}
                     />
-                    <div className="modern-pause-btn" onClick={stopVideo}>
+                    <div className={`modern-pause-btn ${showControls ? "visible" : ""}`} onClick={(e) => { 
+                      e.stopPropagation(); 
+                      stopVideo(); 
+                    }}>
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                       </svg>
@@ -255,21 +280,23 @@ export default function CustomCarousel() {
               drag: true,
               focus: 'center',
               autoWidth: true,
-              gap: '200px',
+              gap: '60px',       // Reduced further for more reliable snap points
               arrows: false,
               pagination: false,
               trimSpace: false,
-              dragThreshold: 0,
-              flickPower: 100,
+              dragThreshold: 5,
+              flickPower: 150,   // Strictly controlled momentum for 1 slide only
               flickMaxPages: 1,
               perMove: 1,
-              speed: 600,
+              speed: 400,
               snap: true,
-              clones: 20,
+              clones: 10,
               rewind: false,
-              updateOnMove: true,
+              updateOnMove: false, // Prevent React re-renders during active drag
+              waitForTransition: true,
             }}
             onMove={handleMove}
+            onMoved={handleMoved}
             onMounted={(splide) => apply3DEffect(splide)}
             className="mobile-splide-container"
           >
@@ -289,7 +316,7 @@ export default function CustomCarousel() {
 
                   <div className="mobile-screen-inner">
                     {isPlaying && idx === currentIndex ? (
-                      <div className="video-wrapper-no-transform">
+                      <div className="video-wrapper-no-transform" onClick={handleVideoClick}>
                         <video
                           ref={(el) => (videoRefs.current[idx] = el)}
                           src={slide.videoSrc}
@@ -301,7 +328,10 @@ export default function CustomCarousel() {
                           }}
                           onEnded={stopVideo}
                         />
-                        <div className="modern-pause-btn" onClick={stopVideo}>
+                        <div className={`modern-pause-btn ${showControls ? "visible" : ""}`} onClick={(e) => { 
+                          e.stopPropagation(); 
+                          stopVideo(); 
+                        }}>
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
                           </svg>

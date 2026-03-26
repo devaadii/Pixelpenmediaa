@@ -23,7 +23,7 @@
 .mobile-screen-inner {
   position: absolute;
   inset: 6%;
-  border-radius: 24px;
+  border-radius: 27px;
   overflow: hidden;
   z-index: 5;
   background: black;
@@ -126,27 +126,26 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 24px;
+  border-radius: 27px;
   display: block;
 }
 
 .modern-play-btn {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.3s ease;
+  z-index: 10;
+  transition: opacity 0.3s ease;
 }
 
 .modern-play-btn svg {
   width: 45px;
   height: 45px;
   color: #fff;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
 }
 
 .modern-play-btn svg path {
@@ -157,14 +156,9 @@
 }
 
 @media (hover: hover) {
-  .custom-carousel-thumb-wrapper:hover .modern-play-btn,
-  .mobile-thumb:hover .modern-play-btn {
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-
   .custom-carousel-thumb-wrapper:hover .modern-play-btn svg,
   .mobile-thumb:hover .modern-play-btn svg {
-    transform: scale(1.05);
+    transform: scale(1.1);
     color: #F47F17;
   }
 }
@@ -179,7 +173,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Keeping translate here because it's already mounted and not re-mounting frequently, but I'll remove the transform from the transition base */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -190,9 +184,22 @@
   background: rgba(0, 0, 0, 0.3);
   border-radius: 50%;
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  visibility: hidden;
+  transition: opacity 0.2s ease, background 0.2s ease, visibility 0.2s ease;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+}
+
+.modern-pause-btn.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.modern-pause-btn svg {
+  width: 35px;
+  height: 35px;
+  color: #fff;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
 }
 
 .video-wrapper:hover .modern-pause-btn,
@@ -202,33 +209,30 @@
 
 @media (max-width: 768px) {
   .modern-pause-btn {
-    opacity: 0.6; /* Slightly visible since mobile lacks hover */
+    opacity: 0; /* Hidden by default on mobile */
+  }
+  
+  .modern-pause-btn.visible {
+    opacity: 1 !important;
   }
 }
 
 .modern-pause-btn:hover,
 .modern-pause-btn:active {
   opacity: 1 !important;
-  transform: translate(-50%, -50%) scale(1.1);
   background: rgba(0, 0, 0, 0.7);
-}
-
-.modern-pause-btn svg {
-  width: 35px;
-  height: 35px;
-  color: #fff;
-  transition: color 0.3s ease;
 }
 
 .modern-pause-btn:hover svg,
 .modern-pause-btn:active svg {
+  transform: scale(1.1);
   color: #F47F17;
 }
 
 .player-host {
   width: 100%;
   height: 100%;
-  border-radius: 24px;
+  border-radius: 27px;
   overflow: hidden;
   position: relative;
 }
@@ -341,7 +345,7 @@
   .mobile-video-item {
     display: block !important;
     border: 12px solid #111;
-    border-radius: 22px;
+    border-radius: 27px;
     overflow: hidden;
     background: black;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
@@ -358,7 +362,7 @@
     height: 100%;
     display: block;
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: 27px;
     min-height: 180px;
   }
 
@@ -402,7 +406,7 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    border-radius: inherit;
+    border-radius: 27px;
   }
 
   .mobile-video-item .custom-carousel-close {
@@ -427,7 +431,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 24px;
+    border-radius: 27px;
     overflow: hidden;
   }
 }

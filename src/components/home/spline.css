@@ -18,20 +18,7 @@
 
 @media (max-width: 768px) {
   .spline-wrapper {
-    transform: translateX(-50%) translateY(-160px);
-    /* Wrapper stays full size, position adjusted */
-    height: 90vh;
-  }
-
-  .spline-wrapper iframe {
-    position: absolute !important;
-    left: 50% !important;
-    top: 50% !important;
-    width: 250vw !important;
-    /* 100vw / 0.4 = 250vw */
-    height: 250% !important;
-    /* 100% / 0.4 = 250% */
-    transform: translate(-50%, -50%) scale(0.4) !important;
+    display: none !important; /* Do not load or render Spline on mobile */
   }
 }
 

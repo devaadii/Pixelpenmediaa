@@ -12,8 +12,8 @@ const PackagesSection = () => {
   return (
     <div className="packages-wrapper" ref={sectionRef}>
       {/* Side Blurs */}
-      <img src="/Pixelpenmediaa/testimonial-side-blur.svg" className="package-side-blur left" alt="" />
-      <img src="/Pixelpenmediaa/testimonial-side-blur.svg" className="package-side-blur right" alt="" />
+      <img src="/testimonial-side-blur.svg" className="package-side-blur left" alt="" />
+      <img src="/testimonial-side-blur.svg" className="package-side-blur right" alt="" />
       <h2 className="heading">Two Packages</h2>
       <p className="subheading">Endless Possibilities</p>
 
