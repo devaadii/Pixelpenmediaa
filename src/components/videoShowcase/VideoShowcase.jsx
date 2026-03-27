@@ -33,9 +33,9 @@ export default function VideoShowcase() {
       <div className="video-carousel-heading">
         <div className="header">
           <h2 className="heading">Our Edits, Your Story</h2>
-          <img className="img img-desktop" src={img} alt="vector desktop" />
+          <img className="img img-desktop" src={img} alt="vector desktop" draggable={false} onContextMenu={(e) => e.preventDefault()} />
           <p className="subheading">Results That Speak for Themselves.</p>
-          <img className="img img-mobile" src={img2} alt="vector mobile" />
+          <img className="img img-mobile" src={img2} alt="vector mobile" draggable={false} onContextMenu={(e) => e.preventDefault()} />
         </div>
       </div>
                
@@ -64,6 +64,8 @@ export default function VideoShowcase() {
                   src={video.thumbnail}
                   alt="Video thumbnail"
                   className="thumbnail-img"
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
                 />
                 <div className="play-overlay">
                   <div className="modern-play-btn">

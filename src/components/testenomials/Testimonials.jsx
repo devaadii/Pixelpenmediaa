@@ -85,7 +85,7 @@ const Testimonial = () => {
               <div className="vtc-scroll-track">
                 {[...columnImages, ...columnImages].map((img, idx) => (
                   <div className="vtc-image-wrapper" key={idx}>
-                    <img src={img} alt={`testimonial-${colIndex}-${idx}`} />
+                    <img src={img} alt={`testimonial-${colIndex}-${idx}`} draggable={false} onContextMenu={(e) => e.preventDefault()} />
                   </div>
                 ))}
               </div>
@@ -119,7 +119,7 @@ const Testimonial = () => {
             {[...allImages, ...allImages].map((img, idx) => (
               <SplideSlide key={idx}>
                 <div className="htc-image-wrapper">
-                  <img src={img} alt={`testimonial-horizontal-${idx}`} />
+                  <img src={img} alt={`testimonial-horizontal-${idx}`} draggable={false} onContextMenu={(e) => e.preventDefault()} />
                 </div>
               </SplideSlide>
             ))}

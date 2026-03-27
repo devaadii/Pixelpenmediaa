@@ -62,7 +62,7 @@ const Footer = () => {
           >
             <div className="footer-tweet">
               <div className="tweet-header">
-                <div className="tweet-avatar"><img src={logo} /></div>
+                <div className="tweet-avatar"><img src={logo} draggable={false} onContextMenu={(e) => e.preventDefault()} /></div>
                 <div className="tweet-user">
                   <strong>Pixelpen Media</strong>
                   <span>@PixelpenMedia</span>

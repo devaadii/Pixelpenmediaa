@@ -145,7 +145,7 @@ function Nav() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <img className='logo' src={img} ref={logoRef} alt="logo" />
+        <img className='logo' src={img} ref={logoRef} alt="logo" draggable={false} onContextMenu={(e) => e.preventDefault()} />
 
         <div className={`menu-icon ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
           <span className="hamburger-line"></span>

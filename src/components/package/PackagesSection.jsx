@@ -12,8 +12,8 @@ const PackagesSection = () => {
   return (
     <div className="packages-wrapper" ref={sectionRef}>
       {/* Side Blurs */}
-      <img src="/testimonial-side-blur.svg" className="package-side-blur left" alt="" />
-      <img src="/testimonial-side-blur.svg" className="package-side-blur right" alt="" />
+      <img src="/testimonial-side-blur.svg" className="package-side-blur left" alt="" draggable={false} onContextMenu={(e) => e.preventDefault()} />
+      <img src="/testimonial-side-blur.svg" className="package-side-blur right" alt="" draggable={false} onContextMenu={(e) => e.preventDefault()} />
       <h2 className="heading">Two Packages</h2>
       <p className="subheading">Endless Possibilities</p>
 

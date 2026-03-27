@@ -209,9 +209,9 @@ export default function CustomCarousel() {
       <div className="video-carousel-heading" ref={headingRef}>
         <div className="header">
           <h2>Our Edits, Your Story</h2>
-          <img className="img img-desktop" src={img} alt="" />
+          <img className="img img-desktop" src={img} alt="" draggable={false} onContextMenu={(e) => e.preventDefault()} />
           <p>Proof looks better in motion.</p>
-          <img className="img img-mobile" src={img2} alt="" />
+          <img className="img img-mobile" src={img2} alt="" draggable={false} onContextMenu={(e) => e.preventDefault()} />
         </div>
       </div>
 
@@ -219,7 +219,7 @@ export default function CustomCarousel() {
         <div className="custom-desktop-layout" ref={layoutRef}>
           {slides.map((slide, index) => (
             <div key={index} className={`iphone-shell ${slide.orientation === "vertical" ? "desktop-vertical" : "desktop-horizontal"}`}>
-              <img src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame} className="iphone-frame-img" alt="" />
+              <img src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame} className="iphone-frame-img" alt="" draggable={false} onContextMenu={(e) => e.preventDefault()} />
               <div className="desktop-screen-inner">
                 {isPlaying && index === currentIndex ? (
                   <div className="video-wrapper" onClick={handleVideoClick}>
@@ -252,6 +252,8 @@ export default function CustomCarousel() {
                       src={slide.thumbnail}
                       className="custom-carousel-video-thumb"
                       alt=""
+                      draggable={false}
+                      onContextMenu={(e) => e.preventDefault()}
                     />
                     <div className="modern-play-btn">
                       <svg
@@ -312,6 +314,8 @@ export default function CustomCarousel() {
                     src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
                     className="iphone-frame-img"
                     alt=""
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
                   />
 
                   <div className="mobile-screen-inner">
@@ -346,6 +350,8 @@ export default function CustomCarousel() {
                           src={slide.thumbnail}
                           className="custom-carousel-video-thumb"
                           alt=""
+                          draggable={false}
+                          onContextMenu={(e) => e.preventDefault()}
                         />
                         <div className="modern-play-btn">
                           <svg

@@ -147,6 +147,13 @@ html {
 }
 
 @media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
   body {
     padding-top: 100px; /* Mobile only — clear space for the fixed glass navbar */
     background-image:
@@ -166,7 +173,7 @@ html {
 
   .overlap-up {
     position: relative;
-    margin-top: 20px; /* Changed from -100px to avoid overlapping fixed/scaled content */
+    margin-top: -10px; /* Adjusted down by another 10px per user request */
     z-index: 5;
   }
 
