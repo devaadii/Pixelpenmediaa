@@ -11,18 +11,50 @@ interface VideoPlayerProps {
   poster?: string;
 }
 
+interface YTPlayer {
+  playVideo: () => void;
+  pauseVideo: () => void;
+  seekTo: (seconds: number, allowSeekAhead: boolean) => void;
+  getCurrentTime: () => number;
+  getDuration: () => number;
+  setVolume: (volume: number) => void;
+  destroy: () => void;
+}
+
+interface YTEvent {
+  data: number;
+  target: YTPlayer;
+}
+
 declare global {
   interface Window {
     onYouTubeIframeAPIReady: () => void;
-    YT: any;
+    YT: {
+      Player: new (
+        elementId: string,
+        options: {
+          videoId: string;
+          playerVars?: Record<string, number>;
+          events?: {
+            onReady?: () => void;
+            onStateChange?: (event: YTEvent) => void;
+          };
+        }
+      ) => YTPlayer;
+      PlayerState: {
+        PLAYING: number;
+        PAUSED: number;
+        ENDED: number;
+      };
+    };
   }
 }
 
 export const VideoPlayer = ({ src, className = "", isYoutube = false, poster }: VideoPlayerProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const playerRef = useRef<any>(null);
-  
+  const playerRef = useRef<YTPlayer | null>(null);
+
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -66,7 +98,6 @@ export const VideoPlayer = ({ src, className = "", isYoutube = false, poster }: 
     } else if (window.YT && window.YT.Player) {
       initPlayer();
     } else {
-      // If window.YT exists but is loading, queue it up anyway
       const previousCallback = window.onYouTubeIframeAPIReady;
       window.onYouTubeIframeAPIReady = () => {
         if (typeof previousCallback === 'function') previousCallback();
@@ -91,10 +122,10 @@ export const VideoPlayer = ({ src, className = "", isYoutube = false, poster }: 
         events: {
           onReady: () => {
             setIsReady(true);
-            playerRef.current.setVolume(80);
-            setDuration(playerRef.current.getDuration());
+            playerRef.current?.setVolume(80);
+            setDuration(playerRef.current?.getDuration() ?? 0);
           },
-          onStateChange: (event: any) => {
+          onStateChange: (event: YTEvent) => {
             if (event.data === window.YT.PlayerState.PLAYING) {
               setIsPlaying(true);
               setHasStarted(true);
@@ -113,7 +144,7 @@ export const VideoPlayer = ({ src, className = "", isYoutube = false, poster }: 
 
   // 2. Progress Tracking (Both Types)
   useEffect(() => {
-    let interval: any;
+    let interval: ReturnType<typeof setInterval>;
     if (isPlaying) {
       interval = setInterval(() => {
         if (isYoutube && playerRef.current?.getCurrentTime) {
@@ -173,7 +204,7 @@ export const VideoPlayer = ({ src, className = "", isYoutube = false, poster }: 
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`absolute inset-0 group overflow-hidden cursor-pointer bg-black ${className}`}
       onClick={togglePlay}
@@ -201,12 +232,12 @@ export const VideoPlayer = ({ src, className = "", isYoutube = false, poster }: 
 
       {/* YouTube Thumbnail Cover (hides YouTube UI before playback) */}
       {isYoutube && !hasStarted && videoId && (
-        <img 
+        <img
           src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
           alt="Video Thumbnail"
           className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none"
           onError={(e) => {
-             (e.target as HTMLImageElement).src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+            (e.target as HTMLImageElement).src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
           }}
         />
       )}
@@ -221,13 +252,13 @@ export const VideoPlayer = ({ src, className = "", isYoutube = false, poster }: 
       {/* Custom Timeline (Hover Only - YouTube Only) */}
       {isYoutube && (
         <div className="absolute z-20 bottom-4 left-4 right-4 flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-md p-3 rounded-xl border border-white/10">
-          <button 
+          <button
             onClick={togglePlay}
             className="text-white hover:scale-110 transition-transform"
           >
             {isPlaying ? <Pause size={18} fill="white" /> : <Play size={18} fill="white" />}
           </button>
-          
+
           <input
             type="range"
             min={0}
@@ -240,7 +271,7 @@ export const VideoPlayer = ({ src, className = "", isYoutube = false, poster }: 
           />
 
           <div className="text-[10px] font-mono text-white/70 min-w-16 tabular-nums">
-            {Math.floor(currentTime / 60)}:{Math.floor(currentTime % 60).toString().padStart(2, '0')} / 
+            {Math.floor(currentTime / 60)}:{Math.floor(currentTime % 60).toString().padStart(2, '0')} /
             {isFinite(duration) ? ` ${Math.floor(duration / 60)}:${Math.floor(duration % 60).toString().padStart(2, '0')}` : ' --:--'}
           </div>
         </div>
