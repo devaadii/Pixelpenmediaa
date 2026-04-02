@@ -18,31 +18,26 @@ const slides = [
   {
     orientation: "vertical",
     thumbnail: "/tn_1.png",
-    videoSrc:
-      "https://res.cloudinary.com/dehknfmqf/video/upload/v1774425997/namita_final_edit_GOATED_1_vr6rlg.mp4",
+    videoSrc: "https://res.cloudinary.com/dehknfmqf/video/upload/q_auto/f_auto/v1774425997/namita_final_edit_GOATED_1_vr6rlg.mp4",
   },
   {
     orientation: "vertical",
     thumbnail: "/tn_2.png",
-    videoSrc:
-      "https://res.cloudinary.com/dehknfmqf/video/upload/v1767528720/animation_web_nzmjsg.mp4",
+    videoSrc: "https://res.cloudinary.com/dehknfmqf/video/upload/q_auto/f_auto/v1767528720/animation_web_nzmjsg.mp4",
   },
   {
     orientation: "horizontal",
-    thumbnail: "/tn_1.png", // Replaced old thumb with tn_1
-    videoSrc:
-      "https://res.cloudinary.com/dehknfmqf/video/upload/v1774424026/Its_you_vs_you_upl1ck.mp4",
+    thumbnail: "/thumb_3.png",
+    videoSrc: "https://res.cloudinary.com/dehknfmqf/video/upload/q_auto/f_auto/v1775114992/long_jgkc50.mp4",
   },
   {
     orientation: "vertical",
     thumbnail: "/tn_4.png",
-    videoSrc:
-      "https://res.cloudinary.com/dehknfmqf/video/upload/v1774424026/Its_you_vs_you_upl1ck.mp4",
+    videoSrc: "https://res.cloudinary.com/dehknfmqf/video/upload/q_auto/f_auto/v1774424026/Its_you_vs_you_upl1ck.mp4",
   },  {
     orientation: "vertical",
     thumbnail: "/tn_5.png",
-    videoSrc:
-      "https://res.cloudinary.com/dehknfmqf/video/upload/v1767528735/Astrakhan_Web_j52ksd.mp4",
+    videoSrc: "https://res.cloudinary.com/dehknfmqf/video/upload/q_auto/f_auto/v1767528735/Astrakhan_Web_j52ksd.mp4",
   },
 ];
 
@@ -65,8 +60,8 @@ const useIsMobile = () => {
 
 export default function CustomCarousel() {
   const isMobile = useIsMobile();
-  const [currentIndex, setCurrentIndex] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [playingIndex, setPlayingIndex] = useState(null);
+  const [activatedIndices, setActivatedIndices] = useState(new Set());
   const videoRefs = useRef({});
   const videoTimes = useRef({}); // Stores paused timestamps
   const headingRef = useRef(null);
@@ -182,26 +177,50 @@ export default function CustomCarousel() {
     return () => ctx.revert();
   }, [isMobile]);
 
-  const stopVideo = () => {
-    if (currentIndex !== null && videoRefs.current[currentIndex]) {
-      const video = videoRefs.current[currentIndex];
-      videoTimes.current[currentIndex] = video.ended ? 0 : video.currentTime;
-      video.pause();
+  const handleTogglePlay = (index) => {
+    const isCurrentlyPlaying = playingIndex === index;
+
+    if (isCurrentlyPlaying) {
+      // Pause current
+      if (videoRefs.current[index]) {
+        videoRefs.current[index].pause();
+      }
+      setPlayingIndex(null);
+    } else {
+      // Pause any other playing video
+      if (playingIndex !== null && videoRefs.current[playingIndex]) {
+        videoRefs.current[playingIndex].pause();
+      }
+      
+      // Update activated set
+      setActivatedIndices((prev) => new Set(prev).add(index));
+      setPlayingIndex(index);
+      
+      // Ensure specific video plays
+      setTimeout(() => {
+        if (videoRefs.current[index] && slides[index].videoSrc) {
+          videoRefs.current[index].play().catch(err => console.log("Play error:", err));
+        }
+      }, 0);
     }
-    setIsPlaying(false);
-    setCurrentIndex(null);
-    setShowControls(false);
-    if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
+    
+    // For hover/tap control visibility
+    setShowControls(true);
+    resetControlsTimeout();
+    
+    // Liquidy Bounce Effect
+    const btn = document.querySelectorAll('.modern-control-btn')[index];
+    if (btn) {
+      gsap.fromTo(btn, 
+        { scale: 0.8, filter: 'blur(6px)', opacity: 0.5 }, 
+        { scale: 1, filter: 'blur(0px)', opacity: 1, duration: 0.8, ease: "elastic.out(1.2, 0.4)" }
+      );
+    }
   };
 
-  const handleThumbnailClick = (index) => {
-    if (isPlaying) stopVideo();
-    setTimeout(() => {
-      setCurrentIndex(index);
-      setIsPlaying(true);
-      setShowControls(true);
-      resetControlsTimeout();
-    }, 0);
+  const handleVideoEnded = (index) => {
+    setPlayingIndex(null);
+    setShowControls(false);
   };
 
   return (
@@ -220,53 +239,42 @@ export default function CustomCarousel() {
           {slides.map((slide, index) => (
             <div key={index} className={`iphone-shell ${slide.orientation === "vertical" ? "desktop-vertical" : "desktop-horizontal"}`}>
               <img src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame} className="iphone-frame-img" alt="" draggable={false} onContextMenu={(e) => e.preventDefault()} />
-              <div className="desktop-screen-inner">
-                {isPlaying && index === currentIndex ? (
-                  <div className="video-wrapper" onClick={handleVideoClick}>
-                    <video
-                      ref={(el) => (videoRefs.current[index] = el)}
-                      src={slide.videoSrc}
-                      className="player-host"
-                      autoPlay
-                      playsInline
-                      onLoadedData={(e) => {
-                        if (videoTimes.current[index]) e.target.currentTime = videoTimes.current[index];
-                      }}
-                      onEnded={stopVideo}
-                    />
-                    <div className={`modern-pause-btn ${showControls ? "visible" : ""}`} onClick={(e) => { 
-                      e.stopPropagation(); 
-                      stopVideo(); 
-                    }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                      </svg>
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    className="custom-carousel-thumb-wrapper"
-                    onClick={() => handleThumbnailClick(index)}
-                  >
-                    <img
-                      src={slide.thumbnail}
-                      className="custom-carousel-video-thumb"
-                      alt=""
-                      draggable={false}
-                      onContextMenu={(e) => e.preventDefault()}
-                    />
-                    <div className="modern-play-btn">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
-                  </div>
+              <div className="desktop-screen-inner" onClick={() => handleTogglePlay(index)}>
+                {/* Thumbnail Layer (Always present as a bridge/background) */}
+                <img
+                  src={slide.thumbnail}
+                  className="custom-carousel-video-thumb absolute-inset"
+                  alt=""
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+
+                {/* Video Layer (Mounted only when activated) */}
+                {activatedIndices.has(index) && slide.videoSrc && (
+                  <video
+                    ref={(el) => (videoRefs.current[index] = el)}
+                    src={slide.videoSrc}
+                    poster={slide.thumbnail}
+                    className="player-host absolute-inset"
+                    playsInline
+                    onEnded={() => handleVideoEnded(index)}
+                  />
                 )}
-              </div>  </div>
+
+                {/* Controls Layer */}
+                <div className={`modern-control-btn ${playingIndex === index ? (showControls ? "visible" : "hidden") : "visible"}`}>
+                  {playingIndex === index ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                    </svg>
+                  ) : (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  )}
+                </div>
+              </div>
+  </div>
 
           ))}
         </div>
@@ -308,7 +316,7 @@ export default function CustomCarousel() {
                   className={`iphone-shell mobile-video-item ${slide.orientation === "vertical"
                       ? "mobile-vertical"
                       : "mobile-horizontal"
-                    } ${isPlaying && idx === currentIndex ? "playing" : ""}`}
+                    } ${playingIndex === idx ? "playing" : ""}`}
                 >
                   <img
                     src={slide.orientation === "horizontal" ? LiphoneFrame : iphoneFrame}
@@ -318,52 +326,37 @@ export default function CustomCarousel() {
                     onContextMenu={(e) => e.preventDefault()}
                   />
 
-                  <div className="mobile-screen-inner">
-                    {isPlaying && idx === currentIndex ? (
-                      <div className="video-wrapper-no-transform" onClick={handleVideoClick}>
-                        <video
-                          ref={(el) => (videoRefs.current[idx] = el)}
-                          src={slide.videoSrc}
-                          className="player-host"
-                          autoPlay
-                          playsInline
-                          onLoadedData={(e) => {
-                            if (videoTimes.current[idx]) e.target.currentTime = videoTimes.current[idx];
-                          }}
-                          onEnded={stopVideo}
-                        />
-                        <div className={`modern-pause-btn ${showControls ? "visible" : ""}`} onClick={(e) => { 
-                          e.stopPropagation(); 
-                          stopVideo(); 
-                        }}>
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                          </svg>
-                        </div>
-                      </div>
-                    ) : (
-                      <div
-                        className="custom-carousel-thumb-wrapper mobile-thumb"
-                        onClick={() => handleThumbnailClick(idx)}
-                      >
-                        <img
-                          src={slide.thumbnail}
-                          className="custom-carousel-video-thumb"
-                          alt=""
-                          draggable={false}
-                          onContextMenu={(e) => e.preventDefault()}
-                        />
-                        <div className="modern-play-btn">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                          >
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
-                        </div>
-                      </div>
+                  <div className="mobile-screen-inner" onClick={() => handleTogglePlay(idx)}>
+                    <img
+                      src={slide.thumbnail}
+                      className="custom-carousel-video-thumb absolute-inset"
+                      alt=""
+                      draggable={false}
+                      onContextMenu={(e) => e.preventDefault()}
+                    />
+
+                    {activatedIndices.has(idx) && slide.videoSrc && (
+                      <video
+                        ref={(el) => (videoRefs.current[idx] = el)}
+                        src={slide.videoSrc}
+                        poster={slide.thumbnail}
+                        className="player-host absolute-inset"
+                        playsInline
+                        onEnded={() => handleVideoEnded(idx)}
+                      />
                     )}
+
+                    <div className={`modern-control-btn ${playingIndex === idx ? (showControls ? "visible" : "hidden") : "visible"}`}>
+                      {playingIndex === idx ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      )}
+                    </div>
                   </div>
                 </div>
               </SplideSlide>

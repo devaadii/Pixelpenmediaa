@@ -130,15 +130,44 @@
   display: block;
 }
 
-.modern-play-btn {
+.absolute-inset {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.custom-carousel-video-thumb {
+  z-index: 1;
+}
+
+.player-host {
+  z-index: 2;
+  background: transparent;
+}
+
+.modern-control-btn {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  z-index: 10;
-  transition: opacity 0.3s ease;
+  z-index: 15;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modern-control-btn.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.modern-control-btn.hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .modern-play-btn svg {
@@ -156,8 +185,10 @@
 }
 
 @media (hover: hover) {
-  .custom-carousel-thumb-wrapper:hover .modern-play-btn svg,
-  .mobile-thumb:hover .modern-play-btn svg {
+  .custom-carousel-thumb-wrapper:hover .modern-control-btn svg,
+  .mobile-thumb:hover .modern-control-btn svg,
+  .video-wrapper:hover .modern-control-btn svg,
+  .video-wrapper-no-transform:hover .modern-control-btn svg {
     transform: scale(1.1);
     color: #F47F17;
   }
@@ -169,42 +200,18 @@
   height: 100%;
 }
 
-.modern-pause-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Keeping translate here because it's already mounted and not re-mounting frequently, but I'll remove the transform from the transition base */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 15;
-  width: 70px;
-  height: 70px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 50%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, background 0.2s ease, visibility 0.2s ease;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-.modern-pause-btn.visible {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-.modern-pause-btn svg {
-  width: 35px;
-  height: 35px;
+.modern-control-btn svg {
+  width: 45px;
+  height: 45px;
   color: #fff;
   transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
 }
 
-.video-wrapper:hover .modern-pause-btn,
-.video-wrapper-no-transform:hover .modern-pause-btn {
+.video-wrapper:hover .modern-control-btn,
+.video-wrapper-no-transform:hover .modern-control-btn,
+.custom-carousel-thumb-wrapper:hover .modern-control-btn {
   opacity: 1;
+  visibility: visible;
 }
 
 @media (max-width: 768px) {
@@ -217,14 +224,8 @@
   }
 }
 
-.modern-pause-btn:hover,
-.modern-pause-btn:active {
-  opacity: 1 !important;
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.modern-pause-btn:hover svg,
-.modern-pause-btn:active svg {
+.modern-control-btn:hover svg,
+.modern-control-btn:active svg {
   transform: scale(1.1);
   color: #F47F17;
 }

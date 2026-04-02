@@ -17,28 +17,16 @@ import "keen-slider/keen-slider.min.css";
 import image from "../src/assets/background.svg"
 import CustomCursor from './components/common/CustomCursor';
 import CustomScrollbar from './components/common/CustomScrollbar';
+import SmoothScroll from './components/common/SmoothScroll';
 import { useEffect } from 'react';
 
 function App() {
   useEffect(() => {
-    // Force browser to start at top on reload
+    // Lenis handles smooth scroll and should be initialized via the SmoothScroll component
+    // We just ensure the history scroll restoration is set to manual for safety
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-
-    // Immediate scroll
-    window.scrollTo(0, 0);
-
-    // Defensive delayed scroll (ensures it hits after the initial render loop finishes)
-    const timer = setTimeout(() => {
-      window.scrollTo(0, 0);
-      // Optional: Clear hash if you want to remove "#section" from URL on reload
-      if (window.location.hash) {
-        window.history.replaceState(null, null, ' ');
-      }
-    }, 10);
-
-    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -55,6 +43,7 @@ function App() {
         </filter>
       </svg>
       <div className="noise-overlay" />
+      <SmoothScroll />
       <CustomCursor />
       <CustomScrollbar />
       <Nav />
