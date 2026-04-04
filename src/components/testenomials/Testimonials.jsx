@@ -10,16 +10,15 @@ import one from '../../assets/1.svg';
 import two from '../../assets/2.svg';
 import three from '../../assets/3.svg';
 import four from '../../assets/4.svg';
-import five from '../../assets/5.svg';
 import six from '../../assets/6.svg';
 
 const columns = [
   [one, two, three],
-  [four, five, six],
+  [four, three, six],
   [two, four, one],
 ];
 
-const allImages = [one, two, three, four, five, six];
+const allImages = [one, two, three, four, three, six];
 
 const scrollDurations = [12, 10, 14]; // Duration for 50% scroll
 

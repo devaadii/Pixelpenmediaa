@@ -19,26 +19,56 @@ import CustomCursor from './components/common/CustomCursor';
 import CustomScrollbar from './components/common/CustomScrollbar';
 import SmoothScroll from './components/common/SmoothScroll';
 import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async'; // 👈 add this
 
 function App() {
   useEffect(() => {
-    // Lenis handles smooth scroll and should be initialized via the SmoothScroll component
-    // We just ensure the history scroll restoration is set to manual for safety
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
   }, []);
 
   return (
-    <div className="layout"  >
-      {/* Native SVG Noise Filter — No external assets needed */}
+    <div className="layout">
+
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Pixelpen Media | World Class Video Editing in 29 Hours</title>
+        <meta
+          name="description"
+          content="An elite video team that edits world class videos for Creators, Brands, and Entrepreneurs — delivered in 29 hours."
+        />
+        <meta
+          name="keywords"
+          content="video editing agency, video editing for creators, video editing for brands, fast video editing, YouTube video editing, Pixelpen Media"
+        />
+        <link rel="canonical" href="https://pixelpen.in/" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Pixelpen Media | World Class Video Edits delivered in 29 Hours" />
+        <meta property="og:description" content="We edit world class videos for Creators, Brands, and Entrepreneurs — delivered in 29 hours." />
+        <meta property="og:url" content="https://pixelpen.in/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://pixelpen.in/og-image.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Pixelpen Media | World Class Video Editing in 29 Hours" />
+        <meta name="twitter:description" content="We edit world class videos for Creators, Brands, and Entrepreneurs — delivered in 29 hours." />
+        <meta name="twitter:image" content="https://pixelpen.in/og-image.jpg" />
+
+        {/* Indexing */}
+        <meta name="robots" content="index, follow" />
+      </Helmet>
+
+      {/* Native SVG Noise Filter */}
       <svg style={{ position: 'absolute', width: 0, height: 0 }}>
         <filter id="noiseFilter">
-          <feTurbulence 
-            type="fractalNoise" 
-            baseFrequency="1.0" 
-            numOctaves="1" 
-            stitchTiles="stitch" 
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="1.0"
+            numOctaves="1"
+            stitchTiles="stitch"
           />
         </filter>
       </svg>
@@ -47,39 +77,36 @@ function App() {
       <CustomCursor />
       <CustomScrollbar />
       <Nav />
-  
+
       <main className="page-content">
         <div className="page-wrap">
-            <section  id="home">
-          <Home />
-   
-        </section>
-     <section id="our-story" className="overlap-up">
-  <OurStory />
-</section>
-        <section id="portfolio">
- 
-<CustomCarousel />
-        </section>
-        <section id="case-study">
-          <PackagesSection />
-        </section>
-        <section id="services">
-          <Testimonials />
-        </section>
-        <section id="about">
-          <FAQSection />
-        </section>
-        <section id="book-call">
-          <BookCallBanner />
-        </section>
-
-        <section id="footer">
-          <Footer />
-        </section>
+          <section id="home">
+            <Home />
+          </section>
+          <section id="our-story" className="overlap-up">
+            <OurStory />
+          </section>
+          <section id="portfolio">
+            <CustomCarousel />
+          </section>
+          <section id="case-study">
+            <PackagesSection />
+          </section>
+          <section id="services">
+            <Testimonials />
+          </section>
+          <section id="about">
+            <FAQSection />
+          </section>
+          <section id="book-call">
+            <BookCallBanner />
+          </section>
+          <section id="footer">
+            <Footer />
+          </section>
         </div>
       </main>
-     </div>
+    </div>
   );
 }
 
